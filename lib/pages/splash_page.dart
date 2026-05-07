@@ -15,21 +15,43 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    debugPrint('🎯 [Splash] initState 开始');
     _checkAndNavigate();
   }
 
   Future<void> _checkAndNavigate() async {
-    // 等动画跑完再跳转
+    debugPrint('🎯 [Splash] 开始初始化检查');
+    // 等动画跑完
     await Future.delayed(const Duration(milliseconds: 2200));
-    final loggedIn = await StorageManager.isLoggedIn();
-    if (loggedIn) {
-      final profileSet = await StorageManager.isProfileSet();
-      if (profileSet) {
-        Get.offAllNamed('/main');
+    
+    try {
+      debugPrint('🔍 [Splash] 检查登录状态...');
+      // 尝试读取存储，超时 3 秒
+      final loggedIn = await StorageManager.isLoggedIn()
+          .timeout(const Duration(seconds: 3), onTimeout: () {
+        debugPrint('❌ [Splash] 存储检查超时，跳过');
+        return false;
+      });
+      
+      debugPrint('✅ [Splash] 登录状态: $loggedIn');
+      
+      if (loggedIn) {
+        final profileSet = await StorageManager.isProfileSet()
+            .timeout(const Duration(seconds: 3), onTimeout: () => false);
+        if (profileSet) {
+          debugPrint('🚀 [Splash] 跳转到主页');
+          Get.offAllNamed('/main');
+        } else {
+          debugPrint('🚀 [Splash] 跳转到设置资料');
+          Get.offAllNamed('/setup');
+        }
       } else {
-        Get.offAllNamed('/setup');
+        debugPrint('🚀 [Splash] 跳转到登录页');
+        Get.offAllNamed('/login');
       }
-    } else {
+    } catch (e) {
+      debugPrint('❌ [Splash] 异常: $e');
+      debugPrint('🚀 [Splash] 强制跳转到登录页');
       Get.offAllNamed('/login');
     }
   }

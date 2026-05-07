@@ -8,7 +8,9 @@ import 'pages/auth/setup_profile_page.dart';
 import 'pages/main/main_page.dart';
 import 'pages/post/create_post_stub_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  debugPrint('🚀 [YuCircle] 启动应用...');
   runApp(const YuCircleApp());
 }
 
@@ -18,7 +20,7 @@ class YuCircleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: '��Ȧ',
+      title: '��Ȧ',
       theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',

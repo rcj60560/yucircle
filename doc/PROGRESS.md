@@ -35,18 +35,35 @@
 
 ## 下一步计划
 
-### 第3周：后端基础建设 ⚠️（未启动）
-**负责人**：AI Agent（代你完成）  
-**依赖条件**：
-- [ ] 宝塔面板公网 IP 确认
-- [ ] 阿里云短信账户信息获取
-- [ ] Spring Boot 开发环境配置
+### 第3周：后端基础建设 ✅ 已完成
+**负责人**：AI Agent  
+**完成时间**：2026-04-30
 
-**输出物**：
-1. Spring Boot 后端项目模板
-2. MySQL 数据库建表脚本
-3. 后端 API 文档（doc/03_后端API设计.md）
-4. 前端 app_config.dart 真实地址配置
+**✅ 已交付：**
+1. ✅ Spring Boot 后端项目完整结构
+2. ✅ MySQL 数据库建表脚本（包含 7 个表）
+3. ✅ 阶段2 完整实现：
+   - 用户认证系统（User Entity + Mapper）
+   - 短信验证码系统（SmsCode Entity + Mapper）
+   - JWT 工具类
+   - 阿里云短信工具类
+   - AuthService（业务逻辑）
+   - AuthController（3个 API）
+4. ✅ 项目部署文档
+5. ✅ API 文档 + 测试示例
+
+**项目位置**：`d:\Users\luocj\tf\yu-server\`
+
+**后端 API 端点（已实现）：**
+- `POST /api/auth/send-code` — 发送验证码
+- `POST /api/auth/verify-code` — 验证码登录
+- `POST /api/auth/setup-profile` — 设置用户资料
+
+**下一步：前端联调**
+1. 修改前端 `lib/config/app_config.dart` 的 `mockMode: false`
+2. 修改 `apiBaseUrl` 为后端真实地址
+3. 修改前端 `ApiClient` 去掉 Mock 实现
+4. 真机测试完整登录流程
 
 ### 第4-5周：阶段3+4 联调 🚀（未启动）
 **前端需改造**：

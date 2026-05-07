@@ -1,8 +1,8 @@
 class AppConfig {
-  // 后端 API 地址（域名备案下来后替换）
-  static const String apiBaseUrl = 'http://localhost:8080/api';
+  // 后端 API 地址（局域网 IP）
+  static const String apiBaseUrl = 'http://192.168.13.74:8080/api';
 
-  // Mock 模式开关：true = 不请求真实后端，返回模拟数据
+  // Mock 模式开关：true = 本地 Mock，false = 请求真实后端
   static const bool mockMode = true;
 
   // Mock 短信验证码（mock 模式下固定）
