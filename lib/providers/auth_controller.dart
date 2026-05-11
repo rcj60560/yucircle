@@ -39,7 +39,7 @@ class AuthController extends GetxController {
     final res = await ApiClient.sendSmsCode(phone.value);
     step.value = AuthStep.idle;
 
-    if (res['code'] == 0) {
+    if (res['code'] == 200) {  // ← 改为 200（服务端返回码）
       _startCountdown();
       return true;
     }
@@ -70,10 +70,19 @@ class AuthController extends GetxController {
     final res = await ApiClient.verifySmsCode(phone.value, smsCode.value);
     step.value = AuthStep.idle;
 
-    if (res['code'] == 0) {
+    if (res['code'] == 200) {  // ← 改为 200
       final data = res['data'] as Map<String, dynamic>;
-      await StorageManager.saveToken(data['token']);
-      isNewUser.value = data['isNewUser'] ?? false;
+      final token = data['token'] as String;
+      final user = data['user'] as Map<String, dynamic>;
+      
+      await StorageManager.saveToken(token);
+      await StorageManager.saveUserInfo(
+        userId: user['id'].toString(),
+        phone: user['phone'] ?? phone.value,
+        nickname: user['nickname'] ?? '',
+        level: user['badmintonLevel'] ?? '',
+      );
+      
       isLoggedIn.value = true;
       return true;
     }
@@ -100,13 +109,13 @@ class AuthController extends GetxController {
     );
     step.value = AuthStep.idle;
 
-    if (res['code'] == 0) {
+    if (res['code'] == 200) {  // ← 改为 200
       final data = res['data'] as Map<String, dynamic>;
       await StorageManager.saveUserInfo(
-        userId: data['userId'],
+        userId: data['id'].toString(),
         phone: phone.value,
-        nickname: data['nickname'],
-        level: data['level'],
+        nickname: data['nickname'] ?? '',
+        level: data['badmintonLevel'] ?? '',
       );
       return true;
     }

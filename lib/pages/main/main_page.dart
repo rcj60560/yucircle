@@ -17,18 +17,29 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
-    HomePage(),
-    DiscoverPage(),
-    SizedBox(), // 发帖用弹窗，不需要页面
-    MessagePage(),
-    ProfilePage(),
-  ];
+  late final List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      const HomePage(),
+      const DiscoverPage(),
+      const SizedBox(), // 发帖用弹窗，不需要页面
+      const MessagePage(),
+      const ProfilePage(),
+    ];
+  }
 
   void _onTabTapped(int index) {
     if (index == 2) {
       // 发帖按钮：跳转到发帖页
-      Get.toNamed('/create-post');
+      Get.toNamed('/create-post')?.then((result) {
+        // 发帖后，切换到首页（用户可手动下拉刷新）
+        if (result == true) {
+          setState(() => _currentIndex = 0);
+        }
+      });
       return;
     }
     setState(() => _currentIndex = index);
