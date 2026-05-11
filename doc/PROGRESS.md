@@ -222,12 +222,30 @@ Phase 7+ 🟠 打球组织功能（后续迭代）
 }
 ```
 
-**验收标准**：
-- [x] 能成功发表帖子（含图片）
-- [x] 帖子列表正常分页显示（从后端加载真实数据）
-- [x] 能发表评论和嵌套回复
-- [x] 评论正确按时间排序，嵌套结构清晰
-- [x] 删除自己的帖子/评论生效
+**✅ 后端已完成**（2026-05-11）：
+- ✅ Entity 类：Post.java、Comment.java、PostLike.java
+- ✅ Mapper 接口：PostMapper.java、CommentMapper.java、PostLikeMapper.java
+- ✅ Service 层：PostService.java、CommentService.java、LikeService.java
+- ✅ Controller 层：PostController.java、CommentController.java、LikeController.java
+- ✅ DTO 类：CreatePostRequest、UpdatePostRequest、CreateCommentRequest、LikeRequest
+- ✅ 数据库迁移脚本：V2__create_post_comment_like_tables.sql
+- ✅ Postman 测试指南：[POSTMAN_TESTING_GUIDE.md](../../../yu-server/server/yucircle-server/POSTMAN_TESTING_GUIDE.md)
+
+**关键特性**：
+- 支持发帖、编辑、删除（软删除）
+- 支持评论和嵌套回复（parent_id + root_id）
+- 支持点赞和踩（dislike）互斥关系
+- 自动更新计数（like_count、dislike_count、comment_count）
+- 完整的权限验证
+
+**验收标准**（待前端联调）：
+- [ ] 能成功发表帖子（含图片）
+- [ ] 帖子列表正常分页显示
+- [ ] 能发表评论和嵌套回复
+- [ ] 评论正确按时间排序，嵌套结构清晰
+- [ ] 删除自己的帖子/评论生效
+- [ ] 点赞和踩功能正常
+- [ ] 点赞/踩数统计准确
 
 **预计时间**：2 周（前后端并行）
 
