@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
+import '../venue/venue_list_page.dart';
 import '../home/home_page.dart';
-import '../discover/discover_page.dart';
-import '../post/create_post_stub_page.dart';
 import '../message/message_page.dart';
 import '../profile/profile_page.dart';
 
@@ -23,11 +22,11 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _pages = [
-      const HomePage(),
-      const DiscoverPage(),
-      const SizedBox(), // 发帖用弹窗，不需要页面
-      const MessagePage(),
-      const ProfilePage(),
+      const VenueListPage(),      // Tab1: 球馆列表
+      const HomePage(),           // Tab2: 社区（帖子流）
+      const SizedBox(),           // Tab3: 发帖用弹窗，不需要页面
+      const MessagePage(),        // Tab4: 消息
+      const ProfilePage(),        // Tab5: 我的
     ];
   }
 
@@ -63,14 +62,14 @@ class _MainPageState extends State<MainPage> {
           onTap: _onTabTapped,
           items: [
             const BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home_rounded),
-              label: '首页',
+              icon: Icon(Icons.sports),
+              activeIcon: Icon(Icons.sports),
+              label: '球馆',
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.explore_outlined),
-              activeIcon: Icon(Icons.explore_rounded),
-              label: '发现',
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home_rounded),
+              label: '社区',
             ),
             BottomNavigationBarItem(
               icon: Container(
@@ -81,7 +80,7 @@ class _MainPageState extends State<MainPage> {
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.primaryShadow.withOpacity(0.4),
+                      color: AppTheme.primaryShadow.withValues(alpha: 0.4),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),

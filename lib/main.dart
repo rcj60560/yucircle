@@ -9,6 +9,9 @@ import 'pages/auth/setup_profile_page.dart';
 import 'pages/main/main_page.dart';
 import 'pages/post/create_post_stub_page.dart';
 import 'pages/post/post_detail_page.dart';
+import 'pages/venue/venue_list_page.dart';
+import 'pages/venue/club_list_page.dart';
+import 'pages/venue/activity_lobby_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +45,9 @@ class YuCircleApp extends StatelessWidget {
             return PostDetailPage(postId: postId, post: post);
           },
         ),
+        GetPage(name: '/venue-list', page: () => const VenueListPage()),
+        GetPage(name: '/club-list', page: () => const ClubListPage()),
+        GetPage(name: '/activity-lobby', page: () => const ActivityLobbyPage()),
       ],
     );
   }

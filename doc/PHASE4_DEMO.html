@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YuCircle Phase 4 - 球馆俱乐部大厅系统演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            border: 8px solid #000;
+            position: relative;
+        }
+
+        .notch {
+            position: absolute;
+            width: 200px;
+            height: 28px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: white;
+        }
+
+        .phone-frame.phone-frame-light .screen {
+            background: #f9f9f9;
+        }
+
+        /* 界面切换 */
+        .screen-page {
+            display: none;
+            flex: 1;
+            overflow-y: auto;
+            padding-top: 44px;
+        }
+
+        .screen-page.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部栏 */
+        .status-bar {
+            height: 44px;
+            background: white;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            z-index: 5;
+        }
+
+        .tab-bar {
+            display: flex;
+            height: 50px;
+            background: white;
+            border-top: 1px solid #eee;
+            position: relative;
+            z-index: 5;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #999;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .tab-item.active {
+            color: #13b44f;
+            font-weight: 600;
+        }
+
+        .tab-icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        /* ===== 球馆列表页 ===== */
+        .venue-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .page-title {
+            padding: 16px;
+            background: white;
+        }
+
+        .page-title h1 {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .page-title p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .broadcast-banner {
+            background: rgba(255, 165, 0, 0.1);
+            border-left: 3px solid #FFA500;
+            padding: 12px 16px;
+            margin: 0 16px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #FFA500;
+        }
+
+        .broadcast-banner span {
+            margin-right: 8px;
+        }
+
+        .venue-card {
+            margin: 0 16px 12px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .venue-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .venue-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .venue-card-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .venue-card-header .icon {
+            font-size: 16px;
+            color: #13b44f;
+        }
+
+        .venue-card-address {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .venue-card-address span {
+            margin-right: 4px;
+        }
+
+        .venue-card-stats {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .stat-text {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* ===== 俱乐部列表页 ===== */
+        .club-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 16px;
+            top: 8px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .club-card {
+            margin: 0 16px 12px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .club-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .club-card-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .badge-broadcast {
+            background: rgba(255, 165, 0, 0.2);
+            color: #FFA500;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .club-card-desc {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+
+        .club-card-stats {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+
+        .club-card-button {
+            width: 100%;
+            padding: 10px;
+            background: #13b44f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .club-create-activity {
+            margin: 0 16px 16px;
+            padding: 16px;
+            background: rgba(19, 180, 79, 0.1);
+            border: 1px dashed rgba(19, 180, 79, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* ===== 活动大厅页 ===== */
+        .activity-lobby {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .lobby-header {
+            padding: 16px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .lobby-header-title {
+            margin-bottom: 12px;
+        }
+
+        .lobby-header-title small {
+            font-size: 12px;
+            color: #999;
+            display: block;
+        }
+
+        .lobby-header-title h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .lobby-header-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .stat-time {
+            color: #999;
+        }
+
+        .online-badge {
+            background: rgba(19, 180, 79, 0.1);
+            color: #13b44f;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-weight: 600;
+        }
+
+        .section-tabs {
+            display: flex;
+            height: 44px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-tab {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #999;
+            font-size: 14px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .section-tab.active {
+            color: #13b44f;
+            border-bottom-color: #13b44f;
+            font-weight: 600;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+        }
+
+        .content-section {
+            display: none;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .content-section.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 场地区 */
+        .courts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .court-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 12px;
+            transition: transform 0.2s;
+        }
+
+        .court-card.locked {
+            background: rgba(19, 180, 79, 0.05);
+            border-color: #13b44f;
+        }
+
+        .court-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .court-number {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .court-status {
+            font-size: 10px;
+            background: #13b44f;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .court-status.recruiting {
+            background: #999;
+        }
+
+        .court-progress {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .slot {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s;
+            border: 1px dashed #ccc;
+            background: white;
+        }
+
+        .slot:hover {
+            transform: scale(1.05);
+        }
+
+        .slot.empty {
+            color: #ccc;
+            font-size: 24px;
+        }
+
+        .slot.reserved {
+            background: #fff9e6;
+            border-color: #ffd666;
+            font-size: 18px;
+            border-style: solid;
+        }
+
+        .slot.confirmed {
+            background: #f6ffed;
+            border-color: #13b44f;
+            font-size: 18px;
+            border-style: solid;
+            position: relative;
+        }
+
+        .slot.confirmed::after {
+            content: '✓';
+            position: absolute;
+            font-size: 10px;
+            right: 2px;
+            bottom: 2px;
+            color: #13b44f;
+        }
+
+        .slot.locked {
+            background: rgba(19, 180, 79, 0.2);
+            border-color: #13b44f;
+            font-size: 18px;
+            border-style: solid;
+        }
+
+        .slot.locked::after {
+            content: '🔒';
+            position: absolute;
+            font-size: 10px;
+            right: 2px;
+            bottom: 2px;
+        }
+
+        .court-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #999;
+        }
+
+        /* 观望区 */
+        .presence-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .presence-card {
+            text-align: center;
+        }
+
+        .presence-avatar {
+            width: 60px;
+            height: 60px;
+            background: rgba(19, 180, 79, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 8px;
+            border: 1px solid #eee;
+        }
+
+        .presence-name {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .presence-level {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* 聊天区 */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .broadcast-notification {
+            background: rgba(255, 165, 0, 0.1);
+            border-bottom: 1px dashed rgba(255, 165, 0, 0.3);
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #FFA500;
+            flex-shrink: 0;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chat-message {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .chat-message-header {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .chat-message-content {
+            color: #333;
+        }
+
+        .chat-input-area {
+            padding: 12px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .chat-send {
+            padding: 8px 16px;
+            background: #13b44f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 底部操作区 */
+        .action-buttons {
+            padding: 12px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .action-button:hover {
+            background: #f9f9f9;
+        }
+
+        .action-button.primary {
+            background: #13b44f;
+            color: white;
+            border-color: #13b44f;
+        }
+
+        .action-button.primary:hover {
+            background: #0c8c3a;
+        }
+
+        /* 帮助文字 */
+        .help-text {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            z-index: 100;
+            max-width: 200px;
+            line-height: 1.4;
+        }
+
+        .help-text code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-family: monospace;
+        }
+
+        .title-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #13b44f 0%, #0c8c3a 100%);
+            color: white;
+        }
+
+        .title-section h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .title-section p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .controls {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .control-button {
+            margin: 0 8px;
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .control-button:hover {
+            background: #e0e0e0;
+        }
+
+        .control-button.active {
+            background: #13b44f;
+            color: white;
+            border-color: #13b44f;
+        }
+
+        @media (max-width: 1200px) {
+            .help-text {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title-section">
+        <h1>🎾 YuCircle Phase 4 演示</h1>
+        <p>球馆 / 俱乐部 / 活动大厅系统</p>
+    </div>
+
+    <div class="controls">
+        <span>点击图片中的内容进行交互 | 切换页面:</span>
+        <button class="control-button active" onclick="switchPage('venue-list')">球馆列表</button>
+        <button class="control-button" onclick="switchPage('club-list')">俱乐部列表</button>
+        <button class="control-button" onclick="switchPage('activity-lobby')">活动大厅</button>
+    </div>
+
+    <div class="phone-frame">
+        <div class="notch"></div>
+
+        <div class="screen">
+            <!-- 球馆列表页 -->
+            <div class="screen-page active" id="page-venue-list">
+                <div class="status-bar">球馆</div>
+                <div class="venue-list">
+                    <div class="page-title">
+                        <h1>附近球馆</h1>
+                        <p>今晚去哪打？</p>
+                    </div>
+
+                    <div class="broadcast-banner">
+                        <span>🔔</span>1号场高质量缺人，L4 以上速来
+                    </div>
+
+                    <div class="venue-card" onclick="switchPage('club-list')">
+                        <div class="venue-card-header">
+                            <h3>晴天羽毛球馆</h3>
+                            <span class="icon">→</span>
+                        </div>
+                        <div class="venue-card-address">
+                            <span>📍</span>成都市武侯区一环路南三段1号
+                        </div>
+                        <div class="venue-card-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon">🏸</div>
+                                <div class="stat-text">10片场</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">📍</div>
+                                <div class="stat-text">距你 3.2km</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">👥</div>
+                                <div class="stat-text">在线23人</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 俱乐部列表页 -->
+            <div class="screen-page" id="page-club-list">
+                <div class="status-bar">
+                    <button class="back-button" onclick="switchPage('venue-list')">←</button>
+                    <div style="flex: 1; margin-left: 20px;">
+                        <div style="font-size: 12px; color: #999;">晴天羽毛球馆</div>
+                        <div style="font-size: 14px; font-weight: 600;">选择俱乐部</div>
+                    </div>
+                </div>
+                <div class="club-list">
+                    <div class="club-card" onclick="switchPage('activity-lobby')">
+                        <div class="club-card-header">
+                            <h3>俱乐部 A</h3>
+                            <div class="badge-broadcast">🔔 有广播</div>
+                        </div>
+                        <div class="club-card-desc">羽毛球爱好者聚集地</div>
+                        <div class="club-card-stats">
+                            <span>📅 今日2个活动</span>
+                            <span>👥 在线8人</span>
+                        </div>
+                        <button class="club-card-button">进入大厅</button>
+                    </div>
+
+                    <div class="club-card">
+                        <div class="club-card-header">
+                            <h3>俱乐部 B</h3>
+                        </div>
+                        <div class="club-card-desc">高手对决的地方</div>
+                        <div class="club-card-stats">
+                            <span>📅 今日1个活动</span>
+                            <span>👥 在线5人</span>
+                        </div>
+                        <button class="club-card-button">进入大厅</button>
+                    </div>
+
+                    <div class="club-card">
+                        <div class="club-card-header">
+                            <h3>俱乐部 C</h3>
+                            <div class="badge-broadcast">🔔 有广播</div>
+                        </div>
+                        <div class="club-card-desc">新手友好型俱乐部</div>
+                        <div class="club-card-stats">
+                            <span>📅 今日3个活动</span>
+                            <span>👥 在线12人</span>
+                        </div>
+                        <button class="club-card-button">进入大厅</button>
+                    </div>
+
+                    <div class="club-create-activity">
+                        <div style="font-size: 18px; margin-bottom: 8px;">➕</div>
+                        <div style="font-weight: 600; font-size: 14px;">个人发起活动</div>
+                        <div style="font-size: 12px; color: #999; margin-top: 4px;">不加入俱乐部也能组局</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 活动大厅页 -->
+            <div class="screen-page" id="page-activity-lobby">
+                <div class="status-bar">
+                    <button class="back-button" onclick="switchPage('club-list')">←</button>
+                    <div style="flex: 1; margin-left: 20px;">
+                        <div style="font-size: 12px; color: #999;">晴天 · 俱乐部 A</div>
+                        <div style="font-size: 14px; font-weight: 600;">活动大厅</div>
+                    </div>
+                </div>
+
+                <div class="lobby-header">
+                    <div class="lobby-header-title">
+                        <small>今晚 19:30 - 22:00</small>
+                        <h3 style="margin-top: 4px;">今晚 19:30 - 22:00</h3>
+                    </div>
+                    <div class="lobby-header-stats">
+                        <span class="stat-time">双打 · L3+</span>
+                        <span class="online-badge">在线 23 人</span>
+                    </div>
+                </div>
+
+                <div class="section-tabs">
+                    <div class="section-tab active" onclick="switchTab('courts-section')">场地</div>
+                    <div class="section-tab" onclick="switchTab('presence-section')">观望区</div>
+                </div>
+
+                <div class="content-wrapper">
+                    <!-- 场地区 -->
+                    <div class="content-section active" id="courts-section">
+                        <div class="courts-grid">
+                            <!-- 1号场 -->
+                            <div class="court-card">
+                                <div class="court-header">
+                                    <span class="court-number">1号场</span>
+                                    <span class="court-status">3/6</span>
+                                </div>
+                                <div class="court-progress">3/6 已确认</div>
+                                <div class="slots-grid">
+                                    <div class="slot confirmed" title="已确认">👨</div>
+                                    <div class="slot reserved" title="已占坑">👨</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot confirmed" title="已确认">👩</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                </div>
+                                <div class="court-info">
+                                    <span>L3+</span>
+                                    <span>双打</span>
+                                </div>
+                            </div>
+
+                            <!-- 2号场 -->
+                            <div class="court-card">
+                                <div class="court-header">
+                                    <span class="court-number">2号场</span>
+                                    <span class="court-status">1/6</span>
+                                </div>
+                                <div class="court-progress">1/6 已确认</div>
+                                <div class="slots-grid">
+                                    <div class="slot confirmed" title="已确认">👨</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                </div>
+                                <div class="court-info">
+                                    <span>L3+</span>
+                                    <span>双打</span>
+                                </div>
+                            </div>
+
+                            <!-- 3号场 (已成局) -->
+                            <div class="court-card locked">
+                                <div class="court-header">
+                                    <span class="court-number">3号场</span>
+                                    <span class="court-status">6/6 ✓</span>
+                                </div>
+                                <div class="court-progress" style="color: #13b44f; font-weight: 600;">✓ 已成局</div>
+                                <div class="slots-grid">
+                                    <div class="slot locked" title="已锁定">👨</div>
+                                    <div class="slot locked" title="已锁定">👩</div>
+                                    <div class="slot locked" title="已锁定">👨</div>
+                                    <div class="slot locked" title="已锁定">👨</div>
+                                    <div class="slot locked" title="已锁定">👩</div>
+                                    <div class="slot locked" title="已锁定">👨</div>
+                                </div>
+                                <div class="court-info">
+                                    <span>L3+</span>
+                                    <span>双打</span>
+                                </div>
+                            </div>
+
+                            <!-- 4号场 -->
+                            <div class="court-card">
+                                <div class="court-header">
+                                    <span class="court-number">4号场</span>
+                                    <span class="court-status recruiting">0/6</span>
+                                </div>
+                                <div class="court-progress">0/6 已确认</div>
+                                <div class="slots-grid">
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                </div>
+                                <div class="court-info">
+                                    <span>L3+</span>
+                                    <span>双打</span>
+                                </div>
+                            </div>
+
+                            <!-- 5号场 -->
+                            <div class="court-card">
+                                <div class="court-header">
+                                    <span class="court-number">5号场</span>
+                                    <span class="court-status recruiting">0/6</span>
+                                </div>
+                                <div class="court-progress">0/6 已确认</div>
+                                <div class="slots-grid">
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                    <div class="slot empty" title="空位，点击占坑">+</div>
+                                </div>
+                                <div class="court-info">
+                                    <span>L3+</span>
+                                    <span>双打</span>
+                                </div>
+                            </div>
+
+                            <!-- 6-10号场 (简化) -->
+                            <div class="court-card" style="grid-column: 1 / -1; padding: 12px; text-align: center; color: #999; font-size: 12px;">
+                                场地 6-10 号 (继续滑动查看...)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 观望区 -->
+                    <div class="content-section" id="presence-section">
+                        <div class="presence-grid">
+                            <div class="presence-card">
+                                <div class="presence-avatar">👨</div>
+                                <div class="presence-name">观望者A</div>
+                                <div class="presence-level">L2</div>
+                            </div>
+                            <div class="presence-card">
+                                <div class="presence-avatar">👩</div>
+                                <div class="presence-name">观望者B</div>
+                                <div class="presence-level">L3</div>
+                            </div>
+                            <div class="presence-card">
+                                <div class="presence-avatar">👨</div>
+                                <div class="presence-name">观望者C</div>
+                                <div class="presence-level">L4</div>
+                            </div>
+                            <div class="presence-card">
+                                <div class="presence-avatar">👩</div>
+                                <div class="presence-name">观望者D</div>
+                                <div class="presence-level">L3.5</div>
+                            </div>
+                            <div class="presence-card">
+                                <div class="presence-avatar">👨</div>
+                                <div class="presence-name">观望者E</div>
+                                <div class="presence-level">L3</div>
+                            </div>
+                            <div class="presence-card">
+                                <div class="presence-avatar">👩</div>
+                                <div class="presence-name">观望者F</div>
+                                <div class="presence-level">L4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 聊天区 (仅在设计中展示) -->
+                <div style="height: 150px; background: white; border-top: 1px solid #eee; display: flex; flex-direction: column;">
+                    <div class="broadcast-notification">
+                        🔔 1号场高质量缺人，L4 以上速来
+                    </div>
+                    <div class="chat-messages" style="font-size: 11px;">
+                        <div class="chat-message">
+                            <div class="chat-message-header">👨 张三 L4</div>
+                            <div class="chat-message-content">1号场差一个人，来不？</div>
+                        </div>
+                        <div class="chat-message">
+                            <div class="chat-message-header">👨 李四 L3</div>
+                            <div class="chat-message-content">我可以，但需要15分钟</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area" style="height: auto;">
+                        <input type="text" class="chat-input" placeholder="说点什么..." >
+                        <button class="chat-send">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-bar">
+            <div class="tab-item active" onclick="switchBottomTab('venue')">
+                <div class="tab-icon">🏸</div>
+                <div>球馆</div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-icon">🏘</div>
+                <div>社区</div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-icon">➕</div>
+                <div>发帖</div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-icon">💬</div>
+                <div>消息</div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-icon">👤</div>
+                <div>我的</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="help-text">
+        <strong>交互提示</strong><br>
+        ✓ 点击球馆卡片进入俱乐部<br>
+        ✓ 点击俱乐部卡片进入大厅<br>
+        ✓ 在场地区切换观望区标签<br>
+        ✓ 查看3号场的"已成局"效果<br>
+        ✓ 顶部控制按钮快速切换页面
+    </div>
+
+    <script>
+        function switchPage(pageName) {
+            // 隐藏所有页面
+            document.querySelectorAll('.screen-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // 显示指定页面
+            document.getElementById(`page-${pageName}`).classList.add('active');
+
+            // 更新底部按钮
+            document.querySelectorAll('.control-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target?.classList.add('active');
+        }
+
+        function switchTab(sectionId) {
+            // 隐藏所有内容区
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // 显示指定区
+            document.getElementById(sectionId).classList.add('active');
+
+            // 更新标签页样式
+            document.querySelectorAll('.section-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target?.classList.add('active');
+        }
+
+        function switchBottomTab(tabName) {
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target?.closest('.tab-item')?.classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
