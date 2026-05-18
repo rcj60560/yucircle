@@ -49,15 +49,15 @@ class _HomePageState extends State<HomePage> {
           });
         } else {
           setState(() => _loading = false);
-          Get.snackbar('数据错误', '服务端返回数据格式错误', backgroundColor: Colors.red);
+          Get.snackbar('数据错误', '服务端返回数据格式错误', backgroundColor: AppTheme.danger);
         }
       } else {
         setState(() => _loading = false);
-        Get.snackbar('加载失败', res['msg'] ?? '获取帖子列表失败', backgroundColor: Colors.red);
+        Get.snackbar('加载失败', res['msg'] ?? '获取帖子列表失败', backgroundColor: AppTheme.danger);
       }
     } catch (e) {
       setState(() => _loading = false);
-      Get.snackbar('错误', '网络错误: $e', backgroundColor: Colors.red);
+      Get.snackbar('错误', '网络错误: $e', backgroundColor: AppTheme.danger);
     }
   }
 

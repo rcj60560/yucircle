@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
 import '../../services/api_client.dart';
-import '../../utils/storage.dart';
 
 class CreatePostStubPage extends StatefulWidget {
   const CreatePostStubPage({super.key});
@@ -55,7 +54,7 @@ class _CreatePostStubPageState extends State<CreatePostStubPage> {
     } catch (e) {
       setState(() => _isLoading = false);
       print('Publish error: $e');
-      Get.snackbar('错误', '网络错误: $e', backgroundColor: Colors.red);
+      Get.snackbar('错误', '网络错误: $e', backgroundColor: AppTheme.danger);
     }
   }
 
@@ -89,7 +88,7 @@ class _CreatePostStubPageState extends State<CreatePostStubPage> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: isSelected ? AppTheme.primary : Colors.grey[200],
+                      color: isSelected ? AppTheme.primary : AppTheme.border.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(

@@ -443,6 +443,99 @@ class ApiClient {
       rethrow;
     }
   }
+
+  // ── 场馆和俱乐部相关 ──────────────────────────────────────────────
+  
+  /// 获取所有场馆列表
+  static Future<Map<String, dynamic>> getVenues() async {
+    if (AppConfig.mockMode) {
+      await Future.delayed(const Duration(milliseconds: 600));
+      return {
+        'code': 200,
+        'msg': 'ok',
+        'data': [
+          {
+            'id': 1,
+            'name': '晴天羽毛球馆',
+            'address': '成都市武侯区一环路南三段1号',
+            'city': '成都',
+            'courtCount': 10,
+            'latitude': 30.5528,
+            'longitude': 104.0666,
+            'distance': 3.2,
+            'onlineCount': 23,
+            'broadcastMessage': '1号场高质量缺人，L4 以上速来',
+          }
+        ]
+      };
+    }
+    try {
+      final response = await _dio.get('/venues');
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('getVenues error: $e');
+      return {'code': 500, 'msg': '获取场馆列表失败: $e'};
+    }
+  }
+
+  /// 获取指定场馆的俱乐部列表
+  static Future<Map<String, dynamic>> getClubsByVenue(int venueId) async {
+    if (AppConfig.mockMode) {
+      await Future.delayed(const Duration(milliseconds: 600));
+      return {
+        'code': 200,
+        'msg': 'ok',
+        'data': [
+          {
+            'id': 1,
+            'venueId': venueId,
+            'name': '俱乐部 A',
+            'description': '羽毛球爱好者聚集地',
+            'creatorId': 1,
+            'status': 'active',
+            'broadcastCredits': 5,
+            'createdAt': '2026-05-01T10:00:00',
+            'todayActivityCount': 2,
+            'onlineCount': 8,
+            'hasActiveBoradcast': true,
+          },
+          {
+            'id': 2,
+            'venueId': venueId,
+            'name': '俱乐部 B',
+            'description': '高手对决的地方',
+            'creatorId': 2,
+            'status': 'active',
+            'broadcastCredits': 3,
+            'createdAt': '2026-05-02T10:00:00',
+            'todayActivityCount': 1,
+            'onlineCount': 5,
+            'hasActiveBoradcast': false,
+          },
+          {
+            'id': 3,
+            'venueId': venueId,
+            'name': '俱乐部 C',
+            'description': '新手友好型俱乐部',
+            'creatorId': 3,
+            'status': 'active',
+            'broadcastCredits': 2,
+            'createdAt': '2026-05-03T10:00:00',
+            'todayActivityCount': 3,
+            'onlineCount': 12,
+            'hasActiveBoradcast': true,
+          },
+        ]
+      };
+    }
+    try {
+      final response = await _dio.get('/clubs/venue/$venueId');
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('getClubsByVenue error: $e');
+      return {'code': 500, 'msg': '获取俱乐部列表失败: $e'};
+    }
+  }
 }
 
 class _MockConstants {

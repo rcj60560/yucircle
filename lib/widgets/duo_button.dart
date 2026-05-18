@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
 import '../../config/theme.dart';
 
 /// Duolingo 风格按钮：绿色实心 + 底部阴影下沉效果

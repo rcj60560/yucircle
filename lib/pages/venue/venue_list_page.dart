@@ -12,30 +12,64 @@ class VenueListPage extends StatefulWidget {
 
 class _VenueListPageState extends State<VenueListPage> {
   late List<Venue> venues;
-  String latestBroadcast = '1号场高质量缺人，L4 以上速来';
+  String latestBroadcast = '';
+  bool _isLoading = true;
+  String _errorMessage = '';
 
   @override
   void initState() {
     super.initState();
-    _loadMockData();
+    _loadVenues();
   }
 
-  void _loadMockData() {
-    // Mock 数据：只有晴天羽毛球馆
-    venues = [
-      Venue(
-        id: 1,
-        name: '晴天羽毛球馆',
-        address: '成都市武侯区一环路南三段1号',
-        city: '成都',
-        courtCount: 10,
-        latitude: 30.5528,
-        longitude: 104.0666,
-        distance: 3.2,
-        onlineCount: 23,
-        broadcastMessage: latestBroadcast,
-      ),
-    ];
+  Future<void> _loadVenues() async {
+    try {
+      setState(() => _isLoading = true);
+      final response = await ApiClient.getVenues();
+      
+      if (response['code'] == 200) {
+        final data = response['data'] as List?;
+        if (data != null) {
+          venues = data.map((v) {
+            return Venue(
+              id: v['id'] ?? 0,
+              name: v['name'] ?? '未知球馆',
+              address: v['address'] ?? '',
+              city: v['city'] ?? '',
+              courtCount: v['courtCount'] ?? 0,
+              latitude: v['latitude'] ?? 0.0,
+              longitude: v['longitude'] ?? 0.0,
+              distance: (v['distance'] as num?)?.toDouble() ?? 0.0,
+              onlineCount: v['onlineCount'] ?? 0,
+              broadcastMessage: v['broadcastMessage'] ?? '',
+            );
+          }).toList();
+          
+          // 获取最新的广播信息
+          if (venues.isNotEmpty && venues.first.broadcastMessage.isNotEmpty) {
+            latestBroadcast = venues.first.broadcastMessage;
+          }
+          
+          setState(() => _isLoading = false);
+        } else {
+          setState(() {
+            _isLoading = false;
+            _errorMessage = '无效的数据格式';
+          });
+        }
+      } else {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = response['msg'] ?? '获取场馆列表失败';
+        });
+      }
+    } catch (e) {
+      print('❌ 加载场馆列表错误: $e');
+      setState(() {
+        _isLoading = false;
+        _errorMessage = '网络错误: $e';
+      });
+    }
   }
 
   @override
@@ -63,7 +97,7 @@ class _VenueListPageState extends State<VenueListPage> {
                     '今晚去哪打？',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color: AppTheme.textSecondary,
                     ),
                   ),
                 ],
@@ -99,19 +133,63 @@ class _VenueListPageState extends State<VenueListPage> {
                 ),
               ),
 
-            // 球馆卡片列表
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: venues.length,
-                itemBuilder: (context, index) {
-                  final venue = venues[index];
-                  return _buildVenueCard(venue);
-                },
+            // 球馆卡片列表或加载状态
+            if (_isLoading)
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 40),
+                child: Center(child: CircularProgressIndicator(color: AppTheme.primary)),
+              )
+            else if (_errorMessage.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Center(
+                  child: Column(
+                    children: [
+                      const Icon(Icons.error_outline, size: 48, color: AppTheme.danger),
+                      const SizedBox(height: 16),
+                      Text(
+                        _errorMessage,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: AppTheme.textSecondary,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: _loadVenues,
+                        child: const Text('重新加载'),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            else if (venues.isEmpty)
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 40),
+                child: Center(
+                  child: Text(
+                    '暂无场馆',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppTheme.textSecondary,
+                    ),
+                  ),
+                ),
+              )
+            else
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: venues.length,
+                  itemBuilder: (context, index) {
+                    final venue = venues[index];
+                    return _buildVenueCard(venue);
+                  },
+                ),
               ),
-            ),
           ],
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../config/theme.dart';
 import '../../providers/auth_controller.dart';
 import '../../utils/storage.dart';
-import '../../widgets/duo_button.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

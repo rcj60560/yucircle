@@ -14,69 +14,72 @@ class _ClubListPageState extends State<ClubListPage> {
   late List<Club> clubs;
   late int venueId;
   late String venueName;
+  bool _isLoading = true;
+  String _errorMessage = '';
 
   @override
   void initState() {
     super.initState();
     _extractArguments();
-    _loadMockData();
+    _loadClubs();
   }
 
   void _extractArguments() {
     venueId = Get.arguments?['venueId'] ?? 1;
-    venueName = Get.arguments?['venueName'] ?? '晴天羽毛球馆';
+    venueName = Get.arguments?['venueName'] ?? '球馆';
   }
 
-  void _loadMockData() {
-    // Mock 数据：3个俱乐部
-    clubs = [
-      Club(
-        id: 1,
-        venueId: venueId,
-        name: '俱乐部 A',
-        description: '羽毛球爱好者聚集地',
-        creatorId: 1,
-        status: 'active',
-        broadcastCredits: 5,
-        createdAt: DateTime.now(),
-        todayActivityCount: 2,
-        onlineCount: 8,
-        hasActiveBoradcast: true,
-      ),
-      Club(
-        id: 2,
-        venueId: venueId,
-        name: '俱乐部 B',
-        description: '高手对决的地方',
-        creatorId: 2,
-        status: 'active',
-        broadcastCredits: 3,
-        createdAt: DateTime.now(),
-        todayActivityCount: 1,
-        onlineCount: 5,
-        hasActiveBoradcast: false,
-      ),
-      Club(
-        id: 3,
-        venueId: venueId,
-        name: '俱乐部 C',
-        description: '新手友好型俱乐部',
-        creatorId: 3,
-        status: 'active',
-        broadcastCredits: 2,
-        createdAt: DateTime.now(),
-        todayActivityCount: 3,
-        onlineCount: 12,
-        hasActiveBoradcast: true,
-      ),
-    ];
+  Future<void> _loadClubs() async {
+    try {
+      setState(() => _isLoading = true);
+      final response = await ApiClient.getClubsByVenue(venueId);
+      
+      if (response['code'] == 200) {
+        final data = response['data'] as List?;
+        if (data != null) {
+          clubs = data.map((c) {
+            return Club(
+              id: c['id'] ?? 0,
+              venueId: c['venueId'] ?? venueId,
+              name: c['name'] ?? '未知俱乐部',
+              description: c['description'] ?? '',
+              creatorId: c['creatorId'] ?? 0,
+              status: c['status'] ?? 'active',
+              broadcastCredits: c['broadcastCredits'] ?? 0,
+              createdAt: DateTime.tryParse(c['createdAt'] ?? '') ?? DateTime.now(),
+              todayActivityCount: c['todayActivityCount'] ?? 0,
+              onlineCount: c['onlineCount'] ?? 0,
+              hasActiveBoradcast: c['hasActiveBoradcast'] ?? false,
+            );
+          }).toList();
+          
+          setState(() => _isLoading = false);
+        } else {
+          setState(() {
+            _isLoading = false;
+            _errorMessage = '无效的数据格式';
+          });
+        }
+      } else {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = response['msg'] ?? '获取俱乐部列表失败';
+        });
+      }
+    } catch (e) {
+      print('❌ 加载俱乐部列表错误: $e');
+      setState(() {
+        _isLoading = false;
+        _errorMessage = '网络错误: $e';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.surface,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, size: 20),
@@ -90,7 +93,7 @@ class _ClubListPageState extends State<ClubListPage> {
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: AppTheme.textPrimary,
               ),
             ),
             Text(
@@ -103,71 +106,117 @@ class _ClubListPageState extends State<ClubListPage> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 俱乐部列表
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: clubs.length,
-                itemBuilder: (context, index) {
-                  final club = clubs[index];
-                  return _buildClubCard(club);
-                },
-              ),
-            ),
-
-            // 个人发起活动入口
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppTheme.primary.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: AppTheme.primary.withValues(alpha: 0.3),
-                    width: 1,
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(color: AppTheme.primary),
+            )
+          : _errorMessage.isNotEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.error_outline,
+                        size: 48,
+                        color: AppTheme.danger,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        _errorMessage,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: AppTheme.textSecondary,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: _loadClubs,
+                        child: const Text('重新加载'),
+                      ),
+                    ],
                   ),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.add_circle_outline, color: AppTheme.primary),
-                    const SizedBox(width: 12),
-                    Expanded(
+                )
+              : clubs.isEmpty
+                  ? const Center(
+                      child: Text(
+                        '暂无俱乐部',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppTheme.textSecondary,
+                        ),
+                      ),
+                    )
+                  : SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            '个人发起活动',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: AppTheme.primary,
+                          // 俱乐部列表
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: clubs.length,
+                              itemBuilder: (context, index) {
+                                final club = clubs[index];
+                                return _buildClubCard(club);
+                              },
                             ),
                           ),
-                          Text(
-                            '不加入俱乐部也能组局',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey[600],
+
+                          // 个人发起活动入口
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: AppTheme.primary.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: AppTheme.primary.withValues(alpha: 0.3),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.add_circle_outline,
+                                      color: AppTheme.primary),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          '个人发起活动',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppTheme.primary,
+                                          ),
+                                        ),
+                                        Text(
+                                          '不加入俱乐部也能组局',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Icon(Icons.arrow_forward_ios,
+                                      size: 16, color: AppTheme.primary),
+                                ],
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const Icon(Icons.arrow_forward_ios, size: 16, color: AppTheme.primary),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+                  ])
     );
   }
 

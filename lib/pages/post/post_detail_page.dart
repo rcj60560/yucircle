@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../config/theme.dart';
 import '../../services/api_client.dart';
 import '../../utils/storage.dart';
 
@@ -189,7 +189,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 }
               }
             },
-            child: const Text('删除', style: TextStyle(color: Colors.red)),
+            child: const Text('删除', style: TextStyle(color: AppTheme.danger)),
           ),
         ],
       ),
@@ -300,18 +300,18 @@ class _PostDetailPageState extends State<PostDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: AppTheme.background,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.surface,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppTheme.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           '帖子详情',
-          style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
+          style: TextStyle(color: AppTheme.textPrimary, fontSize: 16, fontWeight: FontWeight.w600),
         ),
       ),
       body: Column(
@@ -334,7 +334,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black87,
+                          color: AppTheme.textPrimary,
                         ),
                       ),
                     ),
@@ -354,13 +354,13 @@ class _PostDetailPageState extends State<PostDetailPage> {
                           Icon(
                             Icons.chat_bubble_outline,
                             size: 48,
-                            color: Colors.grey[400],
+                            color: AppTheme.textSecondary,
                           ),
                           const SizedBox(height: 16),
                           Text(
                             '暂无评论，来发表第一条吧！',
                             style: TextStyle(
-                              color: Colors.grey[600],
+                              color: AppTheme.textSecondary,
                               fontSize: 14,
                             ),
                           ),
@@ -440,7 +440,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundColor: const Color(0xFF667EEA),
+                backgroundColor: AppTheme.primary,
                 child: Text(
                   _getAvatarText(nickname),
                   style: const TextStyle(
@@ -500,7 +500,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                 style: const TextStyle(
                   fontSize: 14,
                   height: 1.6,
-                  color: Colors.black54,
+                  color: AppTheme.textSecondary,
                 ),
                 maxLines: 10,
                 overflow: TextOverflow.ellipsis,
