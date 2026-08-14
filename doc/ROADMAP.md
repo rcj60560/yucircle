@@ -14,8 +14,8 @@
 - 男单 / 女单 / 男双 / 女双 / 混双 **世界排名**
 - **世界巡回赛**赛程（近期 / 往期）
 - 展示形式：原生 or WebView（待定）
-- 数据来源：现成 git 库（优先验证可得性）→ 不满足再自建 Python 爬虫（低频）
-- 状态：⏳ 待 brainstorm → `docs/superpowers/specs/`
+- 数据来源：~~现成 git 库~~（已探针：无活库）→ **自建低频 Python 爬虫**（进 ky/tools 工具箱）
+- 状态：📋 spec 已定稿 → `docs/superpowers/specs/2026-08-14-bwf-info-design.md`（待实现计划）
 
 ### Track B — 社区（球友发声）
 - 发帖 / 评论 / 回复 / 删除 / 点赞（取消点赞）
