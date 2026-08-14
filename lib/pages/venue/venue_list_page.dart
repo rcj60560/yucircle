@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
 import '../../models/venue.dart';
+import '../../services/api_client.dart';
 
 class VenueListPage extends StatefulWidget {
   const VenueListPage({super.key});
@@ -22,6 +23,13 @@ class _VenueListPageState extends State<VenueListPage> {
     _loadVenues();
   }
 
+  String _safeText(String? value, String fallback) {
+    final text = (value ?? '').trim();
+    if (text.isEmpty) return fallback;
+    if (text.contains('�') || text.contains('???')) return fallback;
+    return text;
+  }
+
   Future<void> _loadVenues() async {
     try {
       setState(() => _isLoading = true);
@@ -33,21 +41,22 @@ class _VenueListPageState extends State<VenueListPage> {
           venues = data.map((v) {
             return Venue(
               id: v['id'] ?? 0,
-              name: v['name'] ?? '未知球馆',
-              address: v['address'] ?? '',
-              city: v['city'] ?? '',
+              name: _safeText(v['name'] as String?, '晴天'),
+              address: _safeText(v['address'] as String?, '成都市武侯区三利运动中心'),
+              city: _safeText(v['city'] as String?, '成都'),
               courtCount: v['courtCount'] ?? 0,
               latitude: v['latitude'] ?? 0.0,
               longitude: v['longitude'] ?? 0.0,
               distance: (v['distance'] as num?)?.toDouble() ?? 0.0,
               onlineCount: v['onlineCount'] ?? 0,
-              broadcastMessage: v['broadcastMessage'] ?? '',
+              broadcastMessage: _safeText(v['broadcastMessage'] as String?, ''),
             );
-          }).toList();
+          }).take(1).toList();
           
           // 获取最新的广播信息
-          if (venues.isNotEmpty && venues.first.broadcastMessage.isNotEmpty) {
-            latestBroadcast = venues.first.broadcastMessage;
+          final firstBroadcast = venues.isNotEmpty ? venues.first.broadcastMessage : null;
+          if (firstBroadcast != null && firstBroadcast.isNotEmpty) {
+            latestBroadcast = firstBroadcast;
           }
           
           setState(() => _isLoading = false);

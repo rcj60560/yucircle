@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
+import '../../services/api_client.dart';
+import '../../utils/storage.dart';
 
 class ActivityLobbyPage extends StatefulWidget {
   const ActivityLobbyPage({super.key});
@@ -10,29 +14,36 @@ class ActivityLobbyPage extends StatefulWidget {
 }
 
 class _ActivityLobbyPageState extends State<ActivityLobbyPage>
-    with TickerProviderStateMixin {
+  with TickerProviderStateMixin {
   late int venueId;
   late int clubId;
+  late int activityId;
   late String venueName;
   late String clubName;
+  late String activityTitle;
+  late String timeSlot;
+  String levelRequirement = 'L1-L8';
+  String matchType = '双打';
 
   // 页面状态
-  int onlineCount = 23;
-  int myUserId = 1; // 当前用户ID（模拟）
+  int onlineCount = 0;
+  int venueOnlineCount = 0;
+  int myUserId = 0;
   int? mySlotId; // 当前用户占的坑位ID
   String mySlotStatus = ''; // reserved, confirmed
+  bool _isLoading = true;
+  bool _isActionLoading = false;
+  String _errorMessage = '';
 
   // 数据
   late List<CourtData> courts;
   late List<OnlineUser> onlineUsers;
   late List<ChatMessage> chatMessages;
-  List<String> broadcasts = [
-    '1号场高质量缺人，L4 以上速来',
-    '2号场差一位，双打局',
-  ];
+  List<String> broadcasts = [];
 
   late AnimationController _broadcastController;
-  late TabController _tabController;
+  Timer? _snapshotTimer;
+  Timer? _pingTimer;
 
   final TextEditingController _messageController = TextEditingController();
 
@@ -40,15 +51,25 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
   void initState() {
     super.initState();
     _extractArguments();
-    _loadMockData();
+    _initStateData();
     _setupControllers();
+    _bootstrapLobby();
   }
 
   void _extractArguments() {
     venueId = Get.arguments?['venueId'] ?? 1;
     clubId = Get.arguments?['clubId'] ?? 1;
+    activityId = Get.arguments?['activityId'] ?? 0;
     venueName = Get.arguments?['venueName'] ?? '晴天羽毛球馆';
     clubName = Get.arguments?['clubName'] ?? '俱乐部 A';
+    activityTitle = Get.arguments?['activityTitle'] ?? '今晚活动';
+    timeSlot = Get.arguments?['timeSlot'] ?? '19:30-22:00';
+  }
+
+  void _initStateData() {
+    courts = [];
+    onlineUsers = [];
+    chatMessages = [];
   }
 
   void _setupControllers() {
@@ -56,272 +77,401 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
       duration: const Duration(seconds: 3),
       vsync: this,
     )..repeat();
-
-    _tabController = TabController(length: 2, vsync: this);
   }
 
-  void _loadMockData() {
-    // 初始化10个场地，每个6个坑位
-    courts = List.generate(10, (courtIndex) {
-      return CourtData(
-        courtNumber: courtIndex + 1,
-        levelRequirement: 'L3+',
-        matchType: '双打',
-        slots: List.generate(6, (slotIndex) {
-          return SlotData(
-            slotId: courtIndex * 6 + slotIndex + 1,
-            slotNumber: slotIndex + 1,
-            status: SlotStatus.empty,
-          );
-        }),
-      );
+  Future<void> _bootstrapLobby() async {
+    final userInfo = await StorageManager.getUserInfo();
+    myUserId = int.tryParse(userInfo['userId'] ?? '') ?? 0;
+
+    if (activityId <= 0) {
+      final resolved = await _resolveActivityIdFromClub();
+      if (!resolved) {
+        if (!mounted) return;
+        setState(() {
+          _isLoading = false;
+          _errorMessage = '缺少 activityId，无法进入大厅';
+        });
+        return;
+      }
+    }
+
+    await _enterLobby();
+    await _refreshLobbySnapshot(showErrorSnackBar: true);
+    _startPolling();
+  }
+
+  Future<bool> _resolveActivityIdFromClub() async {
+    if (clubId <= 0) return false;
+    final response = await ApiClient.getClubActivities(clubId);
+    if (response['code'] != 200) return false;
+    final activities = response['data'] as List? ?? [];
+    if (activities.isEmpty) return false;
+    final first = activities.first as Map<String, dynamic>;
+    final id = first['id'] as int? ?? 0;
+    if (id <= 0) return false;
+    activityId = id;
+    activityTitle = first['title'] as String? ?? activityTitle;
+    timeSlot = first['timeSlot'] as String? ?? timeSlot;
+    return true;
+  }
+
+  void _startPolling() {
+    _snapshotTimer?.cancel();
+    _pingTimer?.cancel();
+
+    _snapshotTimer = Timer.periodic(const Duration(seconds: 3), (_) {
+      _refreshLobbySnapshot();
     });
 
-    // 添加一些Mock用户占坑
-    courts[0].slots[0] = SlotData(
-      slotId: 1,
-      slotNumber: 1,
-      status: SlotStatus.confirmed,
-      userName: '张三',
-      userAvatar: '👨',
-      userLevel: 'L4',
-      userId: 10,
-    );
-
-    courts[0].slots[1] = SlotData(
-      slotId: 2,
-      slotNumber: 2,
-      status: SlotStatus.reserved,
-      userName: '李四',
-      userAvatar: '👨',
-      userLevel: 'L3',
-      userId: 11,
-    );
-
-    courts[1].slots[0] = SlotData(
-      slotId: 7,
-      slotNumber: 1,
-      status: SlotStatus.confirmed,
-      userName: '王五',
-      userAvatar: '👩',
-      userLevel: 'L3.5',
-      userId: 12,
-    );
-
-    // 在线用户（观望中）
-    onlineUsers = [
-      OnlineUser(
-        userId: 20,
-        userName: '观望者A',
-        userLevel: 'L2',
-        userAvatar: '👨',
-      ),
-      OnlineUser(
-        userId: 21,
-        userName: '观望者B',
-        userLevel: 'L3',
-        userAvatar: '👩',
-      ),
-      OnlineUser(
-        userId: 22,
-        userName: '观望者C',
-        userLevel: 'L4',
-        userAvatar: '👨',
-      ),
-    ];
-
-    // 聊天消息
-    chatMessages = [
-      ChatMessage(
-        userName: '张三',
-        userLevel: 'L4',
-        userAvatar: '👨',
-        content: '1号场差一个人，来不？',
-        timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
-      ),
-      ChatMessage(
-        userName: '李四',
-        userLevel: 'L3',
-        userAvatar: '👨',
-        content: '我可以，但需要15分钟',
-        timestamp: DateTime.now().subtract(const Duration(minutes: 4)),
-      ),
-      ChatMessage(
-        userName: '王五',
-        userLevel: 'L3.5',
-        userAvatar: '👩',
-        content: '2号场缺人吗？',
-        timestamp: DateTime.now().subtract(const Duration(minutes: 2)),
-      ),
-    ];
+    _pingTimer = Timer.periodic(const Duration(seconds: 2), (_) {
+      ApiClient.pingActivityLobby(activityId);
+    });
   }
 
-  void _onSlotTapped(int courtIndex, int slotIndex) {
-    final slot = courts[courtIndex].slots[slotIndex];
-
-    if (slot.status == SlotStatus.empty) {
-      // 占坑
-      setState(() {
-        slot.status = SlotStatus.reserved;
-        slot.userId = myUserId;
-        slot.userName = '我';
-        slot.userLevel = 'L3.5';
-        slot.userAvatar = '👤';
-        mySlotId = slot.slotId;
-        mySlotStatus = 'reserved';
-      });
-
+  Future<void> _enterLobby() async {
+    final response = await ApiClient.enterActivityLobby(activityId);
+    if (response['code'] != 200 && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('占坑成功！请点击"确认参加"按钮')),
+        SnackBar(content: Text('进入大厅失败：${response['msg'] ?? '未知错误'}')),
       );
-    } else if (slot.userId == myUserId) {
-      // 已占坑，显示取消选项
-      _showSlotOptionsMenu(courtIndex, slotIndex);
     }
   }
 
-  void _showSlotOptionsMenu(int courtIndex, int slotIndex) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              '坑位操作',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+  Future<void> _refreshLobbySnapshot({bool showErrorSnackBar = false}) async {
+    final response = await ApiClient.getActivityLobbySnapshot(activityId);
+
+    if (!mounted) return;
+
+    if (response['code'] == 200) {
+      final data = response['data'] as Map<String, dynamic>? ?? {};
+      setState(() {
+        _isLoading = false;
+        _errorMessage = '';
+        _applyLobbyData(data);
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoading = false;
+      _errorMessage = response['msg'] ?? '获取大厅快照失败';
+    });
+
+    if (showErrorSnackBar) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(_errorMessage)),
+      );
+    }
+  }
+
+  void _applyLobbyData(Map<String, dynamic> data) {
+    onlineCount = data['onlineCount'] as int? ?? 0;
+    venueOnlineCount = data['venueOnlineCount'] as int? ?? 0;
+    timeSlot = data['timeSlot'] as String? ?? timeSlot;
+    activityTitle = data['title'] as String? ?? activityTitle;
+    levelRequirement = data['levelRequirement'] as String? ?? levelRequirement;
+    matchType = data['matchType'] as String? ?? matchType;
+
+    final broadcast = data['broadcast'] as Map<String, dynamic>?;
+    broadcasts = [];
+    if (broadcast != null && (broadcast['content'] as String?)?.isNotEmpty == true) {
+      broadcasts = [broadcast['content'] as String];
+    }
+
+    final courtsData = data['courts'] as List? ?? [];
+    courts = courtsData.map((item) {
+      final court = item as Map<String, dynamic>;
+      final courtNumber = court['courtNumber'] as int? ?? 0;
+      final slotsData = court['slots'] as List? ?? [];
+
+      final slots = slotsData.map((slotItem) {
+        final slot = slotItem as Map<String, dynamic>;
+        final userId = slot['userId'] as int?;
+        final status = _toSlotStatus(slot['status'] as String? ?? 'empty');
+        final isMine = slot['isMine'] as bool? ?? false;
+
+        if (userId != null && userId == myUserId) {
+          mySlotId = courtNumber * 10 + (slot['slotNumber'] as int? ?? 0);
+          mySlotStatus = slot['status'] as String? ?? '';
+        }
+
+        return SlotData(
+          slotId: courtNumber * 10 + (slot['slotNumber'] as int? ?? 0),
+          slotNumber: slot['slotNumber'] as int? ?? 0,
+          status: status,
+          userId: userId,
+          userName: slot['nickname'] as String?,
+          userAvatar: (slot['avatar'] as String?)?.isNotEmpty == true
+              ? slot['avatar'] as String
+              : '👤',
+          userLevel: slot['level'] as String?,
+          isMine: isMine,
+        );
+      }).toList();
+
+      return CourtData(
+        courtNumber: courtNumber,
+        levelRequirement: levelRequirement,
+        matchType: matchType,
+        slots: slots,
+      );
+    }).toList();
+
+    final observers = data['observers'] as List? ?? [];
+    onlineUsers = observers.map((item) {
+      final user = item as Map<String, dynamic>;
+      return OnlineUser(
+        userId: user['userId'] as int? ?? 0,
+        userName: user['nickname'] as String? ?? '球友',
+        userLevel: user['level'] as String? ?? '',
+        userAvatar: (user['avatar'] as String?)?.isNotEmpty == true
+            ? user['avatar'] as String
+            : '👤',
+      );
+    }).toList();
+
+    final messages = data['messages'] as List? ?? [];
+    chatMessages = messages.map((item) {
+      final msg = item as Map<String, dynamic>;
+      return ChatMessage(
+        userName: msg['nickname'] as String? ?? '球友',
+        userLevel: msg['level'] as String? ?? '',
+        userAvatar: '👤',
+        content: msg['content'] as String? ?? '',
+        timestamp: DateTime.now(),
+      );
+    }).toList();
+  }
+
+  SlotStatus _toSlotStatus(String status) {
+    switch (status) {
+      case 'reserved':
+        return SlotStatus.reserved;
+      case 'confirmed':
+        return SlotStatus.confirmed;
+      case 'locked':
+        return SlotStatus.locked;
+      case 'empty':
+      default:
+        return SlotStatus.empty;
+    }
+  }
+
+  Future<void> _onSlotTapped(int courtIndex, int slotIndex) async {
+    if (_isActionLoading) return;
+    final slot = courts[courtIndex].slots[slotIndex];
+
+    if (slot.status == SlotStatus.empty) {
+      // 点击空坑位 - 弹对话框确认
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('确认占位'),
+          content: Text(
+            '确认要在 ${courts[courtIndex].courtNumber} 号场 ${slot.slotNumber} 号位占位吗？\n\n占位成功后可随时取消，但请勿频繁变动。',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('取消'),
             ),
-            const SizedBox(height: 16),
-            if (courts[courtIndex].slots[slotIndex].status == SlotStatus.reserved)
-              GestureDetector(
-                onTap: () {
-                  Get.back();
-                  _confirmSlot(courtIndex, slotIndex);
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppTheme.primary,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text(
-                    '确认参加',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            const SizedBox(height: 12),
-            GestureDetector(
-              onTap: () {
-                Get.back();
-                _cancelSlot(courtIndex, slotIndex);
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _doReserveSlot(courtIndex, slotIndex);
               },
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  '取消占坑',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+              child: const Text('确认占位'),
             ),
           ],
         ),
+      );
+    } else if (slot.isMine) {
+      // 点击自己的坑位 - 根据状态显示取消或升级选项
+      if (slot.status == SlotStatus.reserved) {
+        // 已占坑未确认 - 弹菜单选择确认或取消
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('坑位操作'),
+            content: Text(
+              '${courts[courtIndex].courtNumber} 号场 ${slot.slotNumber} 号位已占位',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('返回'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _showCancelSlotDialog(courtIndex, slotIndex);
+                },
+                child: const Text('取消占位', style: TextStyle(color: Colors.red)),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _confirmSlot(courtIndex, slotIndex);
+                },
+                child: const Text('确认参加'),
+              ),
+            ],
+          ),
+        );
+      } else if (slot.status == SlotStatus.confirmed) {
+        // 已确认 - 只能取消
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('确认取消'),
+            content: Text(
+              '确认要取消 ${courts[courtIndex].courtNumber} 号场的已确认位置吗？',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('不取消'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _showCancelSlotDialog(courtIndex, slotIndex);
+                },
+                child: const Text('确认取消', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _doReserveSlot(int courtIndex, int slotIndex) async {
+    if (_isActionLoading) return;
+    setState(() => _isActionLoading = true);
+    final slot = courts[courtIndex].slots[slotIndex];
+
+    final response = await ApiClient.reserveActivitySlot(
+      activityId: activityId,
+      courtNumber: courts[courtIndex].courtNumber,
+      slotNumber: slot.slotNumber,
+    );
+    if (!mounted) return;
+    setState(() => _isActionLoading = false);
+
+    if (response['code'] == 200) {
+      await _refreshLobbySnapshot();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('占坑成功！')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(response['msg'] ?? '占坑失败')),
+      );
+    }
+  }
+
+  void _showCancelSlotDialog(int courtIndex, int slotIndex) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('确认取消占位'),
+        content: const Text(
+          '一旦取消成功，此位置将释放给其他用户。确认要继续吗？',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('不取消'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _cancelSlot(courtIndex, slotIndex);
+            },
+            child: const Text('确认取消', style: TextStyle(color: Colors.red)),
+          ),
+        ],
       ),
     );
   }
 
-  void _confirmSlot(int courtIndex, int slotIndex) {
-    setState(() {
-      courts[courtIndex].slots[slotIndex].status = SlotStatus.confirmed;
-      mySlotStatus = 'confirmed';
 
-      // 检查该场地是否所有坑位都已确认
-      final court = courts[courtIndex];
-      bool allConfirmed = court.slots.every(
-        (s) => s.userId == null || s.status == SlotStatus.confirmed || s.status == SlotStatus.locked,
+  Future<void> _confirmSlot(int courtIndex, int slotIndex) async {
+    if (_isActionLoading) return;
+    setState(() => _isActionLoading = true);
+
+    final response = await ApiClient.confirmActivitySlot(activityId);
+    if (!mounted) return;
+    setState(() => _isActionLoading = false);
+
+    if (response['code'] == 200) {
+      await _refreshLobbySnapshot();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('已确认参加')),
       );
-
-      if (allConfirmed && court.slots.where((s) => s.userId != null).length == 6) {
-        // 成局！
-        for (var slot in court.slots) {
-          if (slot.userId != null) {
-            slot.status = SlotStatus.locked;
-          }
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('🎉 该场地已成局！'),
-            backgroundColor: AppTheme.primary,
-          ),
-        );
-      }
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('已确认参加')),
-    );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(response['msg'] ?? '确认参加失败')),
+      );
+    }
   }
 
-  void _cancelSlot(int courtIndex, int slotIndex) {
-    setState(() {
-      final slot = courts[courtIndex].slots[slotIndex];
-      slot.status = SlotStatus.empty;
-      slot.userId = null;
-      slot.userName = null;
-      slot.userLevel = null;
-      slot.userAvatar = null;
-      mySlotId = null;
-      mySlotStatus = '';
-    });
+  Future<void> _cancelSlot(int courtIndex, int slotIndex) async {
+    if (_isActionLoading) return;
+    setState(() => _isActionLoading = true);
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('已取消占坑')),
-    );
+    final response = await ApiClient.cancelActivitySlot(activityId);
+    if (!mounted) return;
+    setState(() => _isActionLoading = false);
+
+    if (response['code'] == 200) {
+      await _refreshLobbySnapshot();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('已取消占坑')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(response['msg'] ?? '取消占坑失败')),
+      );
+    }
   }
 
-  void _sendMessage() {
-    if (_messageController.text.isEmpty) return;
+  Future<void> _sendMessage() async {
+    final content = _messageController.text.trim();
+    if (content.isEmpty) return;
 
-    setState(() {
-      chatMessages.add(
-        ChatMessage(
-          userName: '我',
-          userLevel: 'L3.5',
-          userAvatar: '👤',
-          content: _messageController.text,
-          timestamp: DateTime.now(),
-        ),
-      );
-    });
-
-    _messageController.clear();
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('消息已发送 (60秒限频中)')),
+    final response = await ApiClient.sendActivityMessage(
+      activityId: activityId,
+      content: content,
     );
+
+    if (!mounted) return;
+    if (response['code'] == 200) {
+      _messageController.clear();
+      await _refreshLobbySnapshot();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('消息已发送')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(response['msg'] ?? '发送失败')),
+      );
+    }
   }
 
   @override
   void dispose() {
+    _snapshotTimer?.cancel();
+    _pingTimer?.cancel();
+    if (activityId > 0) {
+      ApiClient.leaveActivityLobby(activityId);
+    }
     _broadcastController.dispose();
-    _tabController.dispose();
     _messageController.dispose();
     super.dispose();
   }
@@ -359,6 +509,41 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
       ),
       body: Column(
         children: [
+          if (_isLoading)
+            const Expanded(
+              child: Center(
+                child: CircularProgressIndicator(color: AppTheme.primary),
+              ),
+            )
+          else if (_errorMessage.isNotEmpty)
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.error_outline, size: 48, color: AppTheme.danger),
+                      const SizedBox(height: 12),
+                      Text(
+                        _errorMessage,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 14, color: AppTheme.textSecondary),
+                      ),
+                      const SizedBox(height: 12),
+                      ElevatedButton(
+                        onPressed: () => _refreshLobbySnapshot(showErrorSnackBar: true),
+                        child: const Text('重试'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          else
+            Expanded(
+              child: Column(
+                children: [
           // 顶部信息区
           Container(
             padding: const EdgeInsets.all(16),
@@ -375,14 +560,30 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '今晚 19:30 - 22:00',
+                          activityTitle,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          timeSlot,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '$matchType · $levelRequirement',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[700],
                           ),
                         ),
                       ],
@@ -393,13 +594,25 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
                         color: AppTheme.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Text(
-                        '在线 $onlineCount 人',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.primary,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '活动在线 $onlineCount 人',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.primary,
+                            ),
+                          ),
+                          Text(
+                            '球馆在线 $venueOnlineCount 人',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.blueGrey[600],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -408,32 +621,9 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
             ),
           ),
 
-          // Tab：场地 / 观望
-          Container(
-            color: Colors.white,
-            child: TabBar(
-              controller: _tabController,
-              labelColor: AppTheme.primary,
-              unselectedLabelColor: Colors.grey,
-              indicatorColor: AppTheme.primary,
-              tabs: const [
-                Tab(text: '场地'),
-                Tab(text: '观望区'),
-              ],
-            ),
-          ),
-
           // 内容区
           Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                // Tab 1: 场地区
-                _buildCourtsTabContent(),
-                // Tab 2: 观望区
-                _buildPresenceTabContent(),
-              ],
-            ),
+            child: _buildCourtsTabContent(),
           ),
 
           // 底部聊天区
@@ -481,7 +671,8 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
                   ),
 
                 // 聊天消息列表
-                Expanded(
+                SizedBox(
+                  height: 180,
                   child: ListView.builder(
                     padding: const EdgeInsets.all(8),
                     itemCount: chatMessages.length,
@@ -568,12 +759,38 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
               ],
             ),
           ),
+                ],
+              ),
+            ),
         ],
       ),
     );
   }
 
   Widget _buildCourtsTabContent() {
+    if (courts.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.sports_tennis_outlined,
+                size: 48,
+                color: AppTheme.textSecondary.withValues(alpha: 0.7),
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                '当前暂无场地信息',
+                style: TextStyle(fontSize: 14, color: AppTheme.textSecondary),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -586,13 +803,15 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
               crossAxisCount: 2,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
-              childAspectRatio: 1.1,
+              childAspectRatio: 0.92,
             ),
             itemCount: courts.length,
             itemBuilder: (context, index) {
               return _buildCourtCard(index);
             },
           ),
+          const SizedBox(height: 12),
+          _buildObserverInlineSection(),
         ],
       ),
     );
@@ -600,7 +819,9 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
 
   Widget _buildCourtCard(int courtIndex) {
     final court = courts[courtIndex];
-    final isLocked = court.slots.every((s) => s.userId == null || s.status == SlotStatus.locked);
+    final hasPlayers = court.slots.any((s) => s.userId != null);
+    final isLocked = hasPlayers &&
+        court.slots.where((s) => s.userId != null).every((s) => s.status == SlotStatus.locked);
     final confirmedCount = court.slots.where((s) => s.status == SlotStatus.confirmed || s.status == SlotStatus.locked).length;
 
     return Container(
@@ -665,7 +886,7 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
               crossAxisSpacing: 4,
               mainAxisSpacing: 4,
             ),
-            itemCount: 6,
+            itemCount: court.slots.length,
             itemBuilder: (context, slotIndex) {
               return _buildSlotWidget(courtIndex, slotIndex, isLocked);
             },
@@ -698,7 +919,7 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
     Widget slotContent;
 
     if (slot.status == SlotStatus.empty) {
-      // 空位
+      // 空位 - 可点击
       slotContent = Container(
         decoration: BoxDecoration(
           border: Border.all(
@@ -714,45 +935,114 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
       );
     } else if (slot.status == SlotStatus.reserved) {
       // 已占坑未确认
-      slotContent = Container(
-        decoration: BoxDecoration(
-          color: Colors.yellow[100],
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: Colors.yellow[600]!, width: 1),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              slot.userAvatar!,
-              style: const TextStyle(fontSize: 14),
-            ),
-            Text(
-              slot.userLevel ?? '',
-              style: const TextStyle(fontSize: 8),
-            ),
-          ],
-        ),
-      );
+      if (slot.isMine) {
+        // 我的坑位 - 黄色 + 立体阴影
+        slotContent = Container(
+          decoration: BoxDecoration(
+            color: Colors.yellow[100],
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: Colors.yellow[600]!, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.yellow[700]!.withValues(alpha: 0.4),
+                blurRadius: 8,
+                offset: const Offset(2, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                slot.userAvatar!,
+                style: const TextStyle(fontSize: 14),
+              ),
+              Text(
+                slot.userLevel ?? '',
+                style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold),
+              ),
+              const Text(
+                '我的坑位',
+                style: TextStyle(fontSize: 7, color: Colors.orange),
+              ),
+            ],
+          ),
+        );
+      } else {
+        // 他人的坑位 - 蓝色，不可交互
+        slotContent = Container(
+          decoration: BoxDecoration(
+            color: Colors.blue[50],
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: Colors.blue[300]!, width: 1),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                slot.userAvatar!,
+                style: const TextStyle(fontSize: 14),
+              ),
+              Text(
+                slot.userLevel ?? '',
+                style: const TextStyle(fontSize: 8),
+              ),
+            ],
+          ),
+        );
+      }
     } else if (slot.status == SlotStatus.confirmed) {
       // 已确认
-      slotContent = Container(
-        decoration: BoxDecoration(
-          color: Colors.green[100],
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: Colors.green[600]!, width: 1),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              slot.userAvatar!,
-              style: const TextStyle(fontSize: 14),
-            ),
-            const Icon(Icons.check, size: 10, color: Colors.green),
-          ],
-        ),
-      );
+      if (slot.isMine) {
+        // 我的坑位 - 绿色 + 立体阴影 + 锁定标记
+        slotContent = Container(
+          decoration: BoxDecoration(
+            color: Colors.green[100],
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: Colors.green[600]!, width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.green[700]!.withValues(alpha: 0.4),
+                blurRadius: 8,
+                offset: const Offset(2, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                slot.userAvatar!,
+                style: const TextStyle(fontSize: 14),
+              ),
+              const Icon(Icons.check, size: 12, color: Colors.green),
+              const Text(
+                '已确认',
+                style: TextStyle(fontSize: 7, color: Colors.green),
+              ),
+            ],
+          ),
+        );
+      } else {
+        // 他人的坑位 - 绿色但不可交互
+        slotContent = Container(
+          decoration: BoxDecoration(
+            color: Colors.green[50],
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(color: Colors.green[300]!, width: 1),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                slot.userAvatar!,
+                style: const TextStyle(fontSize: 14),
+              ),
+              const Icon(Icons.check, size: 10, color: Colors.green),
+            ],
+          ),
+        );
+      }
     } else {
       // 已锁定
       slotContent = Container(
@@ -775,59 +1065,79 @@ class _ActivityLobbyPageState extends State<ActivityLobbyPage>
     }
 
     return GestureDetector(
-      onTap: courtLocked ? null : () => _onSlotTapped(courtIndex, slotIndex),
+      onTap: courtLocked
+          ? null
+          : () => _onSlotTapped(courtIndex, slotIndex),
       child: slotContent,
     );
   }
 
-  Widget _buildPresenceTabContent() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+  Widget _buildObserverInlineSection() {
+    if (onlineUsers.isEmpty) {
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppTheme.border, width: 1),
+        ),
+        child: const Text(
+          '闲逛中 0 人（暂无观望者）',
+          style: TextStyle(fontSize: 13, color: AppTheme.textSecondary),
+        ),
+      );
+    }
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppTheme.border, width: 1),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '观望中的用户',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          Text(
+            '闲逛中 ${onlineUsers.length} 人（球馆边看场地）',
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: onlineUsers.map((user) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: AppTheme.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppTheme.border, width: 1),
-                    ),
-                    child: Center(
-                      child: Text(user.userAvatar, style: const TextStyle(fontSize: 24)),
-                    ),
+          const SizedBox(height: 10),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: onlineUsers.map((user) {
+                return Container(
+                  width: 68,
+                  margin: const EdgeInsets.only(right: 8),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 46,
+                        height: 46,
+                        decoration: BoxDecoration(
+                          color: AppTheme.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(23),
+                          border: Border.all(color: AppTheme.border, width: 1),
+                        ),
+                        child: Center(
+                          child: Text(user.userAvatar, style: const TextStyle(fontSize: 20)),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        user.userName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 4),
-                  SizedBox(
-                    width: 60,
-                    child: Text(
-                      user.userName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                  ),
-                  Text(
-                    user.userLevel,
-                    style: TextStyle(fontSize: 10, color: Colors.grey[600]),
-                  ),
-                ],
-              );
-            }).toList(),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),
@@ -858,6 +1168,7 @@ class SlotData {
   String? userName;
   String? userAvatar;
   String? userLevel;
+  bool isMine; // 标记这是否为用户自己的坑位
 
   SlotData({
     required this.slotId,
@@ -867,6 +1178,7 @@ class SlotData {
     this.userName,
     this.userAvatar,
     this.userLevel,
+    this.isMine = false,
   });
 }
 

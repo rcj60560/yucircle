@@ -26,7 +26,7 @@ class YuCircleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: '��Ȧ',
+      title: '羽圈',
       theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',

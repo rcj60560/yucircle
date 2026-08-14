@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
 import '../../models/club.dart';
+import '../../services/api_client.dart';
 
 class ClubListPage extends StatefulWidget {
   const ClubListPage({super.key});
@@ -26,7 +27,14 @@ class _ClubListPageState extends State<ClubListPage> {
 
   void _extractArguments() {
     venueId = Get.arguments?['venueId'] ?? 1;
-    venueName = Get.arguments?['venueName'] ?? '球馆';
+    venueName = _safeText(Get.arguments?['venueName'] as String?, '晴天');
+  }
+
+  String _safeText(String? value, String fallback) {
+    final text = (value ?? '').trim();
+    if (text.isEmpty) return fallback;
+    if (text.contains('�') || text.contains('???')) return fallback;
+    return text;
   }
 
   Future<void> _loadClubs() async {
@@ -41,8 +49,8 @@ class _ClubListPageState extends State<ClubListPage> {
             return Club(
               id: c['id'] ?? 0,
               venueId: c['venueId'] ?? venueId,
-              name: c['name'] ?? '未知俱乐部',
-              description: c['description'] ?? '',
+              name: _safeText(c['name'] as String?, '俱乐部'),
+              description: _safeText(c['description'] as String?, ''),
               creatorId: c['creatorId'] ?? 0,
               status: c['status'] ?? 'active',
               broadcastCredits: c['broadcastCredits'] ?? 0,
@@ -50,8 +58,14 @@ class _ClubListPageState extends State<ClubListPage> {
               todayActivityCount: c['todayActivityCount'] ?? 0,
               onlineCount: c['onlineCount'] ?? 0,
               hasActiveBoradcast: c['hasActiveBoradcast'] ?? false,
+              nextActivityId: c['nextActivityId'] ?? 0,
+              nextActivityTitle: _safeText(c['nextActivityTitle'] as String?, '今晚活动'),
+              nextActivityTime: _safeText(c['nextActivityTime'] as String?, '20:00-22:00'),
+              nextActivityDescription: _safeText(c['nextActivityDescription'] as String?, ''),
+              nextActivityOnlineCount: c['nextActivityOnlineCount'] ?? 0,
+              organizerName: _safeText(c['organizerName'] as String?, '组织者'),
             );
-          }).toList();
+          }).take(3).toList();
           
           setState(() => _isLoading = false);
         } else {
@@ -216,14 +230,21 @@ class _ClubListPageState extends State<ClubListPage> {
                         ],
                       ),
                     ),
-                  ])
     );
   }
 
   Widget _buildClubCard(Club club) {
     return GestureDetector(
       onTap: () {
-        // 跳转到活动大厅页，传递俱乐部ID和球馆ID
+        if (club.nextActivityId <= 0) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('该俱乐部暂无可进入的活动')),
+          );
+          return;
+        }
+
+        if (!mounted) return;
         Get.toNamed(
           '/activity-lobby',
           arguments: {
@@ -231,6 +252,9 @@ class _ClubListPageState extends State<ClubListPage> {
             'venueName': venueName,
             'clubId': club.id,
             'clubName': club.name,
+            'activityId': club.nextActivityId,
+            'activityTitle': club.nextActivityTitle,
+            'timeSlot': club.nextActivityTime,
           },
         );
       },
@@ -307,6 +331,55 @@ class _ClubListPageState extends State<ClubListPage> {
                 _buildClubInfoItem('📅', '今日${club.todayActivityCount}个活动'),
                 _buildClubInfoItem('👥', '在线${club.onlineCount}人'),
               ],
+            ),
+
+            const SizedBox(height: 12),
+
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF7FAFF),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: const Color(0xFFE2ECFF), width: 1),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    club.nextActivityTitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    '时间：${club.nextActivityTime}',
+                    style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '描述：${club.nextActivityDescription}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '组织者：${club.organizerName}',
+                        style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                      ),
+                      Text(
+                        '在线 ${club.nextActivityOnlineCount} 人',
+                        style: const TextStyle(fontSize: 12, color: AppTheme.primary),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
 
             const SizedBox(height: 12),

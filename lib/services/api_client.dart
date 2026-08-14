@@ -1,11 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 import '../config/app_config.dart';
 import '../utils/storage.dart';
 
 /// API 客户端 - 支持 Mock 模式和真实后端
 class ApiClient {
   static late final Dio _dio;
+
+  static Future<Options> _authOptions() async {
+    final token = await StorageManager.getToken();
+    return Options(headers: {'Authorization': 'Bearer $token'});
+  }
 
   static void init() {
     _dio = Dio(BaseOptions(
@@ -534,6 +538,138 @@ class ApiClient {
     } catch (e) {
       print('getClubsByVenue error: $e');
       return {'code': 500, 'msg': '获取俱乐部列表失败: $e'};
+    }
+  }
+
+  /// 获取俱乐部活动列表（用于进入大厅）
+  static Future<Map<String, dynamic>> getClubActivities(int clubId) async {
+    try {
+      final response = await _dio.get('/clubs/$clubId/activities');
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('getClubActivities error: $e');
+      return {'code': 500, 'msg': '获取俱乐部活动失败: $e'};
+    }
+  }
+
+  /// 进入活动大厅
+  static Future<Map<String, dynamic>> enterActivityLobby(int activityId) async {
+    try {
+      final response = await _dio.post(
+        '/activities/$activityId/enter',
+        options: await _authOptions(),
+      );
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('enterActivityLobby error: $e');
+      return {'code': 500, 'msg': '进入大厅失败: $e'};
+    }
+  }
+
+  /// 获取活动大厅快照
+  static Future<Map<String, dynamic>> getActivityLobbySnapshot(int activityId) async {
+    try {
+      final response = await _dio.get('/activities/$activityId/lobby');
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('getActivityLobbySnapshot error: $e');
+      return {'code': 500, 'msg': '获取大厅快照失败: $e'};
+    }
+  }
+
+  /// 大厅心跳
+  static Future<Map<String, dynamic>> pingActivityLobby(int activityId) async {
+    try {
+      final response = await _dio.post(
+        '/activities/$activityId/ping',
+        options: await _authOptions(),
+      );
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('pingActivityLobby error: $e');
+      return {'code': 500, 'msg': '心跳失败: $e'};
+    }
+  }
+
+  /// 占位
+  static Future<Map<String, dynamic>> reserveActivitySlot({
+    required int activityId,
+    required int courtNumber,
+    required int slotNumber,
+  }) async {
+    try {
+      final response = await _dio.post(
+        '/activities/$activityId/reserve',
+        data: {
+          'courtNumber': courtNumber,
+          'slotNumber': slotNumber,
+        },
+        options: await _authOptions(),
+      );
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('reserveActivitySlot error: $e');
+      return {'code': 500, 'msg': '占位失败: $e'};
+    }
+  }
+
+  /// 取消占位
+  static Future<Map<String, dynamic>> cancelActivitySlot(int activityId) async {
+    try {
+      final response = await _dio.delete(
+        '/activities/$activityId/reserve',
+        options: await _authOptions(),
+      );
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('cancelActivitySlot error: $e');
+      return {'code': 500, 'msg': '取消占位失败: $e'};
+    }
+  }
+
+  /// 确认参加
+  static Future<Map<String, dynamic>> confirmActivitySlot(int activityId) async {
+    try {
+      final response = await _dio.post(
+        '/activities/$activityId/confirm',
+        options: await _authOptions(),
+      );
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('confirmActivitySlot error: $e');
+      return {'code': 500, 'msg': '确认参加失败: $e'};
+    }
+  }
+
+  /// 发送大厅消息
+  static Future<Map<String, dynamic>> sendActivityMessage({
+    required int activityId,
+    required String content,
+  }) async {
+    try {
+      final response = await _dio.post(
+        '/activities/$activityId/messages',
+        data: {'content': content},
+        options: await _authOptions(),
+      );
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('sendActivityMessage error: $e');
+      return {'code': 500, 'msg': '发送消息失败: $e'};
+    }
+  }
+
+  /// 离开大厅
+  static Future<Map<String, dynamic>> leaveActivityLobby(int activityId) async {
+    try {
+      final response = await _dio.post(
+        '/activities/$activityId/leave',
+        options: await _authOptions(),
+      );
+      return response.data ?? {'code': 500, 'msg': 'unknown error'};
+    } catch (e) {
+      print('leaveActivityLobby error: $e');
+      return {'code': 500, 'msg': '离开大厅失败: $e'};
     }
   }
 }

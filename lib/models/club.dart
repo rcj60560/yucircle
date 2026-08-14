@@ -11,6 +11,12 @@ class Club {
   final int todayActivityCount; // 今日活动数
   final int onlineCount; // 当前在线人数
   final bool hasActiveBoradcast; // 是否有活跃广播
+  final int nextActivityId;
+  final String nextActivityTitle;
+  final String nextActivityTime;
+  final String nextActivityDescription;
+  final int nextActivityOnlineCount;
+  final String organizerName;
 
   Club({
     required this.id,
@@ -24,6 +30,12 @@ class Club {
     this.todayActivityCount = 0,
     this.onlineCount = 0,
     this.hasActiveBoradcast = false,
+    this.nextActivityId = 0,
+    this.nextActivityTitle = '',
+    this.nextActivityTime = '',
+    this.nextActivityDescription = '',
+    this.nextActivityOnlineCount = 0,
+    this.organizerName = '',
   });
 
   factory Club.fromJson(Map<String, dynamic> json) {
@@ -39,6 +51,12 @@ class Club {
       todayActivityCount: json['todayActivityCount'] as int? ?? 0,
       onlineCount: json['onlineCount'] as int? ?? 0,
       hasActiveBoradcast: json['hasActiveBoradcast'] as bool? ?? false,
+      nextActivityId: json['nextActivityId'] as int? ?? 0,
+      nextActivityTitle: json['nextActivityTitle'] as String? ?? '',
+      nextActivityTime: json['nextActivityTime'] as String? ?? '',
+      nextActivityDescription: json['nextActivityDescription'] as String? ?? '',
+      nextActivityOnlineCount: json['nextActivityOnlineCount'] as int? ?? 0,
+      organizerName: json['organizerName'] as String? ?? '',
     );
   }
 
@@ -55,6 +73,12 @@ class Club {
       'todayActivityCount': todayActivityCount,
       'onlineCount': onlineCount,
       'hasActiveBoradcast': hasActiveBoradcast,
+      'nextActivityId': nextActivityId,
+      'nextActivityTitle': nextActivityTitle,
+      'nextActivityTime': nextActivityTime,
+      'nextActivityDescription': nextActivityDescription,
+      'nextActivityOnlineCount': nextActivityOnlineCount,
+      'organizerName': organizerName,
     };
   }
 }
