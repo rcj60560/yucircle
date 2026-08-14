@@ -12,6 +12,9 @@
 .swiftpm/
 migrate_working_dir/
 
+# superpowers plugin (local session data)
+.superpowers/
+
 # IntelliJ related
 *.iml
 *.ipr
