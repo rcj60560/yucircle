@@ -177,3 +177,25 @@ class AppTheme {
     ],
   );
 }
+
+/// 羽联模块（BWF）「活力运动」配色 —— spec §6.1，视觉决策来自可视化会话
+class SportPalette {
+  static const Color green = Color(0xFF00A868);
+  static const Color blue = Color(0xFF0084C6);
+  static const Color bg = Color(0xFFF4F7F5);
+  static const Color textPrimary = Color(0xFF14231D);
+  static const Color textSecondary = Color(0xFF7C8F85);
+  static const Color danger = Color(0xFFFF4D6D);
+  static const Color gold = Color(0xFFFFD76F);
+  static const Color goldDark = Color(0xFFE8A200);
+  static const Color silver = Color(0xFFD7DEE8);
+  static const Color bronze = Color(0xFFE8B48A);
+  static const Color levelS750 = Color(0xFFE84D8A);
+  static const Color levelS500 = Color(0xFF2F7BFF);
+
+  static const LinearGradient headerGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [green, blue],
+  );
+}
