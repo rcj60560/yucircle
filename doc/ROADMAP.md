@@ -15,7 +15,7 @@
 - **世界巡回赛**赛程（近期 / 往期）
 - 展示形式：原生 or WebView（待定）
 - 数据来源：~~现成 git 库~~（已探针：无活库）→ **自建低频 Python 爬虫**（进 ky/tools 工具箱）
-- 状态：🚧 已实现（数据管道 + 羽联 Tab），spec/plan 见 docs/superpowers/，每周 `python run_all.py --publish` 更新数据
+- 状态：✅ 已交付（数据管道 + 羽联 Tab + 调试绕过登录，审查通过，测试 13/13+15/15）— 交接与待办见 `doc/2026-08-17-TrackA交付总结.md`；每周 `python run_all.py --publish` 更新数据
 
 ### Track B — 社区（球友发声）
 - 发帖 / 评论 / 回复 / 删除 / 点赞（取消点赞）
