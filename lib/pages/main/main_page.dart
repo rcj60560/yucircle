@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../config/theme.dart';
-import '../venue/venue_list_page.dart';
+import '../bwf/bwf_home_page.dart';
 import '../home/home_page.dart';
 import '../message/message_page.dart';
 import '../profile/profile_page.dart';
@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _pages = [
-      const VenueListPage(),      // Tab1: 球馆列表
+      const BwfHomePage(),         // Tab1: 羽联（球馆入口已隐藏，代码保留）
       const HomePage(),           // Tab2: 社区（帖子流）
       const SizedBox(),           // Tab3: 发帖用弹窗，不需要页面
       const MessagePage(),        // Tab4: 消息
@@ -64,7 +64,7 @@ class _MainPageState extends State<MainPage> {
             const BottomNavigationBarItem(
               icon: Icon(Icons.sports),
               activeIcon: Icon(Icons.sports),
-              label: '球馆',
+              label: '羽联',
             ),
             const BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
