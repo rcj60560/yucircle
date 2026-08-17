@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import '../../config/dev_flags.dart';
 import '../../config/theme.dart';
 import '../../utils/storage.dart';
 
@@ -23,7 +24,14 @@ class _SplashPageState extends State<SplashPage> {
     debugPrint('🎯 [Splash] 开始初始化检查');
     // 等动画跑完
     await Future.delayed(const Duration(milliseconds: 2200));
-    
+
+    if (devBypassLogin) {
+      debugPrint('🚀 [Splash] 调试预览：跳过登录直接进主页');
+      await StorageManager.saveMockLogin();
+      Get.offAllNamed('/main');
+      return;
+    }
+
     try {
       debugPrint('🔍 [Splash] 检查登录状态...');
       // 尝试读取存储，超时 3 秒

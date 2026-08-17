@@ -1,19 +1,26 @@
-// 最小冒烟测试：应用根组件可以构建并通过 Splash 自动导航。
+// 冒烟测试：应用根组件可构建，Splash 自动导航的两条路径均有覆盖
 // （替换自 Flutter 模板计数器测试 —— 该测试引用了不存在的 MyApp，
 //   在本仓库中自创建以来从未通过。）
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:yucircle/config/dev_flags.dart';
 import 'package:yucircle/main.dart';
 import 'package:yucircle/pages/auth/login_page.dart';
+import 'package:yucircle/pages/main/main_page.dart';
 
 void main() {
-  testWidgets('App root builds smoke test', (WidgetTester tester) async {
+  setUp(() {
     // SplashPage 会读 SharedPreferences 判断登录态，打桩避免插件缺失。
     SharedPreferences.setMockInitialValues({});
+    // 默认验证真实跳转（未登录→登录页）；调试绕过路径由专门用例覆盖。
+    devBypassLogin = false;
+  });
 
+  testWidgets('未登录 → Splash 自动跳到登录页', (WidgetTester tester) async {
     await tester.pumpWidget(const YuCircleApp());
     expect(find.byType(MaterialApp), findsOneWidget);
 
@@ -23,8 +30,27 @@ void main() {
     await tester.pump(const Duration(seconds: 2));
     await tester.pump();
 
-    // 未登录（mock 为空）→ 应已自动跳转到登录页，应用仍正常构建。
     expect(find.byType(MaterialApp), findsOneWidget);
     expect(find.byType(LoginPage), findsOneWidget);
+  });
+
+  testWidgets('调试绕过登录 → Splash 直进主页，Tab1 为羽联', (WidgetTester tester) async {
+    devBypassLogin = true;
+
+    await tester.pumpWidget(const YuCircleApp());
+    // Splash 2.2s 延时 + 跳转；主页数据加载为异步，多泵一拍让它走完。
+    await tester.pump(const Duration(milliseconds: 2500));
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+
+    expect(find.byType(MainPage), findsOneWidget);
+    // 底部导航 Tab1 文案（球馆→羽联 的导航重排契约）
+    expect(find.text('羽联'), findsOneWidget);
+
+    // 社区页在测试环境加载失败会弹 GetX Snackbar，其动画 Ticker
+    // 必须在收尾前关闭并泵完退出动画，否则 teardown 抛 Ticker 泄漏异常。
+    Get.closeAllSnackbars();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
   });
 }
