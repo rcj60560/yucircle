@@ -40,4 +40,26 @@ void main() {
     final data = await svc.loadRankings();
     expect(data.disciplines['ms']!.entries.first.player, 'REMOTE');
   });
+
+  test('远端返回非JSON垃圾 → 不写缓存并用内置 asset', () async {
+    final svc = BwfDataService(
+      remoteFetcher: (url) async => 'not json',
+      assetLoader: (path) async => _assetJson,
+    );
+    final data = await svc.loadRankings();
+    expect(data.disciplines['ms']!.entries.first.player, 'ASSET');
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString('bwf_rankings_cache'), isNull);
+  });
+
+  test('缓存被污染(非JSON) → 降级内置资产不抛异常', () async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('bwf_rankings_cache', 'not json');
+    final svc = BwfDataService(
+      remoteFetcher: (url) async => null,
+      assetLoader: (path) async => _assetJson,
+    );
+    final data = await svc.loadRankings();
+    expect(data.disciplines['ms']!.entries.first.player, 'ASSET');
+  });
 }

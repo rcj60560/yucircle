@@ -30,21 +30,25 @@ class BwfDataService {
 
   Future<Map<String, dynamic>> _load(
       String url, String cacheKey, String assetPath) async {
-    // 1) 远端（成功则写缓存）
+    // 1) 远端（解码成功才写缓存）
     try {
       final remote = await (remoteFetcher != null
           ? remoteFetcher!(url)
           : _dioGet(url));
       if (remote != null && remote.isNotEmpty) {
+        final decoded =
+            Map<String, dynamic>.from(jsonDecode(remote) as Map);
         (await SharedPreferences.getInstance()).setString(cacheKey, remote);
-        return Map<String, dynamic>.from(jsonDecode(remote) as Map);
+        return decoded;
       }
     } catch (_) {/* 落到下一层 */}
-    // 2) 本地缓存
-    final cached = (await SharedPreferences.getInstance()).getString(cacheKey);
-    if (cached != null && cached.isNotEmpty) {
-      return Map<String, dynamic>.from(jsonDecode(cached) as Map);
-    }
+    // 2) 本地缓存（解码失败降级到内置资产）
+    try {
+      final cached = (await SharedPreferences.getInstance()).getString(cacheKey);
+      if (cached != null && cached.isNotEmpty) {
+        return Map<String, dynamic>.from(jsonDecode(cached) as Map);
+      }
+    } catch (_) {/* 落到下一层 */}
     // 3) 内置资产
     final bundled =
         await (assetLoader != null ? assetLoader!(assetPath) : rootBundle.loadString(assetPath));
