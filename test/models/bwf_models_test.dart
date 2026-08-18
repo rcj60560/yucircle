@@ -46,6 +46,18 @@ void main() {
     expect(t.statusOn(DateTime(2026, 9, 7)), TournamentStatus.completed);
   });
 
+  test('Tournament.level major 映射（世锦赛/汤尤杯）', () {
+    final t = Tournament.fromJson({
+      'name': 'BWF World Championships 2026',
+      'startDate': '2026-08-17',
+      'endDate': '2026-08-23',
+      'city': 'New Delhi, India',
+      'level': 'major',
+      'prizeMoney': 0,
+    });
+    expect(t.level, TournamentLevel.major);
+  });
+
   test('ScheduleData.fromJson 未知 level 归为 other', () {
     final s = ScheduleData.fromJson({
       'year': 2026,

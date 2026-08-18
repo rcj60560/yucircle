@@ -56,4 +56,26 @@ void main() {
     final upcomingTop = tester.getTopLeft(find.text('LI-NING China Masters')).dy;
     expect(completedTop, lessThan(upcomingTop));
   });
+
+  testWidgets('Grade 1 大赛（major）渲染大赛徽章与进行中状态', (tester) async {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final data = ScheduleData.fromJson({
+      'year': today.year,
+      'tournaments': [
+        {
+          'name': 'BWF World Championships 2026',
+          'startDate': _ymd(DateTime(today.year, today.month, today.day - 1)),
+          'endDate': _ymd(DateTime(today.year, today.month, today.day + 3)),
+          'city': 'New Delhi, India',
+          'level': 'major',
+          'prizeMoney': 0,
+        },
+      ],
+    });
+    await tester.pumpWidget(MaterialApp(home: BwfSchedulePage(data: data)));
+    expect(find.text('BWF World Championships 2026'), findsOneWidget);
+    expect(find.text('大赛'), findsOneWidget);
+    expect(find.text('● 进行中'), findsOneWidget);
+  });
 }

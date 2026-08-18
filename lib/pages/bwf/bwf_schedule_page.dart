@@ -11,6 +11,8 @@ class BwfSchedulePage extends StatelessWidget {
 
   (Color, String) _levelStyle(TournamentLevel l) {
     switch (l) {
+      case TournamentLevel.major:
+        return (SportPalette.danger, '大赛');
       case TournamentLevel.super1000:
         return (SportPalette.goldDark, 'S1000');
       case TournamentLevel.super750:

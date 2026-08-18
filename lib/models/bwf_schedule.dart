@@ -1,5 +1,5 @@
-/// BWF 世界巡回赛赛程模型；状态由日期推导，不落库
-enum TournamentLevel { super1000, super750, super500, super300, finals, other }
+/// BWF 赛程模型（世界巡回赛 + Grade 1 大赛）；状态由日期推导，不落库
+enum TournamentLevel { major, super1000, super750, super500, super300, finals, other }
 
 enum TournamentStatus { completed, ongoing, upcoming }
 
@@ -32,6 +32,8 @@ class Tournament {
 
   static TournamentLevel _levelFrom(String s) {
     switch (s) {
+      case 'major':
+        return TournamentLevel.major;
       case 'super1000':
         return TournamentLevel.super1000;
       case 'super750':

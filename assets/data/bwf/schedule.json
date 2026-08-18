@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-17T10:24:17+08:00",
+ "updatedAt": "2026-08-18T15:06:18+08:00",
  "year": 2026,
  "tournaments": [
   {
@@ -65,6 +65,14 @@
    "city": "Orléans, France",
    "level": "super300",
    "prizeMoney": 250000
+  },
+  {
+   "name": "BWF Thomas & Uber Cup Finals 2026",
+   "startDate": "2026-04-24",
+   "endDate": "2026-05-03",
+   "city": "Horsens, Denmark",
+   "level": "major",
+   "prizeMoney": 0
   },
   {
    "name": "TOYOTA Thailand Open 2026",
@@ -161,6 +169,14 @@
    "city": "Asan, Korea",
    "level": "super300",
    "prizeMoney": 250000
+  },
+  {
+   "name": "BWF World Championships 2026",
+   "startDate": "2026-08-17",
+   "endDate": "2026-08-23",
+   "city": "New Delhi, India",
+   "level": "major",
+   "prizeMoney": 0
   },
   {
    "name": "LI-NING China Masters 2026",
