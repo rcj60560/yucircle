@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-18T15:06:18+08:00",
+ "updatedAt": "2026-08-18T16:29:09+08:00",
  "year": 2026,
  "tournaments": [
   {
@@ -8,7 +8,9 @@
    "endDate": "2026-01-11",
    "city": "Kuala Lumpur, Malaysia",
    "level": "super1000",
-   "prizeMoney": 1450000
+   "prizeMoney": 1450000,
+   "code": "41287386-9043-4062-99C8-3FFBB9B26C1E",
+   "hasLiveScores": true
   },
   {
    "name": "YONEX-SUNRISE India Open 2026",
@@ -16,7 +18,9 @@
    "endDate": "2026-01-18",
    "city": "New Delhi, India",
    "level": "super750",
-   "prizeMoney": 950000
+   "prizeMoney": 950000,
+   "code": "2DFC9259-FA31-48EB-A9F3-5A7C98457593",
+   "hasLiveScores": true
   },
   {
    "name": "DAIHATSU Indonesia Masters 2026",
@@ -24,7 +28,9 @@
    "endDate": "2026-01-25",
    "city": "Jakarta, Indonesia",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "407A6757-08F0-4A1C-A4EE-4024BC3D01E2",
+   "hasLiveScores": true
   },
   {
    "name": "Thailand Masters 2026",
@@ -32,7 +38,9 @@
    "endDate": "2026-02-01",
    "city": "Bangkok, Thailand",
    "level": "super300",
-   "prizeMoney": 0
+   "prizeMoney": 0,
+   "code": "8D53F15B-5128-41EE-801E-8D9B130BC222",
+   "hasLiveScores": true
   },
   {
    "name": "YONEX German Open 2026",
@@ -40,7 +48,9 @@
    "endDate": "2026-03-01",
    "city": "Mülheim an der Ruhr, Germany",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "0E719D29-897E-4BB9-86A7-A9A9C52A3B7A",
+   "hasLiveScores": true
   },
   {
    "name": "All England Open Badminton Championships 2026",
@@ -48,7 +58,9 @@
    "endDate": "2026-03-08",
    "city": "Birmingham, England",
    "level": "super1000",
-   "prizeMoney": 0
+   "prizeMoney": 0,
+   "code": "1A1AB550-BF1E-4CE9-A774-82414E3D4405",
+   "hasLiveScores": true
   },
   {
    "name": "YONEX Swiss Open 2026",
@@ -56,7 +68,9 @@
    "endDate": "2026-03-15",
    "city": "Basel, Switzerland",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "CB5214B2-C4BB-42B6-B01A-C235234AD3DB",
+   "hasLiveScores": true
   },
   {
    "name": "Orleans Masters Badminton 2026 presented by VICTOR",
@@ -64,7 +78,9 @@
    "endDate": "2026-03-22",
    "city": "Orléans, France",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "FE0B73DA-C309-4636-9A64-C98F30A38315",
+   "hasLiveScores": true
   },
   {
    "name": "BWF Thomas & Uber Cup Finals 2026",
@@ -72,7 +88,9 @@
    "endDate": "2026-05-03",
    "city": "Horsens, Denmark",
    "level": "major",
-   "prizeMoney": 0
+   "prizeMoney": 0,
+   "code": "39A63C50-66C5-4857-9008-00C241339F4D",
+   "hasLiveScores": true
   },
   {
    "name": "TOYOTA Thailand Open 2026",
@@ -80,7 +98,9 @@
    "endDate": "2026-05-17",
    "city": "Patumwan, Thailand",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "3B8847C8-A4D7-4C65-B3E1-EA2314FD304B",
+   "hasLiveScores": true
   },
   {
    "name": "PERODUA Malaysia Masters 2026",
@@ -88,7 +108,9 @@
    "endDate": "2026-05-24",
    "city": "Kuala Lumpur, Malaysia",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "71AC3AB2-C072-444C-B479-4AC73C756C14",
+   "hasLiveScores": true
   },
   {
    "name": "KFF Singapore Badminton Open 2026",
@@ -96,7 +118,9 @@
    "endDate": "2026-05-31",
    "city": "Singapore, Singapore",
    "level": "super750",
-   "prizeMoney": 1000000
+   "prizeMoney": 1000000,
+   "code": "034085E6-A6C1-4D5D-AACF-1CA3EDB1C582",
+   "hasLiveScores": true
   },
   {
    "name": "POLYTRON Indonesia Open 2026",
@@ -104,7 +128,9 @@
    "endDate": "2026-06-07",
    "city": "Jakarta, Indonesia",
    "level": "super1000",
-   "prizeMoney": 1450000
+   "prizeMoney": 1450000,
+   "code": "5A719D43-A131-43FC-9A7F-BAFBC0B551E8",
+   "hasLiveScores": true
   },
   {
    "name": "SATHIO GROUP Australian Badminton Open 2026",
@@ -112,7 +138,9 @@
    "endDate": "2026-06-14",
    "city": "Sydney, Australia",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "C8385C7E-F4AB-48C7-881B-122DE3304633",
+   "hasLiveScores": true
   },
   {
    "name": "SANDS CHINA LTD. Macau Open 2026",
@@ -120,7 +148,9 @@
    "endDate": "2026-06-21",
    "city": "Macau, Macau China",
    "level": "super300",
-   "prizeMoney": 370000
+   "prizeMoney": 370000,
+   "code": "0FE7A0E9-A04C-47A4-A042-85A48ED966EC",
+   "hasLiveScores": true
   },
   {
    "name": "YONEX US Open 2026",
@@ -128,7 +158,9 @@
    "endDate": "2026-06-28",
    "city": "Fullerton, CA, USA",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "61701B09-39B5-4491-9DE3-40E927472370",
+   "hasLiveScores": true
   },
   {
    "name": "YONEX Canada Open 2026",
@@ -136,7 +168,9 @@
    "endDate": "2026-07-05",
    "city": "Markham Ontario, Canada",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "E3ED5EB9-7873-4ACF-9738-C5C6ECE01F96",
+   "hasLiveScores": true
   },
   {
    "name": "DAIHATSU Japan Open 2026",
@@ -144,7 +178,9 @@
    "endDate": "2026-07-19",
    "city": "Tokyo, Japan",
    "level": "super750",
-   "prizeMoney": 950000
+   "prizeMoney": 950000,
+   "code": "A05984E7-69C8-46AD-ACB8-906CA66D6913",
+   "hasLiveScores": true
   },
   {
    "name": "VICTOR China Open 2026",
@@ -152,7 +188,9 @@
    "endDate": "2026-07-26",
    "city": "Changzhou, China",
    "level": "super1000",
-   "prizeMoney": 2000000
+   "prizeMoney": 2000000,
+   "code": "718B4055-FCD5-4652-B599-D9E6DFD256AB",
+   "hasLiveScores": true
   },
   {
    "name": "YONEX Taipei Open 2026",
@@ -160,7 +198,9 @@
    "endDate": "2026-08-02",
    "city": "Taipei, Chinese Taipei",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "97FF954D-0A47-498D-81D1-B9105D891B59",
+   "hasLiveScores": true
   },
   {
    "name": "VICTOR Korea Masters 2026",
@@ -168,7 +208,9 @@
    "endDate": "2026-08-09",
    "city": "Asan, Korea",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "5A942038-9A9E-4202-886D-539B48CB0867",
+   "hasLiveScores": true
   },
   {
    "name": "BWF World Championships 2026",
@@ -176,7 +218,9 @@
    "endDate": "2026-08-23",
    "city": "New Delhi, India",
    "level": "major",
-   "prizeMoney": 0
+   "prizeMoney": 0,
+   "code": "B671FB97-491C-46D3-982F-56525168C3AA",
+   "hasLiveScores": true
   },
   {
    "name": "LI-NING China Masters 2026",
@@ -184,7 +228,9 @@
    "endDate": "2026-09-06",
    "city": "Shenzhen, China",
    "level": "super750",
-   "prizeMoney": 1250000
+   "prizeMoney": 1250000,
+   "code": "593CF690-836C-47A7-A710-4FF599A473F3",
+   "hasLiveScores": true
   },
   {
    "name": "CLASH OF CLANS Arctic Open 2026 powered by YONEX",
@@ -192,7 +238,9 @@
    "endDate": "2026-10-11",
    "city": "Vantaa, Finland",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "A0E6DE07-D611-4333-BAF3-2D53D2C3A0E1",
+   "hasLiveScores": true
   },
   {
    "name": "VICTOR Denmark Open 2026",
@@ -200,7 +248,9 @@
    "endDate": "2026-10-18",
    "city": "Odense, Denmark",
    "level": "super750",
-   "prizeMoney": 950000
+   "prizeMoney": 950000,
+   "code": "280293F8-8DB0-437B-8290-4A65B4A3A494",
+   "hasLiveScores": true
   },
   {
    "name": "YONEX French Open 2026",
@@ -208,7 +258,9 @@
    "endDate": "2026-10-25",
    "city": "Paris, France",
    "level": "super750",
-   "prizeMoney": 950000
+   "prizeMoney": 950000,
+   "code": "02C81098-27CE-498C-AABD-8C520607CEAD",
+   "hasLiveScores": true
   },
   {
    "name": "HYLO Open 2026",
@@ -216,7 +268,9 @@
    "endDate": "2026-11-01",
    "city": "Saarbrücken, Germany",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "A2064CBE-3609-4248-82A6-A51558F34FB9",
+   "hasLiveScores": true
   },
   {
    "name": "YEOSU VICTOR Korea Open 2026",
@@ -224,7 +278,9 @@
    "endDate": "2026-11-08",
    "city": "Yeosu city, Korea",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "3637F0DA-82DE-4E51-9E12-FE7BB9C79E36",
+   "hasLiveScores": true
   },
   {
    "name": "Kumamoto Masters Japan 2026",
@@ -232,7 +288,9 @@
    "endDate": "2026-11-15",
    "city": "Kumamoto, Japan",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "5CC4D285-D8E0-4747-A6BF-A2D271B94BC7",
+   "hasLiveScores": true
   },
   {
    "name": "Hong Kong Open 2026",
@@ -240,7 +298,9 @@
    "endDate": "2026-11-22",
    "city": "Hong Kong, China, Hong Kong China",
    "level": "super500",
-   "prizeMoney": 500000
+   "prizeMoney": 500000,
+   "code": "3D2C5586-BB65-4575-8C38-47E290442887",
+   "hasLiveScores": true
   },
   {
    "name": "Syed Modi India International 2026",
@@ -248,7 +308,9 @@
    "endDate": "2026-11-29",
    "city": "Lucknow, India",
    "level": "super300",
-   "prizeMoney": 250000
+   "prizeMoney": 250000,
+   "code": "C7F5AAA6-8A74-40A0-A7B3-EF072887354C",
+   "hasLiveScores": true
   },
   {
    "name": "HSBC BWF World Tour Finals 2026",
@@ -256,7 +318,9 @@
    "endDate": "2026-12-13",
    "city": "Hangzhou, China",
    "level": "finals",
-   "prizeMoney": 3500000
+   "prizeMoney": 3500000,
+   "code": "A7F79D23-D70B-4062-9629-E0DD2B1A968D",
+   "hasLiveScores": true
   }
  ]
 }

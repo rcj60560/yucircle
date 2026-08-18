@@ -10,6 +10,8 @@ class Tournament {
   final String city;
   final TournamentLevel level;
   final int prizeMoney; // 0 = 未知（UI 不显示）
+  final String? code; // extranet-lv 赛事码，有 live 数据时可直连当日赛况
+  final bool hasLiveScores;
 
   const Tournament({
     required this.name,
@@ -18,6 +20,8 @@ class Tournament {
     required this.city,
     required this.level,
     required this.prizeMoney,
+    this.code,
+    this.hasLiveScores = false,
   });
 
   factory Tournament.fromJson(Map<String, dynamic> json) => Tournament(
@@ -28,6 +32,8 @@ class Tournament {
         city: json['city'] as String? ?? '',
         level: _levelFrom(json['level'] as String? ?? 'other'),
         prizeMoney: (json['prizeMoney'] as num? ?? 0).toInt(),
+        code: json['code'] as String?,
+        hasLiveScores: (json['hasLiveScores'] as bool?) ?? false,
       );
 
   static TournamentLevel _levelFrom(String s) {

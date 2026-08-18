@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../config/theme.dart';
 import '../../models/bwf_schedule.dart';
@@ -42,11 +43,17 @@ class BwfSchedulePage extends StatelessWidget {
       (groups[key] ??= []).add(t);
     }
 
+    final ongoing = data.tournaments
+        .where((t) => t.statusOn(now) == TournamentStatus.ongoing)
+        .toList();
+    final hasThisWeek = ongoing.isNotEmpty;
+
     return ListView.builder(
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 16),
-      itemCount: groups.length,
+      itemCount: groups.length + (hasThisWeek ? 1 : 0),
       itemBuilder: (context, gi) {
-        final key = groups.keys.elementAt(gi);
+        if (hasThisWeek && gi == 0) return _thisWeekSection(ongoing);
+        final key = groups.keys.elementAt(gi - (hasThisWeek ? 1 : 0));
         final month = int.parse(key.split('-')[1]);
         final isNextMonth =
             next.isNotEmpty && next.first.startDate.month == month;
@@ -99,6 +106,86 @@ class BwfSchedulePage extends StatelessWidget {
 
   // 粗略估高让连线不断档：每张卡 ~78
   double _groupHeight(List<Tournament> list) => list.length * 84.0 + 8;
+
+  /// 本周置顶区：正在进行的赛事 + 当日赛况入口（有 live 数据才可点）
+  Widget _thisWeekSection(List<Tournament> ongoing) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 4, top: 4, bottom: 6),
+            child: Text('本周',
+                style: TextStyle(
+                    fontSize: 15, fontWeight: FontWeight.w900, color: SportPalette.textPrimary)),
+          ),
+          for (final t in ongoing) _thisWeekCard(t),
+          const SizedBox(height: 12),
+        ],
+      );
+
+  Widget _thisWeekCard(Tournament t) {
+    final canLive = t.hasLiveScores && t.code != null;
+    return GestureDetector(
+      onTap: canLive
+          ? () => Get.toNamed('/bwf-matches', arguments: {'name': t.name, 'code': t.code})
+          : null,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: SportPalette.green, width: 2),
+          boxShadow: const [
+            BoxShadow(color: Color(0x140084C6), blurRadius: 8, offset: Offset(0, 2)),
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Text('● 进行中',
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.w800, color: SportPalette.danger)),
+                      const SizedBox(width: 6),
+                      Text(
+                          '${t.startDate.month}/${t.startDate.day} - ${t.endDate.month}/${t.endDate.day}',
+                          style: const TextStyle(
+                              fontSize: 10, color: SportPalette.textSecondary)),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(t.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: SportPalette.textPrimary)),
+                  const SizedBox(height: 2),
+                  Text(t.city,
+                      style: const TextStyle(
+                          fontSize: 11, color: SportPalette.textSecondary)),
+                ],
+              ),
+            ),
+            if (canLive)
+              const Row(
+                children: [
+                  Text('当日赛况',
+                      style: TextStyle(
+                          fontSize: 11, fontWeight: FontWeight.w800, color: SportPalette.green)),
+                  Icon(Icons.chevron_right, size: 16, color: SportPalette.green),
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _card(Tournament t, {required bool isNext}) {
     final (color, label) = _levelStyle(t.level);

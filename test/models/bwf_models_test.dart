@@ -54,8 +54,25 @@ void main() {
       'city': 'New Delhi, India',
       'level': 'major',
       'prizeMoney': 0,
+      'code': 'B671FB97-491C-46D3-982F-56525168C3AA',
+      'hasLiveScores': true,
     });
     expect(t.level, TournamentLevel.major);
+    expect(t.code, 'B671FB97-491C-46D3-982F-56525168C3AA');
+    expect(t.hasLiveScores, isTrue);
+  });
+
+  test('Tournament 旧资产无 code/hasLiveScores 字段时向后兼容', () {
+    final t = Tournament.fromJson({
+      'name': 'x',
+      'startDate': '2026-01-01',
+      'endDate': '2026-01-02',
+      'city': '',
+      'level': 'super300',
+      'prizeMoney': 0,
+    });
+    expect(t.code, isNull);
+    expect(t.hasLiveScores, isFalse);
   });
 
   test('ScheduleData.fromJson 未知 level 归为 other', () {

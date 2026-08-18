@@ -12,6 +12,7 @@ import 'pages/post/post_detail_page.dart';
 import 'pages/venue/venue_list_page.dart';
 import 'pages/venue/club_list_page.dart';
 import 'pages/venue/activity_lobby_page.dart';
+import 'pages/bwf/bwf_matches_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,16 @@ class YuCircleApp extends StatelessWidget {
         GetPage(name: '/venue-list', page: () => const VenueListPage()),
         GetPage(name: '/club-list', page: () => const ClubListPage()),
         GetPage(name: '/activity-lobby', page: () => const ActivityLobbyPage()),
+        GetPage(
+          name: '/bwf-matches',
+          page: () {
+            final args = Get.arguments as Map<String, dynamic>;
+            return BwfMatchesPage(
+              tournamentName: args['name'] as String,
+              tournamentCode: args['code'] as String,
+            );
+          },
+        ),
       ],
     );
   }
