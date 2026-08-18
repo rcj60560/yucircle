@@ -1,6 +1,6 @@
 {
- "updatedAt": "2026-08-17T10:24:15+08:00",
- "source": "bwfworldtour.bwfbadminton.com",
+ "updatedAt": "2026-08-18T16:17:53+08:00",
+ "source": "extranet-lv.bwfbadminton.com · BWF World Rankings",
  "disciplines": {
   "ms": {
    "name": "男单",
@@ -8,352 +8,352 @@
     {
      "rank": 1,
      "change": 0,
-     "country": "TPE",
-     "player": "CHOU Tien Chen",
-     "points": 67710
+     "country": "CHN",
+     "player": "SHI Yu Qi",
+     "points": 94255
     },
     {
      "rank": 2,
      "change": 0,
-     "country": "INA",
-     "player": "Alwi FARHAN",
-     "points": 60700
+     "country": "THA",
+     "player": "Kunlavut VITIDSARN",
+     "points": 91215
     },
     {
      "rank": 3,
      "change": 0,
-     "country": "TPE",
-     "player": "LIN Chun-Yi",
-     "points": 57220
+     "country": "INA",
+     "player": "Jonatan CHRISTIE",
+     "points": 89231
     },
     {
      "rank": 4,
      "change": 0,
-     "country": "CAN",
-     "player": "Victor LAI",
-     "points": 53840
+     "country": "DEN",
+     "player": "Anders ANTONSEN",
+     "points": 87705
     },
     {
      "rank": 5,
      "change": 0,
      "country": "FRA",
      "player": "Christo POPOV",
-     "points": 52790
+     "points": 87002
     },
     {
      "rank": 6,
      "change": 0,
-     "country": "JPN",
-     "player": "Yushi TANAKA",
-     "points": 52570
+     "country": "TPE",
+     "player": "CHOU Tien Chen",
+     "points": 84280
     },
     {
      "rank": 7,
      "change": 0,
-     "country": "JPN",
-     "player": "Koki WATANABE",
-     "points": 52540
+     "country": "CAN",
+     "player": "Victor LAI",
+     "points": 76465
     },
     {
      "rank": 8,
      "change": 0,
-     "country": "THA",
-     "player": "Kunlavut VITIDSARN",
-     "points": 50920
+     "country": "TPE",
+     "player": "LIN Chun-Yi",
+     "points": 71274
     },
     {
      "rank": 9,
      "change": 0,
-     "country": "FRA",
-     "player": "Toma Junior POPOV",
-     "points": 50820
+     "country": "CHN",
+     "player": "LI Shi Feng",
+     "points": 70483
     },
     {
      "rank": 10,
      "change": 0,
-     "country": "INA",
-     "player": "Jonatan CHRISTIE",
-     "points": 50510
+     "country": "FRA",
+     "player": "Alex LANIER",
+     "points": 70215
     },
     {
      "rank": 11,
      "change": 0,
-     "country": "IND",
-     "player": "Lakshya SEN",
-     "points": 50460
+     "country": "JPN",
+     "player": "Kodai NARAOKA",
+     "points": 70030
     },
     {
      "rank": 12,
-     "change": 5,
-     "country": "JPN",
-     "player": "Yudai OKIMOTO",
-     "points": 47930
+     "change": 0,
+     "country": "INA",
+     "player": "Alwi FARHAN",
+     "points": 69419
     },
     {
      "rank": 13,
-     "change": 1,
-     "country": "THA",
-     "player": "Panitchaphon TEERARATSAKUL",
-     "points": 46310
+     "change": 0,
+     "country": "SIN",
+     "player": "LOH Kean Yew",
+     "points": 66300
     },
     {
      "rank": 14,
-     "change": 1,
-     "country": "SGP",
-     "player": "LOH Kean Yew",
-     "points": 46220
+     "change": 0,
+     "country": "IND",
+     "player": "Lakshya SEN",
+     "points": 65573
     },
     {
      "rank": 15,
-     "change": 1,
-     "country": "TPE",
-     "player": "CHI Yu Jen",
-     "points": 46160
+     "change": 0,
+     "country": "FRA",
+     "player": "Toma Junior POPOV",
+     "points": 62697
     },
     {
      "rank": 16,
-     "change": 1,
-     "country": "FRA",
-     "player": "Alex LANIER",
-     "points": 44780
+     "change": 0,
+     "country": "CHN",
+     "player": "WENG Hong Yang",
+     "points": 60691
     },
     {
      "rank": 17,
-     "change": 1,
-     "country": "SGP",
-     "player": "Jia Heng TEH",
-     "points": 44620
+     "change": 0,
+     "country": "THA",
+     "player": "Panitchaphon TEERARATSAKUL",
+     "points": 60175
     },
     {
      "rank": 18,
      "change": 0,
-     "country": "DEN",
-     "player": "Anders ANTONSEN",
-     "points": 42600
+     "country": "JPN",
+     "player": "Koki WATANABE",
+     "points": 59570
     },
     {
      "rank": 19,
      "change": 0,
-     "country": "HKG",
-     "player": "LEE Cheuk Yiu",
-     "points": 42550
+     "country": "JPN",
+     "player": "Yushi TANAKA",
+     "points": 52805
     },
     {
      "rank": 20,
      "change": 0,
-     "country": "CHN",
-     "player": "SHI Yu Qi",
-     "points": 42190
+     "country": "TPE",
+     "player": "CHI Yu Jen",
+     "points": 52737
     },
     {
      "rank": 21,
-     "change": 4,
+     "change": 0,
      "country": "HKG",
-     "player": "Jason GUNAWAN",
-     "points": 41790
+     "player": "LEE Cheuk Yiu",
+     "points": 49973
     },
     {
      "rank": 22,
-     "change": 1,
-     "country": "JPN",
-     "player": "Kodai NARAOKA",
-     "points": 41610
+     "change": 0,
+     "country": "IND",
+     "player": "Ayush SHETTY",
+     "points": 49799
     },
     {
      "rank": 23,
-     "change": 1,
-     "country": "CAN",
-     "player": "Brian YANG",
-     "points": 40160
+     "change": 0,
+     "country": "JPN",
+     "player": "Yudai OKIMOTO",
+     "points": 49194
     },
     {
      "rank": 24,
-     "change": 1,
-     "country": "IRL",
-     "player": "Nhat NGUYEN",
-     "points": 40110
+     "change": 0,
+     "country": "JPN",
+     "player": "Kenta NISHIMOTO",
+     "points": 48789
     },
     {
      "rank": 25,
-     "change": 1,
-     "country": "TPE",
-     "player": "Chia Hao LEE",
-     "points": 39780
+     "change": 0,
+     "country": "IRL",
+     "player": "Nhat NGUYEN",
+     "points": 48591
     },
     {
      "rank": 26,
      "change": 0,
-     "country": "IND",
-     "player": "KIDAMBI Srikanth",
-     "points": 38510
+     "country": "DEN",
+     "player": "Rasmus GEMKE",
+     "points": 45734
     },
     {
      "rank": 27,
-     "change": 5,
-     "country": "IND",
-     "player": "Tharun MANNEPALLI",
-     "points": 36340
+     "change": 0,
+     "country": "MAS",
+     "player": "LEONG Jun Hao",
+     "points": 44929
     },
     {
      "rank": 28,
-     "change": 1,
-     "country": "CHN",
-     "player": "LI Shi Feng",
-     "points": 35790
+     "change": 0,
+     "country": "INA",
+     "player": "Moh. Zaki UBAIDILLAH",
+     "points": 44661
     },
     {
      "rank": 29,
-     "change": 1,
-     "country": "HKG",
-     "player": "NG Ka Long Angus",
-     "points": 35740
+     "change": 0,
+     "country": "CHN",
+     "player": "LU Guang Zu",
+     "points": 43240
     },
     {
      "rank": 30,
-     "change": 1,
-     "country": "INA",
-     "player": "Moh. Zaki UBAIDILLAH",
-     "points": 34990
+     "change": 0,
+     "country": "HKG",
+     "player": "NG Ka Long Angus",
+     "points": 42399
     },
     {
      "rank": 31,
-     "change": 1,
-     "country": "IND",
-     "player": "Ayush SHETTY",
-     "points": 34840
+     "change": 0,
+     "country": "HKG",
+     "player": "Jason GUNAWAN",
+     "points": 41310
     },
     {
      "rank": 32,
-     "change": 1,
+     "change": 0,
      "country": "TPE",
-     "player": "WANG Tzu Wei",
-     "points": 34800
+     "player": "Chia Hao LEE",
+     "points": 40802
     },
     {
      "rank": 33,
-     "change": 4,
-     "country": "TPE",
-     "player": "SU Li  Yang",
-     "points": 34040
+     "change": 0,
+     "country": "SIN",
+     "player": "Jia Heng TEH",
+     "points": 40728
     },
     {
      "rank": 34,
      "change": 0,
-     "country": "MAS",
-     "player": "LEE Zii Jia",
-     "points": 33620
+     "country": "FRA",
+     "player": "Arnaud MERKLE",
+     "points": 40714
     },
     {
      "rank": 35,
-     "change": 2,
-     "country": "MAS",
-     "player": "LEONG Jun Hao",
-     "points": 33330
+     "change": 0,
+     "country": "IND",
+     "player": "KIDAMBI Srikanth",
+     "points": 40675
     },
     {
      "rank": 36,
-     "change": 5,
+     "change": 0,
      "country": "CHN",
      "player": "HU Zhe An",
-     "points": 31860
+     "points": 39456
     },
     {
      "rank": 37,
-     "change": 2,
-     "country": "CHN",
-     "player": "LU Guang Zu",
-     "points": 31530
+     "change": 0,
+     "country": "CAN",
+     "player": "Brian YANG",
+     "points": 38705
     },
     {
      "rank": 38,
-     "change": 1,
+     "change": 0,
      "country": "IND",
-     "player": "Kiran GEORGE",
-     "points": 30940
+     "player": "PRANNOY H. S.",
+     "points": 38004
     },
     {
      "rank": 39,
-     "change": 1,
-     "country": "TPE",
-     "player": "WANG Po-Wei",
-     "points": 30930
+     "change": 0,
+     "country": "KOR",
+     "player": "JEON Hyeok Jin",
+     "points": 37960
     },
     {
      "rank": 40,
-     "change": 4,
-     "country": "MAS",
-     "player": "HOH Justin",
-     "points": 30240
+     "change": 0,
+     "country": "TPE",
+     "player": "WANG Tzu Wei",
+     "points": 37149
     },
     {
      "rank": 41,
-     "change": 3,
-     "country": "CHN",
-     "player": "WENG Hong Yang",
-     "points": 29450
+     "change": 0,
+     "country": "INA",
+     "player": "Prahdiska Bagas SHUJIWO",
+     "points": 36673
     },
     {
      "rank": 42,
-     "change": 1,
-     "country": "JPN",
-     "player": "Minoru KOGA",
-     "points": 27480
+     "change": 0,
+     "country": "TPE",
+     "player": "SU Li  Yang",
+     "points": 36600
     },
     {
      "rank": 43,
-     "change": 1,
-     "country": "JPN",
-     "player": "Kenta NISHIMOTO",
-     "points": 27210
+     "change": 0,
+     "country": "DEN",
+     "player": "Magnus JOHANNESEN",
+     "points": 36452
     },
     {
      "rank": 44,
-     "change": 8,
-     "country": "CHN",
-     "player": "ZHU Xuan Chen",
-     "points": 26060
+     "change": 0,
+     "country": "TPE",
+     "player": "WANG Po-Wei",
+     "points": 35960
     },
     {
      "rank": 45,
-     "change": 1,
-     "country": "IND",
-     "player": "PRANNOY H. S.",
-     "points": 24880
+     "change": 0,
+     "country": "CHN",
+     "player": "DONG Tian Yao",
+     "points": 35900
     },
     {
      "rank": 46,
-     "change": 11,
-     "country": "KOR",
-     "player": "YOO Tae Bin",
-     "points": 23400
+     "change": 0,
+     "country": "MAS",
+     "player": "HOH Justin",
+     "points": 34342
     },
     {
      "rank": 47,
-     "change": 2,
+     "change": 0,
      "country": "INA",
      "player": "Muhamad YUSUF",
-     "points": 23140
+     "points": 34210
     },
     {
      "rank": 48,
-     "change": 5,
-     "country": "CHN",
-     "player": "DONG Tian Yao",
-     "points": 21440
+     "change": 0,
+     "country": "BEL",
+     "player": "Julien CARRAGGI",
+     "points": 34069
     },
     {
      "rank": 49,
-     "change": 6,
+     "change": 0,
      "country": "KOR",
-     "player": "JEON Hyeok Jin",
-     "points": 20990
+     "player": "YOO Tae Bin",
+     "points": 33739
     },
     {
      "rank": 50,
-     "change": 4,
+     "change": 0,
      "country": "INA",
      "player": "Anthony Sinisuka GINTING",
-     "points": 20960
+     "points": 33679
     }
    ]
   },
@@ -363,352 +363,352 @@
     {
      "rank": 1,
      "change": 0,
-     "country": "CHN",
-     "player": "CHEN Yu Fei",
-     "points": 84600
+     "country": "KOR",
+     "player": "AN Se Young",
+     "points": 117787
     },
     {
      "rank": 2,
      "change": 0,
      "country": "JPN",
      "player": "Akane YAMAGUCHI",
-     "points": 75800
+     "points": 104576
     },
     {
      "rank": 3,
      "change": 0,
      "country": "CHN",
      "player": "WANG Zhi Yi",
-     "points": 65550
+     "points": 102689
     },
     {
      "rank": 4,
      "change": 0,
-     "country": "JPN",
-     "player": "Tomoka MIYAZAKI",
-     "points": 61520
+     "country": "CHN",
+     "player": "CHEN Yu Fei",
+     "points": 91451
     },
     {
      "rank": 5,
      "change": 0,
-     "country": "KOR",
-     "player": "AN Se Young",
-     "points": 60520
+     "country": "CHN",
+     "player": "HAN Yue",
+     "points": 77038
     },
     {
      "rank": 6,
      "change": 0,
-     "country": "THA",
-     "player": "Ratchanok INTANON",
-     "points": 55690
+     "country": "INA",
+     "player": "Putri Kusuma WARDANI",
+     "points": 76473
     },
     {
      "rank": 7,
      "change": 0,
-     "country": "IND",
-     "player": "PUSARLA V. Sindhu",
-     "points": 54810
+     "country": "THA",
+     "player": "Ratchanok INTANON",
+     "points": 74606
     },
     {
      "rank": 8,
-     "change": 4,
+     "change": 0,
      "country": "JPN",
-     "player": "Hina AKECHI",
-     "points": 53670
+     "player": "Tomoka MIYAZAKI",
+     "points": 68106
     },
     {
      "rank": 9,
-     "change": 1,
-     "country": "INA",
-     "player": "Putri Kusuma WARDANI",
-     "points": 53160
+     "change": 0,
+     "country": "IND",
+     "player": "PUSARLA V. Sindhu",
+     "points": 67601
     },
     {
      "rank": 10,
-     "change": 1,
-     "country": "TPE",
-     "player": "HUANG Yu-Hsun",
-     "points": 52220
+     "change": 0,
+     "country": "THA",
+     "player": "Pornpawee CHOCHUWONG",
+     "points": 66727
     },
     {
      "rank": 11,
-     "change": 1,
+     "change": 0,
      "country": "JPN",
      "player": "Nozomi OKUHARA",
-     "points": 51460
+     "points": 60310
     },
     {
      "rank": 12,
-     "change": 1,
-     "country": "TPE",
-     "player": "LIN Hsiang Ti",
-     "points": 50870
+     "change": 0,
+     "country": "KOR",
+     "player": "KIM Ga Eun",
+     "points": 59731
     },
     {
      "rank": 13,
-     "change": 4,
-     "country": "IND",
-     "player": "Tanvi SHARMA",
-     "points": 49910
+     "change": 0,
+     "country": "CAN",
+     "player": "Michelle LI",
+     "points": 55227
     },
     {
      "rank": 14,
-     "change": 1,
-     "country": "DEN",
-     "player": "Line CHRISTOPHERSEN",
-     "points": 49160
+     "change": 0,
+     "country": "KOR",
+     "player": "SIM Yu Jin",
+     "points": 55084
     },
     {
      "rank": 15,
-     "change": 1,
-     "country": "JPN",
-     "player": "Riko GUNJI",
-     "points": 47990
+     "change": 0,
+     "country": "DEN",
+     "player": "Line CHRISTOPHERSEN",
+     "points": 54060
     },
     {
      "rank": 16,
-     "change": 1,
-     "country": "TPE",
-     "player": "CHIU Pin-Chian",
-     "points": 47500
+     "change": 0,
+     "country": "DEN",
+     "player": "Mia BLICHFELDT",
+     "points": 53503
     },
     {
      "rank": 17,
-     "change": 1,
-     "country": "THA",
-     "player": "Supanida KATETHONG",
-     "points": 46490
+     "change": 0,
+     "country": "TPE",
+     "player": "LIN Hsiang Ti",
+     "points": 51449
     },
     {
      "rank": 18,
      "change": 0,
      "country": "THA",
-     "player": "Pornpawee CHOCHUWONG",
-     "points": 45210
+     "player": "Busanan ONGBAMRUNGPHAN",
+     "points": 50407
     },
     {
      "rank": 19,
      "change": 0,
-     "country": "THA",
-     "player": "Pitchamon OPATNIPUTH",
-     "points": 44480
+     "country": "DEN",
+     "player": "Line Højmark KJAERSFELDT",
+     "points": 50173
     },
     {
      "rank": 20,
      "change": 0,
-     "country": "THA",
-     "player": "Busanan ONGBAMRUNGPHAN",
-     "points": 43230
+     "country": "TPE",
+     "player": "CHIU Pin-Chian",
+     "points": 50078
     },
     {
      "rank": 21,
      "change": 0,
-     "country": "TPE",
-     "player": "SUNG Shuo Yun",
-     "points": 42630
+     "country": "THA",
+     "player": "Pitchamon OPATNIPUTH",
+     "points": 50018
     },
     {
      "rank": 22,
      "change": 0,
-     "country": "VIE",
-     "player": "Thuy Linh NGUYEN",
-     "points": 41240
+     "country": "JPN",
+     "player": "Riko GUNJI",
+     "points": 49333
     },
     {
      "rank": 23,
      "change": 0,
-     "country": "CAN",
-     "player": "Michelle LI",
-     "points": 39040
+     "country": "TPE",
+     "player": "HUANG Yu-Hsun",
+     "points": 48834
     },
     {
      "rank": 24,
      "change": 0,
      "country": "JPN",
-     "player": "Natsuki NIDAIRA",
-     "points": 38890
+     "player": "Hina AKECHI",
+     "points": 48620
     },
     {
      "rank": 25,
      "change": 0,
-     "country": "KOR",
-     "player": "KIM Ga Eun",
-     "points": 38370
+     "country": "VIE",
+     "player": "Thuy Linh NGUYEN",
+     "points": 46640
     },
     {
      "rank": 26,
-     "change": 3,
+     "change": 0,
      "country": "IND",
-     "player": "Isharani BARUAH",
-     "points": 38070
+     "player": "Unnati HOODA",
+     "points": 46380
     },
     {
      "rank": 27,
-     "change": 1,
-     "country": "IND",
-     "player": "Malvika BANSOD",
-     "points": 37860
+     "change": 0,
+     "country": "THA",
+     "player": "Supanida KATETHONG",
+     "points": 45922
     },
     {
      "rank": 28,
-     "change": 7,
-     "country": "CHN",
-     "player": "HAN Qian Xi",
-     "points": 36820
+     "change": 0,
+     "country": "USA",
+     "player": "Beiwen ZHANG",
+     "points": 44926
     },
     {
      "rank": 29,
-     "change": 2,
-     "country": "USA",
-     "player": "Beiwen ZHANG",
-     "points": 36790
+     "change": 0,
+     "country": "IND",
+     "player": "Tanvi SHARMA",
+     "points": 44485
     },
     {
      "rank": 30,
-     "change": 2,
-     "country": "TPE",
-     "player": "TUNG Ciou-Tong",
-     "points": 36180
+     "change": 0,
+     "country": "TUR",
+     "player": "Neslihan ARIN",
+     "points": 43749
     },
     {
      "rank": 31,
-     "change": 1,
-     "country": "IND",
-     "player": "Unnati HOODA",
-     "points": 33810
+     "change": 0,
+     "country": "MAS",
+     "player": "Karupathevan LETSHANAA",
+     "points": 43572
     },
     {
      "rank": 32,
-     "change": 1,
-     "country": "MAS",
-     "player": "Karupathevan LETSHANAA",
-     "points": 33740
+     "change": 0,
+     "country": "JPN",
+     "player": "Natsuki NIDAIRA",
+     "points": 42960
     },
     {
      "rank": 33,
      "change": 1,
-     "country": "IND",
-     "player": "Devika SIHAG",
-     "points": 33630
+     "country": "CHN",
+     "player": "HAN Qian Xi",
+     "points": 42161
     },
     {
      "rank": 34,
-     "change": 1,
-     "country": "DEN",
-     "player": "Line Højmark KJAERSFELDT",
-     "points": 33500
+     "change": -1,
+     "country": "IND",
+     "player": "Devika SIHAG",
+     "points": 41474
     },
     {
      "rank": 35,
-     "change": 2,
-     "country": "IND",
-     "player": "Anmol KHARB",
-     "points": 33040
+     "change": 0,
+     "country": "SCO",
+     "player": "Kirsty GILMOUR",
+     "points": 40250
     },
     {
      "rank": 36,
-     "change": 2,
+     "change": 0,
      "country": "MAS",
      "player": "WONG Ling Ching",
-     "points": 30910
+     "points": 38291
     },
     {
      "rank": 37,
      "change": 1,
-     "country": "CHN",
-     "player": "HAN Yue",
-     "points": 30470
+     "country": "SIN",
+     "player": "YEO Jia Min",
+     "points": 37403
     },
     {
      "rank": 38,
-     "change": 4,
+     "change": -1,
      "country": "IND",
-     "player": "Ashmita CHALIHA",
-     "points": 30120
+     "player": "Isharani BARUAH",
+     "points": 37219
     },
     {
      "rank": 39,
-     "change": 1,
-     "country": "TUR",
-     "player": "Neslihan ARIN",
-     "points": 29320
+     "change": 0,
+     "country": "IND",
+     "player": "Ashmita CHALIHA",
+     "points": 37210
     },
     {
      "rank": 40,
-     "change": 1,
-     "country": "KOR",
-     "player": "SIM Yu Jin",
-     "points": 28510
+     "change": 0,
+     "country": "BUL",
+     "player": "Kaloyana NALBANTOVA",
+     "points": 36687
     },
     {
      "rank": 41,
-     "change": 1,
-     "country": "IND",
-     "player": "TANYA HEMANTH",
-     "points": 27250
+     "change": 0,
+     "country": "DEN",
+     "player": "Amalie SCHULZ",
+     "points": 36597
     },
     {
      "rank": 42,
-     "change": 2,
-     "country": "IND",
-     "player": "Rakshitha Sree SANTHOSH RAMRAJ",
-     "points": 27100
+     "change": 0,
+     "country": "TPE",
+     "player": "TUNG Ciou-Tong",
+     "points": 35710
     },
     {
      "rank": 43,
-     "change": 2,
-     "country": "SGP",
-     "player": "YEO Jia Min",
-     "points": 23450
+     "change": 0,
+     "country": "TPE",
+     "player": "SUNG Shuo Yun",
+     "points": 35505
     },
     {
      "rank": 44,
-     "change": 3,
-     "country": "TPE",
-     "player": "PAI Yu Po",
-     "points": 22290
+     "change": 0,
+     "country": "IND",
+     "player": "Rakshitha Sree SANTHOSH RAMRAJ",
+     "points": 35467
     },
     {
      "rank": 45,
-     "change": 2,
-     "country": "BUL",
-     "player": "Kaloyana NALBANTOVA",
-     "points": 22290
+     "change": 0,
+     "country": "UKR",
+     "player": "Polina BUHROVA",
+     "points": 34734
     },
     {
      "rank": 46,
-     "change": 2,
+     "change": 0,
      "country": "IND",
-     "player": "AAKARSHI KASHYAP",
-     "points": 22190
+     "player": "Malvika BANSOD",
+     "points": 34295
     },
     {
      "rank": 47,
-     "change": 5,
+     "change": 0,
      "country": "IND",
-     "player": "Shriyanshi VALISHETTY",
-     "points": 22040
+     "player": "Anmol KHARB",
+     "points": 33960
     },
     {
      "rank": 48,
-     "change": 5,
-     "country": "USA",
-     "player": "Ishika JAISWAL",
-     "points": 21370
+     "change": 0,
+     "country": "GER",
+     "player": "Yvonne LI",
+     "points": 33141
     },
     {
      "rank": 49,
-     "change": 4,
-     "country": "DEN",
-     "player": "Amalie SCHULZ",
-     "points": 21320
+     "change": 0,
+     "country": "CAN",
+     "player": "Wen Yu ZHANG",
+     "points": 33039
     },
     {
      "rank": 50,
-     "change": 4,
-     "country": "UKR",
-     "player": "Polina BUHROVA",
-     "points": 20900
+     "change": 0,
+     "country": "IND",
+     "player": "Shriyanshi VALISHETTY",
+     "points": 32450
     }
    ]
   },
@@ -718,352 +718,352 @@
     {
      "rank": 1,
      "change": 0,
-     "country": "MAS",
-     "player": "GOH Sze Fei / Nur IZZUDDIN",
-     "points": 72340
+     "country": "KOR",
+     "player": "KIM Won Ho / SEO Seung Jae",
+     "points": 119899
     },
     {
      "rank": 2,
      "change": 0,
-     "country": "KOR",
-     "player": "KIM Won Ho / SEO Seung Jae",
-     "points": 60950
+     "country": "INA",
+     "player": "Fajar ALFIAN / Muhammad Shohibul FIKRI",
+     "points": 94053
     },
     {
      "rank": 3,
      "change": 0,
      "country": "CHN",
      "player": "LIANG Wei Keng / WANG Chang",
-     "points": 58170
+     "points": 86009
     },
     {
      "rank": 4,
      "change": 0,
-     "country": "INA",
-     "player": "Fajar ALFIAN / Muhammad Shohibul FIKRI",
-     "points": 55090
+     "country": "MAS",
+     "player": "Aaron CHIA / SOH Wooi Yik",
+     "points": 84584
     },
     {
      "rank": 5,
      "change": 0,
-     "country": "MAS",
-     "player": "KANG Khai Xing / Aaron TAI",
-     "points": 54490
+     "country": "IND",
+     "player": "Satwiksairaj RANKIREDDY / Chirag SHETTY",
+     "points": 84131
     },
     {
      "rank": 6,
      "change": 0,
-     "country": "TPE",
-     "player": "Fang-Chih LEE / Fang-Jen LEE",
-     "points": 52770
+     "country": "MAS",
+     "player": "GOH Sze Fei / Nur IZZUDDIN",
+     "points": 74917
     },
     {
      "rank": 7,
      "change": 0,
      "country": "CHN",
      "player": "CHEN Bo Yang / LIU Yi",
-     "points": 51240
+     "points": 73345
     },
     {
      "rank": 8,
      "change": 0,
-     "country": "DEN",
-     "player": "Daniel LUNDGAARD / Mads VESTERGAARD",
-     "points": 50940
+     "country": "JPN",
+     "player": "Takuro HOKI / Yugo KOBAYASHI",
+     "points": 72090
     },
     {
      "rank": 9,
      "change": 0,
      "country": "INA",
      "player": "Sabar Karyaman GUTAMA / Moh Reza Pahlevi ISFAHANI",
-     "points": 50580
+     "points": 70786
     },
     {
      "rank": 10,
      "change": 0,
-     "country": "MAS",
-     "player": "Aaron CHIA / SOH Wooi Yik",
-     "points": 50340
+     "country": "ENG",
+     "player": "Ben LANE / Sean VENDY",
+     "points": 70651
     },
     {
      "rank": 11,
      "change": 0,
-     "country": "INA",
-     "player": "Raymond INDRA / Nikolaus JOAQUIN",
-     "points": 48930
+     "country": "MAS",
+     "player": "MAN Wei Chong / TEE Kai Wun",
+     "points": 65833
     },
     {
      "rank": 12,
      "change": 0,
-     "country": "JPN",
-     "player": "Takuro HOKI / Yugo KOBAYASHI",
-     "points": 48240
+     "country": "INA",
+     "player": "Raymond INDRA / Nikolaus JOAQUIN",
+     "points": 61816
     },
     {
      "rank": 13,
      "change": 0,
-     "country": "IND",
-     "player": "Hariharan AMSAKARUNAN / M.R. ARJUN",
-     "points": 47450
+     "country": "DEN",
+     "player": "Daniel LUNDGAARD / Mads VESTERGAARD",
+     "points": 59295
     },
     {
      "rank": 14,
      "change": 0,
-     "country": "ENG",
-     "player": "Ben LANE / Sean VENDY",
-     "points": 47230
+     "country": "TPE",
+     "player": "CHIU Hsiang Chieh / WANG Chi-Lin",
+     "points": 58825
     },
     {
      "rank": 15,
      "change": 0,
-     "country": "MAS",
-     "player": "Nur Mohd Azriyn Ayub AZRIYN / TAN Wee Kiong",
-     "points": 45430
+     "country": "KOR",
+     "player": "KANG Min Hyuk / KI Dong Ju",
+     "points": 57873
     },
     {
      "rank": 16,
-     "change": 4,
-     "country": "TPE",
-     "player": "Zhi-Wei HE / HUANG Jui-Hsuan",
-     "points": 43020
+     "change": 0,
+     "country": "DEN",
+     "player": "Kim ASTRUP / Anders Skaarup RASMUSSEN",
+     "points": 57819
     },
     {
      "rank": 17,
-     "change": 1,
+     "change": 0,
      "country": "TPE",
      "player": "LEE Jhe-Huei / YANG Po-Hsuan",
-     "points": 43010
+     "points": 57116
     },
     {
      "rank": 18,
-     "change": 1,
+     "change": 0,
      "country": "TPE",
-     "player": "CHEN Zhi  Ray / LIN Yu Chieh",
-     "points": 42750
+     "player": "Fang-Chih LEE / Fang-Jen LEE",
+     "points": 52791
     },
     {
      "rank": 19,
-     "change": 1,
-     "country": "IND",
-     "player": "Satwiksairaj RANKIREDDY / Chirag SHETTY",
-     "points": 42230
+     "change": 0,
+     "country": "MAS",
+     "player": "Junaidi ARIF / YAP Roy King",
+     "points": 51954
     },
     {
      "rank": 20,
-     "change": 1,
-     "country": "USA",
-     "player": "CHEN ZHI YI / Presley SMITH",
-     "points": 40940
+     "change": 0,
+     "country": "MAS",
+     "player": "KANG Khai Xing / Aaron TAI",
+     "points": 51830
     },
     {
      "rank": 21,
      "change": 0,
-     "country": "CHN",
-     "player": "HU Ke Yuan / LIN Xiang Yi",
-     "points": 39930
+     "country": "JPN",
+     "player": "Kakeru KUMAGAI / Hiroki NISHI",
+     "points": 50318
     },
     {
      "rank": 22,
      "change": 0,
-     "country": "KOR",
-     "player": "KANG Min Hyuk / KI Dong Ju",
-     "points": 37060
+     "country": "FRA",
+     "player": "Christo POPOV / Toma Junior POPOV",
+     "points": 46581
     },
     {
      "rank": 23,
      "change": 0,
-     "country": "JPN",
-     "player": "Kakeru KUMAGAI / Hiroki NISHI",
-     "points": 36820
+     "country": "INA",
+     "player": "Leo Rolly CARNANDO / Bagas MAULANA",
+     "points": 45896
     },
     {
      "rank": 24,
      "change": 0,
-     "country": "FRA",
-     "player": "Christo POPOV / Toma Junior POPOV",
-     "points": 32310
+     "country": "IND",
+     "player": "Hariharan AMSAKARUNAN / M.R. ARJUN",
+     "points": 45114
     },
     {
      "rank": 25,
-     "change": 4,
-     "country": "KOR",
-     "player": "CHOI Sol Gyu / GOH V Shem",
-     "points": 31590
+     "change": 0,
+     "country": "USA",
+     "player": "CHEN ZHI YI / Presley SMITH",
+     "points": 43135
     },
     {
      "rank": 26,
-     "change": 1,
-     "country": "MAS",
-     "player": "Junaidi ARIF / YAP Roy King",
-     "points": 31410
+     "change": 0,
+     "country": "CHN",
+     "player": "HU Ke Yuan / LIN Xiang Yi",
+     "points": 42223
     },
     {
      "rank": 27,
+     "change": 0,
+     "country": "INA",
+     "player": "Muhammad Rian ARDIANTO / Rahmat HIDAYAT",
+     "points": 41949
+    },
+    {
+     "rank": 28,
+     "change": 0,
+     "country": "MAS",
+     "player": "Nur Mohd Azriyn Ayub AZRIYN / TAN Wee Kiong",
+     "points": 41350
+    },
+    {
+     "rank": 29,
      "change": 1,
+     "country": "JPN",
+     "player": "Takumi NOMURA / Yuichi SHIMOGAMI",
+     "points": 40671
+    },
+    {
+     "rank": 30,
+     "change": -1,
+     "country": "INA",
+     "player": "Ali Faathir RAYHAN / Devin Artha WAHYUDI",
+     "points": 39470
+    },
+    {
+     "rank": 31,
+     "change": 0,
+     "country": "JPN",
+     "player": "Hiroki MIDORIKAWA / Kyohei YAMASHITA",
+     "points": 39350
+    },
+    {
+     "rank": 32,
+     "change": 0,
+     "country": "TPE",
+     "player": "CHEN Zhi  Ray / LIN Yu Chieh",
+     "points": 38590
+    },
+    {
+     "rank": 33,
+     "change": 0,
+     "country": "DEN",
+     "player": "Christian Faust KJÆR / Rasmus KJÆR",
+     "points": 38074
+    },
+    {
+     "rank": 34,
+     "change": 0,
+     "country": "CHN",
+     "player": "HUANG Di / LIU Yang",
+     "points": 37680
+    },
+    {
+     "rank": 35,
+     "change": 0,
+     "country": "TPE",
+     "player": "LIU Kuang Heng / YANG Po Han",
+     "points": 37630
+    },
+    {
+     "rank": 36,
+     "change": 0,
+     "country": "MAS",
+     "player": "CHOONG Hon Jian / HAIKAL Muhammad",
+     "points": 36232
+    },
+    {
+     "rank": 37,
+     "change": 0,
+     "country": "TPE",
+     "player": "Zhi-Wei HE / HUANG Jui-Hsuan",
+     "points": 35980
+    },
+    {
+     "rank": 38,
+     "change": 0,
+     "country": "THA",
+     "player": "Peeratchai SUKPHUN / Pakkapon TEERARATSAKUL",
+     "points": 35028
+    },
+    {
+     "rank": 39,
+     "change": 0,
+     "country": "KOR",
+     "player": "CHOI Sol Gyu / GOH V Shem",
+     "points": 34970
+    },
+    {
+     "rank": 40,
+     "change": 0,
+     "country": "SCO",
+     "player": "Christopher GRIMLEY / Matthew GRIMLEY",
+     "points": 34620
+    },
+    {
+     "rank": 41,
+     "change": 0,
+     "country": "CAN",
+     "player": "Kevin LEE / Ty Alexander LINDEMAN",
+     "points": 33808
+    },
+    {
+     "rank": 42,
+     "change": 0,
+     "country": "SIN",
+     "player": "Eng Keat Wesley KOH / Junsuke KUBO",
+     "points": 33462
+    },
+    {
+     "rank": 43,
+     "change": 0,
+     "country": "CZE",
+     "player": "Jiří KRÁL / Ondřej KRÁL",
+     "points": 32663
+    },
+    {
+     "rank": 44,
+     "change": 0,
+     "country": "FRA",
+     "player": "Eloi ADAM / Leo ROSSI",
+     "points": 32014
+    },
+    {
+     "rank": 45,
+     "change": 0,
+     "country": "JPN",
+     "player": "Haruki KAWABE / Kenta MATSUKAWA",
+     "points": 31160
+    },
+    {
+     "rank": 46,
+     "change": 0,
+     "country": "FRA",
+     "player": "Julien MAIO / William VILLEGER",
+     "points": 30973
+    },
+    {
+     "rank": 47,
+     "change": 0,
      "country": "JPN",
      "player": "Hiroki OKAMURA / Kyohei YAMASHITA",
      "points": 29820
     },
     {
-     "rank": 28,
-     "change": 1,
-     "country": "JPN",
-     "player": "Takumi NOMURA / Yuichi SHIMOGAMI",
-     "points": 29080
-    },
-    {
-     "rank": 29,
-     "change": 1,
-     "country": "THA",
-     "player": "Peeratchai SUKPHUN / Pakkapon TEERARATSAKUL",
-     "points": 28910
-    },
-    {
-     "rank": 30,
+     "rank": 48,
      "change": 0,
-     "country": "INA",
-     "player": "Leo Rolly CARNANDO / Daniel MARTHIN",
-     "points": 27770
-    },
-    {
-     "rank": 31,
-     "change": 0,
-     "country": "TPE",
-     "player": "CHIU Hsiang Chieh / WANG Chi-Lin",
-     "points": 27390
-    },
-    {
-     "rank": 32,
-     "change": 0,
-     "country": "CHN",
-     "player": "HUANG Di / LIU Yang",
-     "points": 27320
-    },
-    {
-     "rank": 33,
-     "change": 0,
-     "country": "SGP",
-     "player": "Eng Keat Wesley KOH / Junsuke KUBO",
-     "points": 27210
-    },
-    {
-     "rank": 34,
-     "change": 0,
-     "country": "INA",
-     "player": "Ali Faathir RAYHAN / Devin Artha WAHYUDI",
-     "points": 26520
-    },
-    {
-     "rank": 35,
-     "change": 0,
-     "country": "DEN",
-     "player": "Kim ASTRUP / Anders Skaarup RASMUSSEN",
-     "points": 25820
-    },
-    {
-     "rank": 36,
-     "change": 0,
-     "country": "TPE",
-     "player": "CHEN Cheng Kuan / LIU Kuang Heng",
-     "points": 25320
-    },
-    {
-     "rank": 37,
-     "change": 0,
-     "country": "INA",
-     "player": "Muhammad Rian ARDIANTO / Rahmat HIDAYAT",
-     "points": 25310
-    },
-    {
-     "rank": 38,
-     "change": 0,
-     "country": "DEN",
-     "player": "Christian Faust KJÆR / Rasmus KJÆR",
-     "points": 25070
-    },
-    {
-     "rank": 39,
-     "change": 0,
-     "country": "MAS",
-     "player": "MAN Wei Chong / TEE Kai Wun",
-     "points": 24290
-    },
-    {
-     "rank": 40,
-     "change": 1,
-     "country": "TPE",
-     "player": "LAI Po Yu / TSAI Fu Cheng",
-     "points": 23730
-    },
-    {
-     "rank": 41,
-     "change": 1,
-     "country": "SCO",
-     "player": "Christopher GRIMLEY / Matthew GRIMLEY",
-     "points": 22170
-    },
-    {
-     "rank": 42,
-     "change": 0,
-     "country": "FRA",
-     "player": "Julien MAIO / William VILLEGER",
-     "points": 21750
-    },
-    {
-     "rank": 43,
-     "change": 0,
-     "country": "INA",
-     "player": "Leo Rolly CARNANDO / Bagas MAULANA",
-     "points": 21250
-    },
-    {
-     "rank": 44,
-     "change": 0,
-     "country": "CZE",
-     "player": "Jiří KRÁL / Ondřej KRÁL",
-     "points": 20870
-    },
-    {
-     "rank": 45,
-     "change": 6,
-     "country": "JPN",
-     "player": "Haruki KAWABE / Kenta MATSUKAWA",
-     "points": 20520
-    },
-    {
-     "rank": 46,
-     "change": 1,
      "country": "THA",
      "player": "Chaloempon CHAROENKITAMORN / Worrapol THONGSA-NGA",
-     "points": 20160
-    },
-    {
-     "rank": 47,
-     "change": 1,
-     "country": "TPE",
-     "player": "Chia Yen LIN / LIN Yong Sheng",
-     "points": 19750
-    },
-    {
-     "rank": 48,
-     "change": 2,
-     "country": "MAS",
-     "player": "CHIA Weijie / TEO Ee Yi",
-     "points": 18360
+     "points": 29501
     },
     {
      "rank": 49,
-     "change": 2,
-     "country": "CAN",
-     "player": "Kevin LEE / Ty Alexander LINDEMAN",
-     "points": 18260
+     "change": 0,
+     "country": "IND",
+     "player": "Pruthvi KRISHNAMURTHY ROY / Sai PRATHEEK.K",
+     "points": 29225
     },
     {
      "rank": 50,
-     "change": 1,
-     "country": "JPN",
-     "player": "Hiroki MIDORIKAWA / Kyohei YAMASHITA",
-     "points": 17750
+     "change": 0,
+     "country": "MAS",
+     "player": "ONG Yew Sin / TEO Ee Yi",
+     "points": 29090
     }
    ]
   },
@@ -1075,350 +1075,350 @@
      "change": 0,
      "country": "CHN",
      "player": "LIU Sheng Shu / TAN Ning",
-     "points": 74040
+     "points": 115317
     },
     {
      "rank": 2,
      "change": 0,
      "country": "JPN",
      "player": "Yuki FUKUSHIMA / Mayu MATSUMOTO",
-     "points": 61600
+     "points": 97006
     },
     {
      "rank": 3,
      "change": 0,
-     "country": "TPE",
-     "player": "HSU Ya Ching / SUNG Yu-Hsuan",
-     "points": 60820
+     "country": "KOR",
+     "player": "BAEK Ha Na / LEE So Hee",
+     "points": 94254
     },
     {
      "rank": 4,
      "change": 0,
-     "country": "MAS",
-     "player": "TAN Pearly / THINAAH Muralitharan",
-     "points": 57030
+     "country": "CHN",
+     "player": "JIA Yi Fan / ZHANG Shu Xian",
+     "points": 90460
     },
     {
      "rank": 5,
      "change": 0,
-     "country": "JPN",
-     "player": "Kaho OSAWA / Mai TANABE",
-     "points": 56610
+     "country": "MAS",
+     "player": "TAN Pearly / THINAAH Muralitharan",
+     "points": 86800
     },
     {
      "rank": 6,
      "change": 0,
-     "country": "TPE",
-     "player": "HSU Yin-Hui / LIN Jhih Yun",
-     "points": 55140
+     "country": "KOR",
+     "player": "KIM Hye Jeong / KONG Hee Yong",
+     "points": 82617
     },
     {
      "rank": 7,
      "change": 0,
-     "country": "CHN",
-     "player": "JIA Yi Fan / ZHANG Shu Xian",
-     "points": 55000
+     "country": "JPN",
+     "player": "Rin IWANAGA / Kie NAKANISHI",
+     "points": 79564
     },
     {
      "rank": 8,
      "change": 0,
-     "country": "KOR",
-     "player": "BAEK Ha Na / LEE So Hee",
-     "points": 52620
+     "country": "CHN",
+     "player": "LI Yi Jing / LUO Xu Min",
+     "points": 64817
     },
     {
      "rank": 9,
-     "change": 2,
-     "country": "USA",
-     "player": "Lauren LAM / Allison Quynh LEE",
-     "points": 52130
+     "change": 0,
+     "country": "BUL",
+     "player": "Gabriela STOEVA / Stefani STOEVA",
+     "points": 61676
     },
     {
      "rank": 10,
-     "change": 1,
-     "country": "INA",
-     "player": "Febriana Dwipuji KUSUMA / Meilysa Trias PUSPITASARI",
-     "points": 50950
+     "change": 0,
+     "country": "TPE",
+     "player": "HSIEH Pei Shan / HUNG En-Tzu",
+     "points": 61315
     },
     {
      "rank": 11,
-     "change": 1,
-     "country": "USA",
-     "player": "Francesca CORBETT / Jennie GAI",
-     "points": 49700
+     "change": 0,
+     "country": "TPE",
+     "player": "HSU Yin-Hui / LIN Jhih Yun",
+     "points": 58464
     },
     {
      "rank": 12,
      "change": 0,
-     "country": "MAS",
-     "player": "ONG Xin Yee / Carmen TING",
-     "points": 47990
+     "country": "INA",
+     "player": "Rachel Allessya ROSE / Febi SETIANINGRUM",
+     "points": 58326
     },
     {
      "rank": 13,
      "change": 0,
-     "country": "JPN",
-     "player": "Rin IWANAGA / Kie NAKANISHI",
-     "points": 45860
+     "country": "INA",
+     "player": "Febriana Dwipuji KUSUMA / Meilysa Trias PUSPITASARI",
+     "points": 56174
     },
     {
      "rank": 14,
      "change": 0,
-     "country": "UKR",
-     "player": "Polina BUHROVA / Yevheniia KANTEMYR",
-     "points": 45280
+     "country": "JPN",
+     "player": "Rui HIROKAMI / Sayaka HOBARA",
+     "points": 54940
     },
     {
      "rank": 15,
      "change": 0,
-     "country": "INA",
-     "player": "Rachel Allessya ROSE / Febi SETIANINGRUM",
-     "points": 44720
+     "country": "JPN",
+     "player": "Arisa IGARASHI / Chiharu SHIDA",
+     "points": 53819
     },
     {
      "rank": 16,
      "change": 0,
      "country": "INA",
      "player": "Amallia Cahaya PRATIWI / Siti Fadia Silva RAMADHANTI",
-     "points": 44610
+     "points": 53363
     },
     {
      "rank": 17,
-     "change": 3,
-     "country": "JPN",
-     "player": "Ririna HIRAMOTO / Kokona ISHIKAWA",
-     "points": 43220
+     "change": 0,
+     "country": "USA",
+     "player": "Lauren LAM / Allison Quynh LEE",
+     "points": 50349
     },
     {
      "rank": 18,
-     "change": 1,
-     "country": "BUL",
-     "player": "Gabriela STOEVA / Stefani STOEVA",
-     "points": 42490
+     "change": 0,
+     "country": "TPE",
+     "player": "HSU Ya Ching / SUNG Yu-Hsuan",
+     "points": 50069
     },
     {
      "rank": 19,
-     "change": 1,
+     "change": 0,
      "country": "JPN",
-     "player": "Rui HIROKAMI / Sayaka HOBARA",
-     "points": 42350
+     "player": "Hinata SUZUKI / Nao YAMAKITA",
+     "points": 49457
     },
     {
      "rank": 20,
-     "change": 1,
-     "country": "TPE",
-     "player": "HSIEH Pei Shan / HUNG En-Tzu",
-     "points": 40810
+     "change": 0,
+     "country": "HKG",
+     "player": "YEUNG Nga Ting / YEUNG Pui Lam",
+     "points": 48004
     },
     {
      "rank": 21,
      "change": 0,
-     "country": "TPE",
-     "player": "HU Ling Fang / JHENG Yu Chieh",
-     "points": 40100
+     "country": "JPN",
+     "player": "Kaho OSAWA / Mai TANABE",
+     "points": 47450
     },
     {
      "rank": 22,
      "change": 0,
-     "country": "JPN",
-     "player": "Hinata SUZUKI / Nao YAMAKITA",
-     "points": 39190
+     "country": "TUR",
+     "player": "Bengisu ERCETIN / Nazlıcan INCI",
+     "points": 47402
     },
     {
      "rank": 23,
      "change": 0,
-     "country": "TPE",
-     "player": "CHANG Ching  Hui / YANG Ching Tun",
-     "points": 39090
+     "country": "MAS",
+     "player": "ONG Xin Yee / Carmen TING",
+     "points": 47133
     },
     {
      "rank": 24,
-     "change": 1,
-     "country": "TPE",
-     "player": "LIN Chih-Chun / YANG Chu Yun",
-     "points": 38140
+     "change": 0,
+     "country": "FRA",
+     "player": "Margot LAMBERT / Camille POGNANTE",
+     "points": 45103
     },
     {
      "rank": 25,
-     "change": 1,
-     "country": "HKG",
-     "player": "LUI Lok Lok / TSANG Hiu Yan",
-     "points": 36320
+     "change": 0,
+     "country": "CHN",
+     "player": "LUO Yi / WANG Ting Ge",
+     "points": 44763
     },
     {
      "rank": 26,
-     "change": 3,
-     "country": "THA",
-     "player": "Hathaithip MIJAD / Napapakorn TUNGKASATAN",
-     "points": 34190
+     "change": 0,
+     "country": "USA",
+     "player": "Francesca CORBETT / Jennie GAI",
+     "points": 44596
     },
     {
      "rank": 27,
-     "change": 5,
-     "country": "CHN",
-     "player": "LUO Yi / WANG Ting Ge",
-     "points": 33810
+     "change": 0,
+     "country": "UKR",
+     "player": "Polina BUHROVA / Yevheniia KANTEMYR",
+     "points": 44544
     },
     {
      "rank": 28,
-     "change": 2,
-     "country": "HKG",
-     "player": "YEUNG Nga Ting / YEUNG Pui Lam",
-     "points": 33330
+     "change": 0,
+     "country": "TPE",
+     "player": "CHANG Ching  Hui / YANG Ching Tun",
+     "points": 44125
     },
     {
      "rank": 29,
-     "change": 2,
+     "change": 0,
+     "country": "JPN",
+     "player": "Ririna HIRAMOTO / Kokona ISHIKAWA",
+     "points": 42650
+    },
+    {
+     "rank": 30,
+     "change": 0,
+     "country": "TPE",
+     "player": "LIN Chih-Chun / YANG Chu Yun",
+     "points": 40640
+    },
+    {
+     "rank": 31,
+     "change": 0,
+     "country": "TPE",
+     "player": "HU Ling Fang / JHENG Yu Chieh",
+     "points": 40520
+    },
+    {
+     "rank": 32,
+     "change": 0,
+     "country": "INA",
+     "player": "Isyana Syahira MEIDA / Rinjani Kwinnara NASTINE",
+     "points": 39700
+    },
+    {
+     "rank": 33,
+     "change": 0,
+     "country": "HKG",
+     "player": "LUI Lok Lok / TSANG Hiu Yan",
+     "points": 37994
+    },
+    {
+     "rank": 34,
+     "change": 0,
+     "country": "THA",
+     "player": "Hathaithip MIJAD / Napapakorn TUNGKASATAN",
+     "points": 37823
+    },
+    {
+     "rank": 35,
+     "change": 0,
+     "country": "SCO",
+     "player": "Julie MACPHERSON / Ciara TORRANCE",
+     "points": 36190
+    },
+    {
+     "rank": 36,
+     "change": 0,
+     "country": "TPE",
+     "player": "LIN Xiao Min / WANG Yu Qiao",
+     "points": 35180
+    },
+    {
+     "rank": 37,
+     "change": 0,
+     "country": "KOR",
+     "player": "JEONG Na Eun / LEE Yeon Woo",
+     "points": 34960
+    },
+    {
+     "rank": 38,
+     "change": 0,
+     "country": "CAN",
+     "player": "Jackie DENT / Crystal LAI",
+     "points": 34306
+    },
+    {
+     "rank": 39,
+     "change": 0,
+     "country": "IND",
+     "player": "Treesa JOLLY / GAYATRI GOPICHAND PULLELA",
+     "points": 33692
+    },
+    {
+     "rank": 40,
+     "change": 0,
      "country": "JPN",
      "player": "Sayaka HIROTA / Ayako SAKURAMOTO",
      "points": 33010
     },
     {
-     "rank": 30,
-     "change": 2,
-     "country": "TUR",
-     "player": "Bengisu ERCETIN / Nazlıcan INCI",
-     "points": 32720
-    },
-    {
-     "rank": 31,
+     "rank": 41,
      "change": 0,
      "country": "JPN",
      "player": "Sumire NAKADE / Miyu TAKAHASHI",
      "points": 32020
     },
     {
-     "rank": 32,
-     "change": 2,
-     "country": "INA",
-     "player": "Isyana Syahira MEIDA / Rinjani Kwinnara NASTINE",
-     "points": 31770
+     "rank": 42,
+     "change": 0,
+     "country": "IND",
+     "player": "Kavipriya SELVAM / Simran SINGHI",
+     "points": 31413
     },
     {
-     "rank": 33,
-     "change": 4,
+     "rank": 43,
+     "change": 0,
+     "country": "ESP",
+     "player": "Paula LOPEZ / Lucia RODRIGUEZ",
+     "points": 31095
+    },
+    {
+     "rank": 44,
+     "change": 0,
      "country": "THA",
      "player": "Benyapa AIMSAARD / Nuntakarn AIMSAARD",
      "points": 30710
     },
     {
-     "rank": 34,
-     "change": 2,
-     "country": "CHN",
-     "player": "BAO Li Jing / Zi Han CAO",
-     "points": 27590
-    },
-    {
-     "rank": 35,
-     "change": 2,
-     "country": "INA",
-     "player": "Lanny Tria MAYASARI / Apriyani RAHAYU",
-     "points": 26260
-    },
-    {
-     "rank": 36,
-     "change": 2,
-     "country": "KOR",
-     "player": "KIM Hye Jeong / KONG Hee Yong",
-     "points": 25520
-    },
-    {
-     "rank": 37,
-     "change": 2,
-     "country": "TPE",
-     "player": "LIN Xiao Min / WANG Yu Qiao",
-     "points": 25460
-    },
-    {
-     "rank": 38,
-     "change": 0,
-     "country": "IND",
-     "player": "Treesa JOLLY / GAYATRI GOPICHAND PULLELA",
-     "points": 24740
-    },
-    {
-     "rank": 39,
-     "change": 0,
-     "country": "JPN",
-     "player": "Arisa IGARASHI / Chiharu SHIDA",
-     "points": 24620
-    },
-    {
-     "rank": 40,
+     "rank": 45,
      "change": 0,
      "country": "IND",
      "player": "Ashwini BHAT K. / Shikha GAUTAM",
-     "points": 23000
-    },
-    {
-     "rank": 41,
-     "change": 5,
-     "country": "JPN",
-     "player": "Nanako HARA / Riko KIYOSE",
-     "points": 21300
-    },
-    {
-     "rank": 42,
-     "change": 7,
-     "country": "KOR",
-     "player": "KIM Yu Jung / LEE Yu Lim",
-     "points": 20690
-    },
-    {
-     "rank": 43,
-     "change": 2,
-     "country": "CAN",
-     "player": "Jackie DENT / Crystal LAI",
-     "points": 19340
-    },
-    {
-     "rank": 44,
-     "change": 2,
-     "country": "SCO",
-     "player": "Julie MACPHERSON / Ciara TORRANCE",
-     "points": 18840
-    },
-    {
-     "rank": 45,
-     "change": 2,
-     "country": "MAS",
-     "player": "CHONG Jie Yu / Vanessa NG",
-     "points": 18720
+     "points": 29990
     },
     {
      "rank": 46,
-     "change": 2,
-     "country": "CHN",
-     "player": "LI Yi Jing / LUO Xu Min",
-     "points": 18550
+     "change": 0,
+     "country": "IND",
+     "player": "Priya KONJENGBAM / Shruti MISHRA",
+     "points": 29395
     },
     {
      "rank": 47,
-     "change": 2,
-     "country": "FRA",
-     "player": "Margot LAMBERT / Camille POGNANTE",
-     "points": 17640
+     "change": 0,
+     "country": "JPN",
+     "player": "Nanako HARA / Riko KIYOSE",
+     "points": 28490
     },
     {
      "rank": 48,
-     "change": 2,
+     "change": 1,
      "country": "MAS",
      "player": "Zi Yu LOW / Noraqilah MAISARAH",
-     "points": 17460
+     "points": 27839
     },
     {
      "rank": 49,
-     "change": 2,
-     "country": "IND",
-     "player": "Rutaparna PANDA / Swetaparna PANDA",
-     "points": 17390
+     "change": 1,
+     "country": "BRA",
+     "player": "Jaqueline LIMA / Samia LIMA",
+     "points": 27750
     },
     {
      "rank": 50,
-     "change": 2,
-     "country": "IND",
-     "player": "Kavipriya SELVAM / Simran SINGHI",
-     "points": 16050
+     "change": -2,
+     "country": "THA",
+     "player": "Phattharin AIAMVAREESRISAKUL / Sarisa JANPENG",
+     "points": 27723
     }
    ]
   },
@@ -1428,352 +1428,352 @@
     {
      "rank": 1,
      "change": 0,
-     "country": "DEN",
-     "player": "Mathias CHRISTIANSEN / Alexandra BØJE",
-     "points": 83920
+     "country": "CHN",
+     "player": "FENG Yan Zhe / HUANG Dong Ping",
+     "points": 106500
     },
     {
      "rank": 2,
      "change": 0,
      "country": "CHN",
-     "player": "GUO Xin Wa / CHEN Fang Hui",
-     "points": 74690
+     "player": "JIANG Zhen Bang / WEI Ya Xin",
+     "points": 90850
     },
     {
      "rank": 3,
      "change": 0,
-     "country": "CHN",
-     "player": "CHENG Xing / ZHANG Chi",
-     "points": 66980
+     "country": "DEN",
+     "player": "Mathias CHRISTIANSEN / Alexandra BØJE",
+     "points": 89270
     },
     {
      "rank": 4,
      "change": 0,
-     "country": "CHN",
-     "player": "FENG Yan Zhe / HUANG Dong Ping",
-     "points": 65460
+     "country": "THA",
+     "player": "Dechapol PUAVARANUKROH / Supissara PAEWSAMPRAN",
+     "points": 87670
     },
     {
      "rank": 5,
      "change": 0,
      "country": "FRA",
      "player": "Thom GICQUEL / Delphine DELRUE",
-     "points": 57830
+     "points": 82200
     },
     {
      "rank": 6,
      "change": 0,
-     "country": "TPE",
-     "player": "YE Hong Wei / Nicole Gonzales CHAN",
-     "points": 54420
+     "country": "CHN",
+     "player": "GUO Xin Wa / CHEN Fang Hui",
+     "points": 82070
     },
     {
      "rank": 7,
      "change": 0,
-     "country": "THA",
-     "player": "Pakkapon TEERARATSAKUL / Sapsiree TAERATTANACHAI",
-     "points": 53060
+     "country": "MAS",
+     "player": "CHEN Tang Jie / TOH Ee Wei",
+     "points": 81090
     },
     {
      "rank": 8,
      "change": 0,
-     "country": "TPE",
-     "player": "YANG Po-Hsuan / HU Ling Fang",
-     "points": 52830
+     "country": "HKG",
+     "player": "TANG Chun Man / TSE Ying Suet",
+     "points": 66110
     },
     {
      "rank": 9,
      "change": 0,
-     "country": "THA",
-     "player": "Dechapol PUAVARANUKROH / Supissara PAEWSAMPRAN",
-     "points": 52710
+     "country": "CHN",
+     "player": "CHENG Xing / ZHANG Chi",
+     "points": 63180
     },
     {
      "rank": 10,
      "change": 0,
-     "country": "HKG",
-     "player": "TANG Chun Man / TSE Ying Suet",
-     "points": 52070
+     "country": "TPE",
+     "player": "YE Hong Wei / Nicole Gonzales CHAN",
+     "points": 62680
     },
     {
      "rank": 11,
      "change": 0,
-     "country": "JPN",
-     "player": "Akira KOGA / Natsu SAITO",
-     "points": 51940
+     "country": "MAS",
+     "player": "GOH Soon Huat / LAI Shevon Jemie",
+     "points": 58830
     },
     {
      "rank": 12,
      "change": 0,
-     "country": "USA",
-     "player": "Presley SMITH / Jennie GAI",
-     "points": 51780
+     "country": "TPE",
+     "player": "YANG Po-Hsuan / HU Ling Fang",
+     "points": 56390
     },
     {
      "rank": 13,
      "change": 0,
-     "country": "CHN",
-     "player": "JIANG Zhen Bang / WEI Ya Xin",
-     "points": 51370
+     "country": "JPN",
+     "player": "Yuta WATANABE / Maya TAGUCHI",
+     "points": 55390
     },
     {
      "rank": 14,
      "change": 0,
-     "country": "MAS",
-     "player": "GOH Soon Huat / LAI Shevon Jemie",
-     "points": 44300
+     "country": "INA",
+     "player": "Jafar HIDAYATULLAH / Felisha Alberta Nathaniel PASARIBU",
+     "points": 53250
     },
     {
      "rank": 15,
      "change": 0,
-     "country": "TPE",
-     "player": "WU Guan Xun / LEE Chia Hsin",
-     "points": 42040
+     "country": "THA",
+     "player": "Pakkapon TEERARATSAKUL / Sapsiree TAERATTANACHAI",
+     "points": 52580
     },
     {
      "rank": 16,
      "change": 0,
-     "country": "THA",
-     "player": "Ruttanapak OUPTHONG / Jhenicha SUDJAIPRAPARAT",
-     "points": 41730
+     "country": "JPN",
+     "player": "Yuichi SHIMOGAMI / Sayaka HOBARA",
+     "points": 52100
     },
     {
      "rank": 17,
-     "change": 4,
-     "country": "JPN",
-     "player": "Yuta WATANABE / Maya TAGUCHI",
-     "points": 40810
+     "change": 0,
+     "country": "USA",
+     "player": "Presley SMITH / Jennie GAI",
+     "points": 49200
     },
     {
      "rank": 18,
-     "change": 1,
-     "country": "INA",
-     "player": "Amri SYAHNAWI / Nita Violina MARWAH",
-     "points": 40430
+     "change": 0,
+     "country": "IND",
+     "player": "DHRUV KAPILA / Tanisha CRASTO",
+     "points": 48480
     },
     {
      "rank": 19,
-     "change": 1,
-     "country": "IND",
-     "player": "Rohan KAPOOR / GADDE Ruthvika Shivani",
-     "points": 39760
+     "change": 0,
+     "country": "DEN",
+     "player": "Jesper TOFT / Amalie MAGELUND",
+     "points": 48080
     },
     {
      "rank": 20,
-     "change": 1,
-     "country": "JPN",
-     "player": "Yuichi SHIMOGAMI / Sayaka HOBARA",
-     "points": 39300
+     "change": 0,
+     "country": "INA",
+     "player": "Amri SYAHNAWI / Nita Violina MARWAH",
+     "points": 47790
     },
     {
      "rank": 21,
-     "change": 1,
-     "country": "IND",
-     "player": "DHRUV KAPILA / Tanisha CRASTO",
-     "points": 37640
+     "change": 0,
+     "country": "THA",
+     "player": "Ruttanapak OUPTHONG / Jhenicha SUDJAIPRAPARAT",
+     "points": 46500
     },
     {
      "rank": 22,
      "change": 0,
-     "country": "CHN",
-     "player": "ZHU Yi Jun / LI Qian",
-     "points": 33290
+     "country": "JPN",
+     "player": "Akira KOGA / Natsu SAITO",
+     "points": 45730
     },
     {
      "rank": 23,
      "change": 0,
      "country": "INA",
-     "player": "Dejan FERDINANSYAH / Bernadine Anindiya WARDANA",
-     "points": 33220
+     "player": "Marwan FAZA / Aisyah Salsabila Putri PRANATA",
+     "points": 44460
     },
     {
      "rank": 24,
      "change": 0,
-     "country": "MAS",
-     "player": "CHEN Tang Jie / TOH Ee Wei",
-     "points": 32550
+     "country": "INA",
+     "player": "Adnan MAULANA / Indah Cahya Sari JAMIL",
+     "points": 44290
     },
     {
      "rank": 25,
      "change": 0,
-     "country": "SCO",
-     "player": "Alexander DUNN / Julie MACPHERSON",
-     "points": 32360
+     "country": "DEN",
+     "player": "Mads VESTERGAARD / Christine BUSCH",
+     "points": 42960
     },
     {
      "rank": 26,
      "change": 0,
-     "country": "MAS",
-     "player": "WONG Tien Ci / LIM Chiew Sien",
-     "points": 30920
+     "country": "KOR",
+     "player": "KIM Jae Hyeon / JANG Ha Jeong",
+     "points": 42610
     },
     {
      "rank": 27,
      "change": 0,
      "country": "HKG",
      "player": "CHAN Yin Chak / NG Tsz Yau",
-     "points": 30440
+     "points": 42580
     },
     {
      "rank": 28,
+     "change": 0,
+     "country": "JPN",
+     "player": "Hiroki MIDORIKAWA / Natsu SAITO",
+     "points": 41810
+    },
+    {
+     "rank": 29,
+     "change": 0,
+     "country": "CHN",
+     "player": "ZHU Yi Jun / LI Qian",
+     "points": 40710
+    },
+    {
+     "rank": 30,
+     "change": 0,
+     "country": "MAS",
+     "player": "HOO Pang Ron / CHENG Su Yin",
+     "points": 40440
+    },
+    {
+     "rank": 31,
+     "change": 0,
+     "country": "CHN",
+     "player": "GAO Jia Xuan / WU Meng Ying",
+     "points": 40170
+    },
+    {
+     "rank": 32,
+     "change": 0,
+     "country": "INA",
+     "player": "Dejan FERDINANSYAH / Bernadine Anindiya WARDANA",
+     "points": 40060
+    },
+    {
+     "rank": 33,
+     "change": 0,
+     "country": "GER",
+     "player": "Marvin SEIDEL / Thuc Phuong NGUYEN",
+     "points": 40030
+    },
+    {
+     "rank": 34,
+     "change": 0,
+     "country": "TPE",
+     "player": "CHEN Cheng Kuan / HSU Yin-Hui",
+     "points": 38000
+    },
+    {
+     "rank": 35,
+     "change": 0,
+     "country": "SCO",
+     "player": "Alexander DUNN / Julie MACPHERSON",
+     "points": 37740
+    },
+    {
+     "rank": 36,
+     "change": 0,
+     "country": "ENG",
+     "player": "Callum HEMMING / Estelle VAN LEEUWEN",
+     "points": 37270
+    },
+    {
+     "rank": 37,
+     "change": 0,
+     "country": "TPE",
+     "player": "WU Guan Xun / LEE Chia Hsin",
+     "points": 37150
+    },
+    {
+     "rank": 38,
+     "change": 0,
+     "country": "DEN",
+     "player": "Rasmus ESPERSEN / Amalie Cecilie KUDSK",
+     "points": 36930
+    },
+    {
+     "rank": 39,
+     "change": 0,
+     "country": "INA",
+     "player": "Bobby SETIABUDI / Melati Daeva OKTAVIANTI",
+     "points": 36130
+    },
+    {
+     "rank": 40,
+     "change": 0,
+     "country": "FRA",
+     "player": "Julien MAIO / Lea PALERMO",
+     "points": 36060
+    },
+    {
+     "rank": 41,
+     "change": 0,
+     "country": "MAS",
+     "player": "Jimmy WONG / LAI Pei Jing",
+     "points": 35380
+    },
+    {
+     "rank": 42,
+     "change": 0,
+     "country": "IND",
+     "player": "Rohan KAPOOR / GADDE Ruthvika Shivani",
+     "points": 35320
+    },
+    {
+     "rank": 43,
+     "change": 0,
+     "country": "MAS",
+     "player": "WONG Tien Ci / LIM Chiew Sien",
+     "points": 34910
+    },
+    {
+     "rank": 44,
+     "change": 0,
+     "country": "ESP",
+     "player": "Ruben GARCIA / Lucia RODRIGUEZ",
+     "points": 33190
+    },
+    {
+     "rank": 45,
+     "change": 0,
+     "country": "TPE",
+     "player": "WU Hsuan-Yi / YANG Chu Yun",
+     "points": 32740
+    },
+    {
+     "rank": 46,
+     "change": 0,
+     "country": "INA",
+     "player": "Bimo PRASETYO / Arlya Nabila Thesya MUNGGARAN",
+     "points": 31010
+    },
+    {
+     "rank": 47,
+     "change": 0,
+     "country": "THA",
+     "player": "Supak JOMKOH / Ornnicha JONGSATHAPORNPARN",
+     "points": 30510
+    },
+    {
+     "rank": 48,
+     "change": 0,
+     "country": "USA",
+     "player": "CHEN ZHI YI / Francesca CORBETT",
+     "points": 30000
+    },
+    {
+     "rank": 49,
      "change": 0,
      "country": "TPE",
      "player": "LIU Kuang Heng / HSU Yin-Hui",
      "points": 30000
     },
     {
-     "rank": 29,
+     "rank": 50,
      "change": 0,
-     "country": "INA",
-     "player": "Jafar HIDAYATULLAH / Felisha Alberta Nathaniel PASARIBU",
-     "points": 28690
-    },
-    {
-     "rank": 30,
-     "change": 0,
-     "country": "INA",
-     "player": "Adnan MAULANA / Indah Cahya Sari JAMIL",
-     "points": 28180
-    },
-    {
-     "rank": 31,
-     "change": 4,
-     "country": "TPE",
-     "player": "WU Hsuan-Yi / YANG Chu Yun",
-     "points": 27340
-    },
-    {
-     "rank": 32,
-     "change": 1,
-     "country": "FRA",
-     "player": "Julien MAIO / Lea PALERMO",
-     "points": 26770
-    },
-    {
-     "rank": 33,
-     "change": 1,
-     "country": "CHN",
-     "player": "GAO Jia Xuan / WEI Ya Xin",
-     "points": 26740
-    },
-    {
-     "rank": 34,
-     "change": 6,
-     "country": "MAS",
-     "player": "Jimmy WONG / CHENG Su Yin",
-     "points": 26360
-    },
-    {
-     "rank": 35,
-     "change": 2,
-     "country": "GER",
-     "player": "Marvin SEIDEL / Thuc Phuong NGUYEN",
-     "points": 25960
-    },
-    {
-     "rank": 36,
-     "change": 2,
-     "country": "THA",
-     "player": "Supak JOMKOH / Ornnicha JONGSATHAPORNPARN",
-     "points": 25260
-    },
-    {
-     "rank": 37,
-     "change": 1,
-     "country": "DEN",
-     "player": "Mads VESTERGAARD / Christine BUSCH",
-     "points": 24280
-    },
-    {
-     "rank": 38,
-     "change": 1,
-     "country": "INA",
-     "player": "Marwan FAZA / Aisyah Salsabila Putri PRANATA",
-     "points": 23570
-    },
-    {
-     "rank": 39,
-     "change": 12,
-     "country": "KOR",
-     "player": "KIM Jae Hyeon / JANG Ha Jeong",
-     "points": 23110
-    },
-    {
-     "rank": 40,
-     "change": 2,
-     "country": "TPE",
-     "player": "CHEN Cheng Kuan / HSU Yin-Hui",
-     "points": 22900
-    },
-    {
-     "rank": 41,
-     "change": 2,
-     "country": "USA",
-     "player": "CHEN ZHI YI / Francesca CORBETT",
-     "points": 22880
-    },
-    {
-     "rank": 42,
-     "change": 8,
-     "country": "CHN",
-     "player": "GAO Jia Xuan / WU Meng Ying",
-     "points": 22620
-    },
-    {
-     "rank": 43,
-     "change": 2,
-     "country": "ESP",
-     "player": "Ruben GARCIA / Lucia RODRIGUEZ",
-     "points": 21170
-    },
-    {
-     "rank": 44,
-     "change": 2,
-     "country": "INA",
-     "player": "Rehan Naufal KUSHARJANTO / Gloria Emanuelle WIDJAJA",
-     "points": 21000
-    },
-    {
-     "rank": 45,
-     "change": 2,
-     "country": "MAS",
-     "player": "Jimmy WONG / LAI Pei Jing",
-     "points": 20790
-    },
-    {
-     "rank": 46,
-     "change": 2,
-     "country": "ENG",
-     "player": "Callum HEMMING / Estelle VAN LEEUWEN",
-     "points": 19790
-    },
-    {
-     "rank": 47,
-     "change": 2,
      "country": "IND",
      "player": "Dhruv RAWAT / MANEESHA K",
-     "points": 19730
-    },
-    {
-     "rank": 48,
-     "change": 3,
-     "country": "IND",
-     "player": "Ashith SURYA / Amrutha PRAMUTHESH",
-     "points": 19660
-    },
-    {
-     "rank": 49,
-     "change": 3,
-     "country": "INA",
-     "player": "Bobby SETIABUDI / Melati Daeva OKTAVIANTI",
-     "points": 19650
-    },
-    {
-     "rank": 50,
-     "change": 3,
-     "country": "DEN",
-     "player": "Jesper TOFT / Amalie MAGELUND",
-     "points": 19330
+     "points": 29830
     }
    ]
   }
