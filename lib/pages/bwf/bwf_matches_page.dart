@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../config/theme.dart';
 import '../../models/bwf_match.dart';
 import '../../services/bwf_live_service.dart';
 
-/// 当日赛况页：进行中赛事的当日对阵，按场地分组 + 逐局比分 + 实时状态
+/// 当日赛况页：进行中赛事的当日对阵，按场地分组（官方对阵顺序）+ 逐局比分 + 实时状态
 class BwfMatchesPage extends StatefulWidget {
   final String tournamentName;
   final String tournamentCode;
+  final int tournamentId; // 单场详情 h2h API 用
   final BwfLiveService? service; // 测试注入
 
   const BwfMatchesPage({
     super.key,
     required this.tournamentName,
     required this.tournamentCode,
+    required this.tournamentId,
     this.service,
   });
 
@@ -84,7 +87,7 @@ class _BwfMatchesPageState extends State<BwfMatchesPage> {
   }
 
   Widget _list(List<BwfMatch> matches) {
-    // 按场地分组（matches 已按场地+时间排序）
+    // 按场地分组：场地顺序与组内顺序都保持 API 原序（官方对阵顺序）
     final groups = <String, List<BwfMatch>>{};
     for (final m in matches) {
       (groups[m.courtName] ??= []).add(m);
@@ -119,46 +122,52 @@ class _BwfMatchesPageState extends State<BwfMatchesPage> {
           SportPalette.blue
         ),
     };
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: const [
-          BoxShadow(color: Color(0x140084C6), blurRadius: 8, offset: Offset(0, 2)),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6), color: SportPalette.blue),
-                child: Text(m.eventName,
+    return GestureDetector(
+      onTap: () => Get.toNamed('/bwf-match-detail',
+          arguments: {'match': m, 'tmtId': widget.tournamentId}),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: const [
+            BoxShadow(color: Color(0x140084C6), blurRadius: 8, offset: Offset(0, 2)),
+          ],
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6), color: SportPalette.blue),
+                  child: Text(m.eventNameZh,
+                      style: const TextStyle(
+                          fontSize: 9, fontWeight: FontWeight.w800, color: Colors.white)),
+                ),
+                const SizedBox(width: 6),
+                Text(m.roundName,
                     style: const TextStyle(
-                        fontSize: 9, fontWeight: FontWeight.w800, color: Colors.white)),
-              ),
-              const SizedBox(width: 6),
-              Text(m.roundName,
-                  style: const TextStyle(
-                      fontSize: 11, fontWeight: FontWeight.w700, color: SportPalette.textPrimary)),
-              const Spacer(),
-              Text(statusText, style: TextStyle(fontSize: 10, color: statusColor)),
-            ],
-          ),
-          const SizedBox(height: 8),
-          _teamRow(m, 1),
-          const SizedBox(height: 4),
-          _teamRow(m, 2),
-        ],
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: SportPalette.textPrimary)),
+                const Spacer(),
+                Text(statusText, style: TextStyle(fontSize: 10, color: statusColor)),
+              ],
+            ),
+            const SizedBox(height: 8),
+            _teamRow(m, 1),
+            const SizedBox(height: 4),
+            _teamRow(m, 2),
+          ],
+        ),
       ),
     );
   }
 
-  /// 一方一行：左球员信息，右逐局得分（胜方加粗、负方置灰）
+  /// 一方一行：左国旗+球员信息，右逐局得分（胜方加粗、负方置灰）
   Widget _teamRow(BwfMatch m, int side) {
     final team = side == 1 ? m.team1 : m.team2;
     final won = m.winner == side;
@@ -175,6 +184,8 @@ class _BwfMatchesPageState extends State<BwfMatchesPage> {
         );
     return Row(
       children: [
+        _flag(team.flagUrl, team.countryCode),
+        const SizedBox(width: 6),
         Expanded(
           child: Text.rich(
             TextSpan(children: [
@@ -183,13 +194,8 @@ class _BwfMatchesPageState extends State<BwfMatchesPage> {
                 TextSpan(
                   text: ' [${team.seed}]',
                   style: const TextStyle(
-                      fontSize: 10, color: SportPalette.textSecondary),
+                      fontSize: 10, color: SportPalette.goldDark),
                 ),
-              TextSpan(
-                text: '  ${team.countryCode}',
-                style: const TextStyle(
-                    fontSize: 10, color: SportPalette.textSecondary),
-              ),
             ]),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -204,6 +210,33 @@ class _BwfMatchesPageState extends State<BwfMatchesPage> {
                     (m.status == BwfMatchStatus.inProgress && i == m.sets.length - 1))),
           ),
       ],
+    );
+  }
+
+  /// 圆形国旗；加载失败/缺失回退国家码文字
+  Widget _flag(String? url, String code) {
+    if (url == null || url.isEmpty) {
+      return SizedBox(
+        width: 16,
+        height: 16,
+        child: Center(
+            child: Text(code,
+                style:
+                    const TextStyle(fontSize: 7, color: SportPalette.textSecondary))),
+      );
+    }
+    return Image.network(
+      url,
+      width: 16,
+      height: 16,
+      errorBuilder: (_, _, _) => SizedBox(
+        width: 16,
+        height: 16,
+        child: Center(
+            child: Text(code,
+                style:
+                    const TextStyle(fontSize: 7, color: SportPalette.textSecondary))),
+      ),
     );
   }
 }

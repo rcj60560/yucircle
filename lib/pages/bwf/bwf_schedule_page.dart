@@ -123,10 +123,11 @@ class BwfSchedulePage extends StatelessWidget {
       );
 
   Widget _thisWeekCard(Tournament t) {
-    final canLive = t.hasLiveScores && t.code != null;
+    final canLive = t.hasLiveScores && t.code != null && t.tmtId != null;
     return GestureDetector(
       onTap: canLive
-          ? () => Get.toNamed('/bwf-matches', arguments: {'name': t.name, 'code': t.code})
+          ? () => Get.toNamed('/bwf-matches',
+              arguments: {'name': t.name, 'code': t.code, 'tmtId': t.tmtId})
           : null,
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),

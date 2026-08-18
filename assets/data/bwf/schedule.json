@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-18T16:29:09+08:00",
+ "updatedAt": "2026-08-18T17:34:53+08:00",
  "year": 2026,
  "tournaments": [
   {
@@ -10,6 +10,7 @@
    "level": "super1000",
    "prizeMoney": 1450000,
    "code": "41287386-9043-4062-99C8-3FFBB9B26C1E",
+   "tmtId": 5227,
    "hasLiveScores": true
   },
   {
@@ -20,6 +21,7 @@
    "level": "super750",
    "prizeMoney": 950000,
    "code": "2DFC9259-FA31-48EB-A9F3-5A7C98457593",
+   "tmtId": 5269,
    "hasLiveScores": true
   },
   {
@@ -30,6 +32,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "407A6757-08F0-4A1C-A4EE-4024BC3D01E2",
+   "tmtId": 5529,
    "hasLiveScores": true
   },
   {
@@ -40,6 +43,7 @@
    "level": "super300",
    "prizeMoney": 0,
    "code": "8D53F15B-5128-41EE-801E-8D9B130BC222",
+   "tmtId": 5226,
    "hasLiveScores": true
   },
   {
@@ -50,6 +54,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "0E719D29-897E-4BB9-86A7-A9A9C52A3B7A",
+   "tmtId": 5246,
    "hasLiveScores": true
   },
   {
@@ -60,6 +65,7 @@
    "level": "super1000",
    "prizeMoney": 0,
    "code": "1A1AB550-BF1E-4CE9-A774-82414E3D4405",
+   "tmtId": 5515,
    "hasLiveScores": true
   },
   {
@@ -70,6 +76,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "CB5214B2-C4BB-42B6-B01A-C235234AD3DB",
+   "tmtId": 5209,
    "hasLiveScores": true
   },
   {
@@ -80,6 +87,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "FE0B73DA-C309-4636-9A64-C98F30A38315",
+   "tmtId": 5270,
    "hasLiveScores": true
   },
   {
@@ -90,6 +98,7 @@
    "level": "major",
    "prizeMoney": 0,
    "code": "39A63C50-66C5-4857-9008-00C241339F4D",
+   "tmtId": 5600,
    "hasLiveScores": true
   },
   {
@@ -100,6 +109,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "3B8847C8-A4D7-4C65-B3E1-EA2314FD304B",
+   "tmtId": 5230,
    "hasLiveScores": true
   },
   {
@@ -110,6 +120,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "71AC3AB2-C072-444C-B479-4AC73C756C14",
+   "tmtId": 5229,
    "hasLiveScores": true
   },
   {
@@ -120,6 +131,7 @@
    "level": "super750",
    "prizeMoney": 1000000,
    "code": "034085E6-A6C1-4D5D-AACF-1CA3EDB1C582",
+   "tmtId": 5649,
    "hasLiveScores": true
   },
   {
@@ -130,6 +142,7 @@
    "level": "super1000",
    "prizeMoney": 1450000,
    "code": "5A719D43-A131-43FC-9A7F-BAFBC0B551E8",
+   "tmtId": 5528,
    "hasLiveScores": true
   },
   {
@@ -140,6 +153,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "C8385C7E-F4AB-48C7-881B-122DE3304633",
+   "tmtId": 5215,
    "hasLiveScores": true
   },
   {
@@ -150,6 +164,7 @@
    "level": "super300",
    "prizeMoney": 370000,
    "code": "0FE7A0E9-A04C-47A4-A042-85A48ED966EC",
+   "tmtId": 5214,
    "hasLiveScores": true
   },
   {
@@ -160,6 +175,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "61701B09-39B5-4491-9DE3-40E927472370",
+   "tmtId": 5701,
    "hasLiveScores": true
   },
   {
@@ -170,6 +186,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "E3ED5EB9-7873-4ACF-9738-C5C6ECE01F96",
+   "tmtId": 5271,
    "hasLiveScores": true
   },
   {
@@ -180,6 +197,7 @@
    "level": "super750",
    "prizeMoney": 950000,
    "code": "A05984E7-69C8-46AD-ACB8-906CA66D6913",
+   "tmtId": 5213,
    "hasLiveScores": true
   },
   {
@@ -190,6 +208,7 @@
    "level": "super1000",
    "prizeMoney": 2000000,
    "code": "718B4055-FCD5-4652-B599-D9E6DFD256AB",
+   "tmtId": 5622,
    "hasLiveScores": true
   },
   {
@@ -200,6 +219,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "97FF954D-0A47-498D-81D1-B9105D891B59",
+   "tmtId": 5514,
    "hasLiveScores": true
   },
   {
@@ -210,6 +230,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "5A942038-9A9E-4202-886D-539B48CB0867",
+   "tmtId": 5596,
    "hasLiveScores": true
   },
   {
@@ -220,6 +241,7 @@
    "level": "major",
    "prizeMoney": 0,
    "code": "B671FB97-491C-46D3-982F-56525168C3AA",
+   "tmtId": 5601,
    "hasLiveScores": true
   },
   {
@@ -230,6 +252,7 @@
    "level": "super750",
    "prizeMoney": 1250000,
    "code": "593CF690-836C-47A7-A710-4FF599A473F3",
+   "tmtId": 5625,
    "hasLiveScores": true
   },
   {
@@ -240,6 +263,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "A0E6DE07-D611-4333-BAF3-2D53D2C3A0E1",
+   "tmtId": 5594,
    "hasLiveScores": true
   },
   {
@@ -250,6 +274,7 @@
    "level": "super750",
    "prizeMoney": 950000,
    "code": "280293F8-8DB0-437B-8290-4A65B4A3A494",
+   "tmtId": 5210,
    "hasLiveScores": true
   },
   {
@@ -260,6 +285,7 @@
    "level": "super750",
    "prizeMoney": 950000,
    "code": "02C81098-27CE-498C-AABD-8C520607CEAD",
+   "tmtId": 5272,
    "hasLiveScores": true
   },
   {
@@ -270,6 +296,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "A2064CBE-3609-4248-82A6-A51558F34FB9",
+   "tmtId": 5273,
    "hasLiveScores": true
   },
   {
@@ -280,6 +307,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "3637F0DA-82DE-4E51-9E12-FE7BB9C79E36",
+   "tmtId": 5597,
    "hasLiveScores": true
   },
   {
@@ -290,6 +318,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "5CC4D285-D8E0-4747-A6BF-A2D271B94BC7",
+   "tmtId": 5216,
    "hasLiveScores": true
   },
   {
@@ -300,6 +329,7 @@
    "level": "super500",
    "prizeMoney": 500000,
    "code": "3D2C5586-BB65-4575-8C38-47E290442887",
+   "tmtId": 5218,
    "hasLiveScores": true
   },
   {
@@ -310,6 +340,7 @@
    "level": "super300",
    "prizeMoney": 250000,
    "code": "C7F5AAA6-8A74-40A0-A7B3-EF072887354C",
+   "tmtId": 5274,
    "hasLiveScores": true
   },
   {
@@ -320,6 +351,7 @@
    "level": "finals",
    "prizeMoney": 3500000,
    "code": "A7F79D23-D70B-4062-9629-E0DD2B1A968D",
+   "tmtId": 5602,
    "hasLiveScores": true
   }
  ]

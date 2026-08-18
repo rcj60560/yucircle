@@ -11,6 +11,7 @@ class Tournament {
   final TournamentLevel level;
   final int prizeMoney; // 0 = 未知（UI 不显示）
   final String? code; // extranet-lv 赛事码，有 live 数据时可直连当日赛况
+  final int? tmtId; // 数字赛事 id（单场详情 /api/h2h/match 只认它）
   final bool hasLiveScores;
 
   const Tournament({
@@ -21,6 +22,7 @@ class Tournament {
     required this.level,
     required this.prizeMoney,
     this.code,
+    this.tmtId,
     this.hasLiveScores = false,
   });
 
@@ -33,6 +35,7 @@ class Tournament {
         level: _levelFrom(json['level'] as String? ?? 'other'),
         prizeMoney: (json['prizeMoney'] as num? ?? 0).toInt(),
         code: json['code'] as String?,
+        tmtId: (json['tmtId'] as num?)?.toInt(),
         hasLiveScores: (json['hasLiveScores'] as bool?) ?? false,
       );
 

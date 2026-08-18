@@ -73,6 +73,7 @@ void main() {
           'level': 'major',
           'prizeMoney': 0,
           'code': 'B671FB97',
+          'tmtId': 5601,
           'hasLiveScores': true,
         },
       ],
