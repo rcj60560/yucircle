@@ -13,11 +13,12 @@ Map<String, dynamic> _h2h() => {
           'team2': 21,
           'ordering': 1,
           'match_set_details_model': [
-            // 故意乱序 + 双方交替，验证按 ordering 排序后累加成 1-0/1-1/2-1/2-2
-            {'ordering': 2, 'team1': 0, 'team2': 1},
+            // 真实形状：值为累计得分；故意乱序验证按 ordering 排序
+            {'ordering': 2, 'team1': 2, 'team2': 0},
             {'ordering': 1, 'team1': 1, 'team2': 0},
-            {'ordering': 4, 'team1': 0, 'team2': 1},
-            {'ordering': 3, 'team1': 1, 'team2': 0},
+            {'ordering': 4, 'team1': 3, 'team2': 1},
+            {'ordering': 3, 'team1': 3, 'team2': 0},
+            {'ordering': 5, 'team1': 3, 'team2': 2},
           ],
           'match_set_stats_model': {
             'team1_rallies_won': 16,
@@ -38,19 +39,21 @@ Map<String, dynamic> _h2h() => {
     };
 
 void main() {
-  test('解析逐分序列：按 ordering 升序且归属正确', () {
+  test('解析逐分序列：值为累计得分，按 ordering 升序', () {
     final stats = BwfMatchStats.fromJson(_h2h());
     final g1 = stats.games.first;
     expect(g1.team1Score, 16);
     expect(g1.team2Score, 21);
-    expect(g1.points.length, 4);
-    // 乱序输入 → 按 ordering 排序：第1分 team1、第2分 team2…
+    expect(g1.points.length, 5);
+    // 乱序输入 → 按 ordering 排序后的累计序列
     expect(g1.points[0].team1, 1);
-    expect(g1.points[1].team2, 1);
-    expect(g1.points[2].team1, 1);
-    expect(g1.points[3].team2, 1);
-    // 累加与逐分归属一致（fixture 截取 4 分：team1 得 2 分）
-    expect(g1.points.map((p) => p.team1).reduce((a, b) => a + b), 2);
+    expect(g1.points[1].team1, 2);
+    expect(g1.points[2].team2, 0);
+    expect(g1.points[4].team2, 2);
+    // 官网图表契约：最后一个节点 = 局终分
+    final last = g1.points.last;
+    expect(last.team1, 3);
+    expect(last.team2, 2);
   });
 
   test('解析统计与元信息；空字段容错', () {

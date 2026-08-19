@@ -143,6 +143,16 @@ void main() {
     await tester.tap(find.text('未开赛'));
     await tester.pump();
     expect(find.text('无符合条件的对阵'), findsOneWidget);
+    // 反选：再点"未开赛"取消选中 → 状态回全部（女单卡恢复，男单仍被项目筛选挡住）
+    await tester.tap(find.text('未开赛'));
+    await tester.pump();
+    expect(find.text('无符合条件的对阵'), findsNothing);
+    expect(find.text('✓ 已结束'), findsOneWidget);
+    expect(find.text('10:25'), findsNothing);
+    // 反选"女单" → 项目也回全部，全部卡片恢复
+    await tester.tap(find.text('女单').first);
+    await tester.pump();
+    expect(find.text('10:25'), findsOneWidget);
   });
 
   testWidgets('拉取失败显示错误态与重试按钮', (tester) async {

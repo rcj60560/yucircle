@@ -1,6 +1,7 @@
 // 单场逐分统计（extranet-lv /api/h2h/match?tmt_id=&match_code=）；实时数据不落库
 
-/// 一分的归属（team1/team2 二选一为 1）
+/// 一分节点：team1/team2 为该分结束后的【累计得分】（非 0/1 归属！
+/// 官网图表直接绘制该值；最后一条即局终分）
 class GamePoint {
   final int team1;
   final int team2;

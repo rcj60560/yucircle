@@ -218,7 +218,8 @@ class _BwfMatchesPageState extends State<BwfMatchesPage> {
           _chip('全部项目', _eventFilter == null, () => setState(() => _eventFilter = null)),
           for (final e in events)
             _chip(eventNamesZh[e] ?? e, _eventFilter == e,
-                () => setState(() => _eventFilter = e)),
+                // 反选：再次点击已选中的项目 → 取消，回到全部
+                () => setState(() => _eventFilter = _eventFilter == e ? null : e)),
           const SizedBox(width: 8),
           _chip('全部状态', _statusFilter == null, () => setState(() => _statusFilter = null)),
           for (final (label, value) in [
@@ -227,7 +228,8 @@ class _BwfMatchesPageState extends State<BwfMatchesPage> {
             ('未开赛', BwfMatchStatus.upcoming),
           ])
             _chip(label, _statusFilter == value,
-                () => setState(() => _statusFilter = value)),
+                // 反选：再次点击已选中的状态 → 取消，回到全部
+                () => setState(() => _statusFilter = _statusFilter == value ? null : value)),
         ],
       ),
     );

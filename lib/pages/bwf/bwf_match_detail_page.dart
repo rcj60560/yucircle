@@ -293,7 +293,12 @@ class _BwfMatchDetailPageState extends State<BwfMatchDetailPage> {
   Widget _gameTab(BwfMatch m, BwfGameStats g) {
     return Column(
       children: [
-        Expanded(child: ScoreCurveChart(points: g.points)),
+        Expanded(
+            child: ScoreCurveChart(
+          points: g.points,
+          name1: m.team1.display,
+          name2: m.team2.display,
+        )),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -347,19 +352,56 @@ class _SectionCard extends StatelessWidget {
   }
 }
 
-/// 逐分得分曲线（阶梯图）：横轴=第几分，两条线为双方累计得分
+/// 逐分得分曲线（对齐官网）：横轴=第几分序号，两条折线直接绘制
+/// 数据自带的【累计得分】（勿再累加），每分一个圆点 + 虚线网格 + 底部图例
 class ScoreCurveChart extends StatelessWidget {
   final List<GamePoint> points;
+  final String name1;
+  final String name2;
 
-  const ScoreCurveChart({super.key, required this.points});
+  const ScoreCurveChart({
+    super.key,
+    required this.points,
+    required this.name1,
+    required this.name2,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: Size.infinite,
-      painter: _CurvePainter(points: points),
+    return Column(
+      children: [
+        Expanded(child: CustomPaint(size: Size.infinite, painter: _CurvePainter(points: points))),
+        SizedBox(
+          height: 16,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _legendDot(SportPalette.blue),
+              const SizedBox(width: 4),
+              Flexible(
+                  child: Text(name1,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 10, color: SportPalette.textPrimary))),
+              const SizedBox(width: 12),
+              _legendDot(SportPalette.green),
+              const SizedBox(width: 4),
+              Flexible(
+                  child: Text(name2,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 10, color: SportPalette.textPrimary))),
+            ],
+          ),
+        ),
+      ],
     );
   }
+
+  Widget _legendDot(Color c) =>
+      Container(width: 7, height: 7, decoration: BoxDecoration(color: c, shape: BoxShape.circle));
 }
 
 class _CurvePainter extends CustomPainter {
@@ -370,67 +412,74 @@ class _CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (points.isEmpty) return;
-    // 累计得分序列
-    final t1 = <int>[0];
-    final t2 = <int>[0];
-    for (final p in points) {
-      t1.add(t1.last + p.team1);
-      t2.add(t2.last + p.team2);
-    }
-    final maxScore = math.max(math.max(t1.last, t2.last), 21);
-    const left = 6.0, right = 30.0, top = 14.0, bottom = 6.0;
     final w = size.width, h = size.height;
     final n = points.length;
-    double x(int i) => left + i / n * (w - left - right);
+    final maxScore = math.max(
+        21,
+        points.fold(
+            0, (m, p) => math.max(m, math.max(p.team1, p.team2))));
+    const left = 20.0, right = 8.0, top = 6.0, bottom = 6.0;
+    double x(int i) =>
+        left + (n == 1 ? 0 : i / (n - 1) * (w - left - right));
     double y(int s) => top + (1 - s / maxScore) * (h - top - bottom);
 
-    // 21 分参考线（虚线）
-    final dashPaint = Paint()
-      ..color = SportPalette.textSecondary.withValues(alpha: 0.35)
-      ..strokeWidth = 1;
-    final dashY = y(21);
-    if (21 <= maxScore) {
-      double dx = left;
-      while (dx < w - right) {
-        canvas.drawLine(Offset(dx, dashY), Offset(dx + 4, dashY), dashPaint);
-        dx += 7;
-      }
-      _label(canvas, '21', Offset(w - right + 2, dashY - 6),
-          SportPalette.textSecondary.withValues(alpha: 0.6));
+    final grid = Paint()
+      ..color = SportPalette.textSecondary.withValues(alpha: 0.30)
+      ..strokeWidth = 0.8;
+
+    // 横向虚线网格：每 2 分一条 + 左侧偶数分标签
+    for (var s = 0; s <= maxScore; s += 2) {
+      _dashed(canvas, Offset(left, y(s)), Offset(w - right, y(s)), grid);
+      _label(canvas, '$s', Offset(2, y(s) - 6),
+          SportPalette.textSecondary.withValues(alpha: 0.8));
+    }
+    // 纵向虚线网格：每 5 分一条（无标签，同官网）
+    for (var i = 4; i < n; i += 5) {
+      _dashed(canvas, Offset(x(i), top), Offset(x(i), h - bottom), grid);
     }
 
-    _drawSeries(canvas, t1, x, y, SportPalette.blue);
-    _drawSeries(canvas, t2, x, y, SportPalette.green);
+    _drawSeries(canvas, points.map((p) => p.team1).toList(), x, y, SportPalette.blue);
+    _drawSeries(canvas, points.map((p) => p.team2).toList(), x, y, SportPalette.green);
   }
 
-  void _drawSeries(Canvas canvas, List<int> series, double Function(int) x,
+  void _drawSeries(Canvas canvas, List<int> scores, double Function(int) x,
       double Function(int) y, Color color) {
-    final path = Path()..moveTo(x(0), y(0));
-    for (var i = 1; i < series.length; i++) {
-      path.lineTo(x(i - 1), y(series[i - 1]));
-      path.lineTo(x(i), y(series[i - 1]));
-      path.lineTo(x(i), y(series[i]));
+    final line = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+    final fill = Paint()..color = color;
+    final path = Path()..moveTo(x(0), y(scores[0]));
+    canvas.drawCircle(Offset(x(0), y(scores[0])), 2.5, fill);
+    for (var i = 1; i < scores.length; i++) {
+      path.lineTo(x(i), y(scores[i]));
+      canvas.drawCircle(Offset(x(i), y(scores[i])), 2.5, fill);
     }
-    canvas.drawPath(
-        path,
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2
-          ..strokeCap = StrokeCap.round
-          ..strokeJoin = StrokeJoin.round);
-    // 终点圆点 + 终分标签
-    final lastX = x(series.length - 1), lastY = y(series.last);
-    canvas.drawCircle(Offset(lastX, lastY), 3, Paint()..color = color);
-    _label(canvas, '${series.last}', Offset(lastX + 6, lastY - 7), color);
+    canvas.drawPath(path, line);
+  }
+
+  void _dashed(Canvas canvas, Offset from, Offset to, Paint paint) {
+    const step = 6.0, on = 3.0;
+    final dx = to.dx - from.dx, dy = to.dy - from.dy;
+    final len = (dx * dx + dy * dy) == 0 ? 0.0 : math.sqrt(dx * dx + dy * dy);
+    if (len == 0) return;
+    final ux = dx / len, uy = dy / len;
+    var t = 0.0;
+    while (t < len) {
+      final end = math.min(t + on, len);
+      canvas.drawLine(Offset(from.dx + ux * t, from.dy + uy * t),
+          Offset(from.dx + ux * end, from.dy + uy * end), paint);
+      t += step;
+    }
   }
 
   void _label(Canvas canvas, String text, Offset at, Color color) {
     final tp = TextPainter(
       text: TextSpan(
           text: text,
-          style: TextStyle(
-              fontSize: 10, fontWeight: FontWeight.w800, color: color)),
+          style: TextStyle(fontSize: 9, color: color)),
       textDirection: TextDirection.ltr,
     )..layout();
     tp.paint(canvas, at);
