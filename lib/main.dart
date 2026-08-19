@@ -59,6 +59,8 @@ class YuCircleApp extends StatelessWidget {
               tournamentName: args['name'] as String,
               tournamentCode: args['code'] as String,
               tournamentId: args['tmtId'] as int,
+              rangeStart: args['start'] as DateTime,
+              rangeEnd: args['end'] as DateTime,
             );
           },
         ),

@@ -126,8 +126,13 @@ class BwfSchedulePage extends StatelessWidget {
     final canLive = t.hasLiveScores && t.code != null && t.tmtId != null;
     return GestureDetector(
       onTap: canLive
-          ? () => Get.toNamed('/bwf-matches',
-              arguments: {'name': t.name, 'code': t.code, 'tmtId': t.tmtId})
+          ? () => Get.toNamed('/bwf-matches', arguments: {
+                'name': t.name,
+                'code': t.code,
+                'tmtId': t.tmtId,
+                'start': t.startDate,
+                'end': t.endDate,
+              })
           : null,
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
