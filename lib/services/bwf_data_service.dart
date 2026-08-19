@@ -1,18 +1,23 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/bwf_ranking.dart';
 import '../models/bwf_schedule.dart';
 
-/// BWF 数据取数：远端 raw JSON → 本地缓存 → 打包内置 asset（spec §5.2）
+/// BWF 数据取数：远端 JSON → 本地缓存 → 打包内置 asset（spec §5.2）
+/// 远端源：debug 连本地 yucircle-server（未启动自动降级）；release 走 GitHub raw。
 class BwfDataService {
-  static const _base =
+  static const _serverBase = 'http://localhost:8080/api/bwf';
+  static const _rawBase =
       'https://raw.githubusercontent.com/rcj60560/yucircle/main/assets/data/bwf';
-  static const _rankingsUrl = '$_base/rankings.json';
-  static const _scheduleUrl = '$_base/schedule.json';
+  static final String _rankingsUrl =
+      kDebugMode ? '$_serverBase/app/rankings' : '$_rawBase/rankings.json';
+  static final String _scheduleUrl =
+      kDebugMode ? '$_serverBase/app/schedule' : '$_rawBase/schedule.json';
   static const _rankingsCacheKey = 'bwf_rankings_cache';
   static const _scheduleCacheKey = 'bwf_schedule_cache';
 
